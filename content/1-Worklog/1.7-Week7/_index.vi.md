@@ -36,60 +36,17 @@ pre: " <b> 1.7. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Hiểu cơ chế presigned URL trong S3 để upload/download an toàn mà không lộ AWS credentials.
-* Biết áp dụng nguyên tắc thời hạn URL ngắn để giảm rủi ro truy cập trái phép.
-* Nắm lifecycle policy (transition/expiration) để tối ưu chi phí ảnh cũ hoặc dữ liệu ít truy cập.
-* Hiểu kiến trúc media service tách biệt giúp scale độc lập với business API.
+* Hiểu cách dùng presigned URL của S3 để client upload hoặc download file an toàn mà không cần cầm credential AWS trực tiếp.
+* Biết cách chọn thời hạn presigned URL ngắn cho tài nguyên nhạy cảm nhưng vẫn cân bằng được trải nghiệm người dùng.
+* Nắm các yêu cầu validate upload như giới hạn content-type, kích thước file và key path để giảm rủi ro lạm dụng.
+* Thiết kế lifecycle policy cho ảnh cũ hoặc file tạm nhằm tối ưu chi phí bằng cách chuyển storage class hoặc xóa theo thời hạn.
+* Hiểu cơ chế phân phối nội dung có kiểm soát để hạn chế hotlink và việc tái sử dụng media ngoài ý muốn.
+* Nắm mối liên hệ giữa object ownership và bucket policy để tránh lỗi quyền truy cập khó chẩn đoán.
+* Liên kết chiến lược cache media với mục tiêu giảm chi phí cloud và tăng tốc độ tải giao diện.
+
+Tóm lại, tuần 7 chuyển kiến thức về S3 từ mức khái niệm sang mô hình phục vụ media an toàn và tối ưu hơn cho dự án.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Xây dựng module Food & Nutrition — `Food`, `Meal`, `MealFood`, `DailyNutrition` với CRUD đầy đủ và tính toán dinh dưỡng.
 * **Frontend**: Xây dựng `DietScreen` với quản lý bữa ăn, tìm kiếm thực phẩm, thêm thực phẩm vào bữa.
-
-
-### Mục tiêu tuần 7:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 7:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

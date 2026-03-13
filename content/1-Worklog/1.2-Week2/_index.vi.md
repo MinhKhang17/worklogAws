@@ -42,60 +42,17 @@ pre: " <b> 1.2. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Nắm kiến trúc AWS Cognito User Pool và luồng OAuth2/OIDC với PKCE cho mobile app.
-* Hiểu sự khác nhau giữa ID Token và Access Token, và vì sao backend chỉ nên chấp nhận Access Token.
-* Biết map claim cognito:groups sang role ứng dụng để thực thi RBAC an toàn.
-* Hiểu cách thiết kế token validation theo issuer/audience/expiration để giảm rủi ro giả mạo token.
+* Nghiên cứu sâu Cognito User Pool: app client, callback URL, logout URL, OAuth scope và thời hạn token phù hợp cho ứng dụng mobile.
+* Hiểu trọn vẹn luồng PKCE với `code_verifier`, `code_challenge`, `S256`, và lý do đây là cơ chế bắt buộc cho public client.
+* Phân biệt rõ ID token và Access token trong bối cảnh API thực tế, nhấn mạnh backend chỉ nên authorize bằng Access token.
+* Nắm quy trình validate JWT đầy đủ gồm `iss`, `aud`, `exp`, `nbf`, `token_use` và chữ ký JWK của Cognito.
+* Biết map claim `cognito:groups` sang role nội bộ như `ROLE_ADMIN` và `ROLE_USER` để triển khai RBAC an toàn.
+* Hiểu cách quản lý refresh token phía mobile: lưu an toàn, xử lý rotation, và force logout khi refresh thất bại.
+* Củng cố nguyên tắc dùng `sub` làm định danh người dùng bất biến xuyên suốt tất cả module backend.
+
+Tóm lại, tuần 2 giúp liên kết kiến thức AWS Identity với cách xây dựng authentication và authorization thực chiến cho dự án.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Xây dựng lớp cơ sở hạ tầng — `GlobalExceptionHandler`, `CorsConfig`. Triển khai module `GoalType`.
 * **Frontend**: Xây dựng nền tảng navigation — `RootNavigator`, `AuthStack`, `MainTabs` với custom tab bar, `OnboardingStack`.
-
-
-### Mục tiêu tuần 2:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 2:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

@@ -36,60 +36,17 @@ pre: " <b> 1.10. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Nắm quy trình đóng gói backend bằng Docker và đẩy image lên Amazon ECR.
-* Hiểu mô hình chạy container serverless bằng Amazon ECS Fargate, giảm gánh nặng quản trị máy chủ.
-* Biết cấu trúc task definition/service và cách rollout phiên bản mới theo chiến lược an toàn.
-* Hiểu cách nối CI/CD (GitHub Actions) với pipeline build-test-deploy lên AWS.
+* Nắm trọn quy trình artifact container: tối ưu Docker build, chuẩn hóa image tag immutable và push image lên Amazon ECR.
+* Hiểu mô hình triển khai ECS Fargate qua task definition, service, health check và desired count.
+* Học cách tổ chức mạng cho container trên AWS: private subnet, outbound qua NAT và tích hợp ALB target group.
+* Biết chiến lược rollout an toàn như rolling update và minimum healthy percent để giảm rủi ro downtime.
+* Áp dụng nguyên tắc tách config runtime khỏi image bằng env hoặc secrets injection ở task level.
+* Hiểu vai trò của quality gate trong GitHub Actions trước khi cho phép bước deploy lên AWS.
+* Liên kết metric vận hành sau deploy với tiêu chí rollback để quyết định release dựa trên dữ liệu thực tế.
+
+Tóm lại, tuần 10 đưa kiến thức AWS sang mức triển khai backend thực tế bằng container platform managed service.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Review lần cuối API, hoàn thiện Docker Compose với health check và tài liệu biến môi trường.
 * **Frontend**: Xây dựng `HomeScreen` dashboard với 5 API song song, sửa bug còn tồn, polish UX toàn ứng dụng.
-
-
-### Mục tiêu tuần 10:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 10:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

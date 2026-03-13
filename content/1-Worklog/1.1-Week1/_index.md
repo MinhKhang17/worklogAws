@@ -41,10 +41,16 @@ pre: " <b> 1.1. </b> "
 
 ### AWS Knowledge Learned (Assumed Application):
 
-* Learned core AWS account setup practices: IAM users/roles, MFA, and least-privilege access design from day one.
-* Understood AWS CLI profile/region separation for dev and staging to keep team operations consistent.
-* Practiced environment-variable based secret handling to keep credentials out of source control.
-* Understood the AWS Shared Responsibility Model and how it affects application security ownership.
+* Learned AWS account bootstrap in a production-minded way: MFA enforcement, admin separation, and least-privilege IAM design for both engineers and CI.
+* Understood how to split identities by purpose: human access, deployment role, and runtime application role to reduce blast radius.
+* Practiced AWS CLI profile strategy for `dev` and `staging`, combined with fixed region selection to avoid accidental cross-environment actions.
+* Learned how the AWS credential provider chain works, and why environment-sourced credentials must never be committed into the repository.
+* Applied tagging standards such as `Project`, `Environment`, `Owner`, and `CostCenter` to support cost tracking and future operations.
+* Understood the AWS Shared Responsibility Model with concrete mapping to the project: application logic, IAM policy, and secret hygiene still belong to the team.
+* Established a cloud-ready configuration mindset early by keeping all sensitive values outside source code and preparing for a future move to Secrets Manager or SSM.
+
+In summary, week 1 built the foundational AWS operating mindset needed before any service-specific implementation started.
+
 ### Next Week Plan:
 
 * **Backend**: Integrate AWS Cognito — configure `SecurityConfig` with JWT resource server, write custom `OAuth2TokenValidator`, build `UserProfile` entity + `UserProfileController` with sync/CRUD endpoints.

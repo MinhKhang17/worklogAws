@@ -39,58 +39,17 @@ pre: " <b> 1.8. </b> "
 
 ### AWS Knowledge Learned (Assumed Application):
 
-* Learned Bedrock Runtime integration and model selection trade-offs across latency/cost/quality.
-* Improved prompt engineering skills to keep fitness-coach persona outputs consistent.
-* Applied application-level guardrails: context limits, input/output controls, and fallback behavior.
-* Learned quota-aware retry/backoff strategy for resilient AI service calls.
+* Learned the Bedrock Runtime invocation lifecycle in detail, from request body construction to stable response parsing.
+* Compared model selection tradeoffs in terms of latency, answer quality, and token cost for a fitness-coach use case.
+* Practiced prompt design with explicit role, scope boundaries, and expected output structure to keep responses predictable.
+* Studied defensive AI integration patterns including prompt-injection awareness, context-window control, and safe fallback responses.
+* Learned retry and backoff strategies, plus timeout budgeting, to keep chat UX responsive during transient service failures.
+* Understood quota and usage governance as part of AI feature operations, not only as a billing concern.
+* Identified operational metrics for the AI feature such as success rate, response latency, and visible failure categories.
+
+In summary, week 8 expanded AWS learning from infrastructure into managed AI services and their production constraints.
+
 ### Next Week Plan:
 
 * **Backend**: Build the User Metric module — `BodyMetric` entity and `HealthCalculation` with BMI / BMR / TDEE computation logic.
 * **Frontend**: Build `HealthDashboardScreen` with wheel pickers, `BodyMetricListScreen`, `BodyMetricFormScreen`, and all health chart components.
-
-
-### Week 8 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
-
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Week 8 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

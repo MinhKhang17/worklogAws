@@ -42,59 +42,18 @@ pre: " <b> 1.11. </b> "
 
 ### AWS Knowledge Learned (Assumed Application):
 
-* Learned frontend delivery architecture using CloudFront with S3 static hosting.
-* Understood HTTPS setup with ACM certificates and domain routing via Route 53.
-* Learned how AWS WAF helps mitigate common web-layer attacks.
-* Applied cache/invalidation strategy to balance fast delivery with fresh content.
+* Learned frontend delivery architecture using S3 static hosting together with CloudFront for global caching and lower latency.
+* Studied HTTPS setup from end to end: ACM certificate issuance, validation workflow, and Route 53 DNS routing.
+* Understood the Origin Access Control model so S3 can remain private while CloudFront serves user traffic securely.
+* Learned cache-key and invalidation strategy to balance fresh UI delivery with strong CDN efficiency.
+* Studied AWS WAF as a baseline web-protection layer for common attacks and noisy traffic patterns.
+* Understood edge error handling and fallback strategies required to support SPA routing without broken deep links.
+* Practiced frontend release thinking with cache busting, controlled propagation, and rollback-friendly asset versioning.
+
+In summary, week 11 focused on the AWS delivery layer that would make the frontend production-ready and globally accessible.
+
 ### Next Week Plan:
 
 * Run full end-to-end integration test of the complete application (all features, all screens).
 * Write project documentation (README, API reference, architecture diagram).
 * Prepare final demo and code cleanup for project handoff.
-
-
-### Week 11 Objectives:
-
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
-
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Week 11 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

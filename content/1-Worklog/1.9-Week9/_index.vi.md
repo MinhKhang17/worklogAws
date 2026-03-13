@@ -35,60 +35,17 @@ pre: " <b> 1.9. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Hiểu cách quản lý secrets bằng AWS Secrets Manager/SSM Parameter Store thay vì hardcode.
-* Nắm vai trò AWS KMS trong mã hóa dữ liệu nhạy cảm (at-rest) cho credential và token liên quan.
-* Biết chiến lược xoay vòng secret định kỳ để giảm rủi ro lộ thông tin truy cập.
-* Hiểu phân tách cấu hình theo môi trường (dev/staging/prod) để tránh nhầm lẫn khi deploy.
+* Nắm phương pháp quản lý secret bằng AWS Secrets Manager hoặc SSM Parameter Store thay cho việc chia sẻ plaintext kéo dài.
+* Hiểu nền tảng AWS KMS gồm mã hóa at-rest, key policy và quan hệ giữa IAM với quyền sử dụng key.
+* Biết cách thiết kế quy trình xoay vòng secret và đánh giá ảnh hưởng của rotation lên ứng dụng đang chạy.
+* Củng cố tách biệt cấu hình giữa dev, staging và production để tránh dùng nhầm credential hoặc rò rỉ quyền truy cập.
+* Hiểu giá trị audit của CloudTrail trong việc truy vết thay đổi cấu hình nhạy cảm và các thao tác quản trị.
+* Áp dụng nguyên tắc giảm credential sống lâu bằng cách ưu tiên role-based access tạm thời khi có thể.
+* Liên kết các biện pháp bảo mật này với việc bảo vệ dữ liệu profile và chỉ số sức khỏe của người dùng.
+
+Tóm lại, tuần 9 tập trung vào lớp bảo mật AWS bao phủ cả quyền truy cập hệ thống lẫn dữ liệu nhạy cảm của ứng dụng.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Hoàn thiện pagination, cải thiện validation endpoint, viết unit test.
 * **Frontend**: Xây dựng `ChatScreen` với AWS Bedrock AI và `ProfileScreen` quản lý hồ sơ.
-
-
-### Mục tiêu tuần 9:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 9:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

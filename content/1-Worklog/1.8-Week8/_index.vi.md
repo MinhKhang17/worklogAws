@@ -36,60 +36,17 @@ pre: " <b> 1.8. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Nắm quy trình tích hợp Amazon Bedrock Runtime và lựa chọn model theo tiêu chí latency/chi phí/chất lượng.
-* Hiểu kỹ thuật prompt engineering để định nghĩa persona fitness coach ổn định cho output.
-* Biết thiết kế guardrails ở tầng ứng dụng: giới hạn ngữ cảnh, kiểm soát input/output và fallback khi lỗi.
-* Hiểu cách quản lý quota và retry/backoff khi gọi dịch vụ AI trên cloud.
+* Nắm chi tiết luồng gọi Amazon Bedrock Runtime từ format request, chọn model ID đến parse response ổn định.
+* So sánh trade-off của model AI theo ba tiêu chí chính: chất lượng phản hồi, độ trễ và chi phí token trong bối cảnh fitness coach.
+* Nâng cao kỹ thuật prompt engineering với role instruction, boundary và output format để phản hồi nhất quán hơn.
+* Hiểu tư duy phòng thủ khi tích hợp AI: kiểm soát context, nhận diện prompt injection cơ bản và xây fallback message khi model lỗi.
+* Nắm chiến lược retry, backoff và timeout budget để giữ UX chat ổn định khi dịch vụ cloud gặp lỗi tạm thời.
+* Biết cách quản trị quota và chi phí AI như một phần của vận hành chứ không chỉ là câu chuyện billing.
+* Xác định được các chỉ số cần theo dõi cho tính năng AI như success rate, latency và tỷ lệ lỗi theo loại.
+
+Tóm lại, tuần 8 mở rộng kiến thức AWS sang mảng managed AI service và các ràng buộc khi đưa AI vào sản phẩm thật.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Xây dựng module User Metric — `BodyMetric` và `HealthCalculation` với logic tính BMI/BMR/TDEE.
 * **Frontend**: Xây dựng `HealthDashboardScreen`, `BodyMetricListScreen`, `BodyMetricFormScreen`, và các chart sức khỏe.
-
-
-### Mục tiêu tuần 8:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 8:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

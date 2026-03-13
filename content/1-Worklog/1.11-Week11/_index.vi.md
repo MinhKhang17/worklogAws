@@ -36,61 +36,18 @@ pre: " <b> 1.11. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Hiểu kiến trúc phân phối frontend qua CloudFront + S3 static hosting để tăng tốc độ tải trang.
-* Nắm cấu hình HTTPS bằng ACM certificate và routing domain qua Route 53.
-* Biết vai trò AWS WAF trong việc giảm các tấn công phổ biến ở lớp web.
-* Hiểu chiến lược cache/invalidation để cập nhật nội dung mới mà vẫn giữ hiệu năng cao.
+* Nắm kiến trúc phân phối frontend bằng S3 static hosting kết hợp CloudFront để giảm độ trễ và tăng khả năng mở rộng.
+* Hiểu quy trình thiết lập HTTPS đầy đủ với ACM certificate và Route 53 cho DNS routing.
+* Học mô hình Origin Access Control để giữ bucket S3 ở trạng thái private nhưng vẫn phục vụ được qua CloudFront.
+* Nắm chiến lược cache key và invalidation để cân bằng giữa tốc độ phân phối và độ mới của nội dung giao diện.
+* Hiểu vai trò của AWS WAF trong việc giảm các tấn công phổ biến ở lớp web và lưu lượng bất thường.
+* Nắm cơ chế xử lý lỗi ở edge và fallback page để SPA routing hoạt động ổn định khi truy cập deep link.
+* Chuẩn hóa tư duy release frontend với cache busting, propagation control và khả năng rollback nhanh.
+
+Tóm lại, tuần 11 tập trung vào lớp phân phối frontend trên AWS để chuẩn bị cho môi trường production thực tế.
+
 ### Kế hoạch tuần tiếp theo:
 
 * Chạy kiểm thử tích hợp end-to-end toàn bộ ứng dụng.
 * Viết tài liệu dự án (README, API reference, sơ đồ kiến trúc).
 * Chuẩn bị demo và dọn dẹp code cho bàn giao.
-
-
-### Mục tiêu tuần 11:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 11:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

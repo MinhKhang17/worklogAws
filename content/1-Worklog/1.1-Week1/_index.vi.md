@@ -41,60 +41,17 @@ pre: " <b> 1.1. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Hiểu nền tảng AWS account setup: IAM user/role, MFA, nguyên tắc least privilege để phân quyền đúng ngay từ đầu dự án.
-* Nắm cách dùng AWS CLI profile và region riêng cho dev/staging, giúp thao tác hạ tầng nhất quán giữa các thành viên.
-* Biết tách thông tin nhạy cảm khỏi source code bằng biến môi trường theo chuẩn cloud-ready.
-* Hiểu cơ bản về Shared Responsibility Model để phân định rõ trách nhiệm bảo mật giữa team và AWS.
+* Nắm cách thiết lập tài khoản AWS theo hướng production ngay từ đầu: bật MFA, tách quyền quản trị, và thiết kế IAM theo nguyên tắc least privilege cho cả lập trình viên lẫn CI.
+* Hiểu cách chia định danh theo đúng mục đích sử dụng: người dùng thao tác thủ công, role deploy, và role runtime của ứng dụng để giảm blast radius.
+* Thực hành dùng AWS CLI profile cho `dev` và `staging`, kết hợp cố định region để tránh thao tác nhầm môi trường.
+* Hiểu cơ chế credential provider chain và lý do không bao giờ được commit access key hoặc secret key vào repository.
+* Áp dụng chuẩn tagging như `Project`, `Environment`, `Owner`, `CostCenter` để phục vụ quản trị chi phí và vận hành sau này.
+* Nắm Shared Responsibility Model ở mức thực tế: AWS chịu trách nhiệm hạ tầng nền, còn team vẫn chịu trách nhiệm code, IAM và bảo mật secret.
+* Hình thành tư duy cloud-ready cho cấu hình hệ thống: toàn bộ giá trị nhạy cảm tách khỏi source code và sẵn sàng chuyển sang Secrets Manager hoặc SSM.
+
+Tóm lại, tuần 1 đặt nền tảng tư duy vận hành AWS bài bản trước khi đi vào từng dịch vụ cụ thể.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Tích hợp AWS Cognito — cấu hình `SecurityConfig` với JWT resource server, viết `OAuth2TokenValidator` tùy chỉnh, xây dựng `UserProfile` entity + `UserProfileController`.
 * **Frontend**: Xây dựng luồng Authentication — `LoginScreen` với PKCE OAuth qua `expo-auth-session`, lưu token vào `expo-secure-store`, quản lý state qua `authSlice`.
-
-
-### Mục tiêu tuần 1:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 06/01/2026   | 06/01/2026      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 07/01/2026   | 07/01/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 08/01/2026   | 08/01/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 09/01/2026   | 10/01/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 10/01/2026   | 10/01/2026      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 1:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

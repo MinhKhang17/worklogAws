@@ -38,60 +38,17 @@ pre: " <b> 1.5. </b> "
 
 ### Kiến thức AWS đã học và giả sử áp dụng cho project:
 
-* Hiểu mô hình vận hành PostgreSQL trên Amazon RDS (single AZ) cho môi trường production cơ bản.
-* Nắm cách dùng Security Group và subnet để giới hạn truy cập DB chỉ từ service backend.
-* Biết chiến lược backup snapshot tự động và khôi phục dữ liệu cho user-owned data quan trọng.
-* Hiểu vì sao migration phải idempotent để deploy an toàn qua nhiều môi trường.
+* Nắm các khái niệm quan trọng khi vận hành PostgreSQL trên Amazon RDS: backup managed, maintenance window, parameter group và giới hạn dịch vụ.
+* Hiểu cách cô lập database qua private subnet và security group chỉ cho backend truy cập.
+* Nghiên cứu snapshot và point-in-time recovery để bảo vệ dữ liệu kế hoạch tập và dữ liệu cá nhân của người dùng.
+* Củng cố kỷ luật migration bằng cách xem Flyway script như artifact deploy bắt buộc phải deterministic giữa nhiều môi trường.
+* Hiểu vì sao kết nối tới cloud database là tài nguyên hữu hạn và connection pooling phía ứng dụng cần được cấu hình cẩn thận.
+* Nắm hướng scale đọc bằng read replica khi sau này hệ thống phát sinh nhiều truy vấn thống kê hoặc báo cáo.
+* Liên hệ chiến lược lưu trữ và khôi phục dữ liệu với nhu cầu audit, phục hồi lỗi thao tác và niềm tin người dùng.
+
+Tóm lại, tuần 5 gắn thiết kế dữ liệu của dự án với các nguyên tắc vận hành database managed service trên AWS.
+
 ### Kế hoạch tuần tiếp theo:
 
 * **Backend**: Xây dựng module `UserWorkoutSession` và `WorkoutLog` để theo dõi buổi tập thực tế.
 * **Frontend**: Xây dựng `PlanDetailScreen` (dashboard kế hoạch active) và `WorkoutSessionScreen` (màn hình tập thực tế với Redux session state).
-
-
-### Mục tiêu tuần 5:
-
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
-
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Kết quả đạt được tuần 5:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-

@@ -1,127 +1,56 @@
 ---
 title: "Blog 6"
-date: 2024-01-01
-weight: 1
+date: 2026-03-02
+weight: 6
 chapter: false
 pre: " <b> 3.6. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Hiểu về IAM cho Managed AWS MCP Servers
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+Khi các AI agent ngày càng được tích hợp sâu vào quy trình phát triển phần mềm, các tổ chức cần một cách để cho phép các agent này tương tác với tài nguyên AWS **một cách an toàn và nhất quán**. Trong thực tế, điều này có nghĩa là AI agent nên sử dụng cùng mô hình **AWS Identity and Access Management (IAM)** mà developer đã quen dùng, thay vì buộc các team phải xây dựng một hệ thống authorization riêng cho hoạt động do AI điều khiển.
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+Đồng thời, các tổ chức cũng cần đủ khả năng kiểm soát để **phân biệt giữa hành động do người dùng thực hiện trực tiếp** và **hành động do AI agent thực hiện thay mặt người dùng**.
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Trong bài viết trên AWS Security Blog, các tác giả giải thích cách AWS giải quyết nhu cầu này cho **AWS-managed remote Model Context Protocol (MCP) servers**. Bài viết giới thiệu các **IAM context key tiêu chuẩn mới**, giúp các tổ chức áp dụng chính sách quản trị khác nhau cho hoạt động AI dựa trên MCP, mô tả mô hình authorization đơn giản hơn tương tự cách **AWS CLI** và **AWS SDKs** hoạt động, đồng thời giới thiệu kế hoạch hỗ trợ **VPC endpoints** trong tương lai để tăng cường kiểm soát mạng riêng.
 
 ---
 
-## Hướng dẫn kiến trúc
+## Tổng quan
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
+AWS cho biết tại **AWS re:Invent 2025**, công ty đã ra mắt bản preview của bốn AWS-managed remote MCP servers:
 
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
+- **AWS**
+- **EKS**
+- **ECS**
+- **SageMaker**
 
-**Kiến trúc giải pháp bây giờ như sau:**
+Các MCP server này được **AWS vận hành và quản lý**, vì vậy khách hàng không cần cài đặt hoặc duy trì hạ tầng MCP server riêng. Thay vào đó, họ được hưởng lợi từ:
 
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+- cập nhật tự động
+- khả năng mở rộng và độ bền tốt hơn
+- khả năng audit thông qua **AWS CloudTrail**
 
----
+Một ví dụ quan trọng được đề cập là **AWS MCP Server**, có thể cung cấp truy cập đến tài liệu AWS và thực thi hơn **15.000 AWS APIs**. Điều này cho phép AI agent hỗ trợ các tác vụ infrastructure nhiều bước như:
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+- tạo tài nguyên VPC
+- cấu hình alarm cho **Amazon CloudWatch**
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Tuy nhiên, AWS nhận thấy khách hàng có hai mối quan tâm lớn khi AI agent bắt đầu tham gia nhiều hơn vào workflow phát triển:
 
----
+1. AI agent cần sử dụng **IAM permission hiện có**, thay vì framework permission mới.
+2. Tổ chức muốn áp dụng **governance control khác nhau** cho hành động do AI và hành động do con người.
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+Để giải quyết vấn đề này, AWS giới thiệu hai **IAM context keys** mới cho AWS-managed MCP servers:
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+- `aws:ViaAWSMCPService`
+- `aws:CalledViaAWSMCP`
 
----
+Các context key này cho phép xác định:
 
-## The pub/sub hub
+- request có đi qua MCP server hay không
+- MCP server nào đã khởi tạo request
 
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
+Theo AWS, điều này giúp triển khai **defense-in-depth**, duy trì audit trail chi tiết và đáp ứng yêu cầu compliance bằng cách phân biệt truy cập do AI và truy cập trực tiếp của người dùng.
 
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
-
----
-
-## Core microservice
-
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
-
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
-
----
-
-## Front door microservice
-
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
-
----
-
-## Staging ER7 microservice
-
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
-
----
-
-## Tính năng mới trong giải pháp
-
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Ngoài ra, AWS cũng công bố một thay đổi nhằm **đơn giản hóa authorization model**. Trong tương lai gần, khách hàng sẽ **không cần sử dụng IAM action riêng cho MCP** như:

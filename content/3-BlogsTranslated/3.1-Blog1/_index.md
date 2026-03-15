@@ -1,126 +1,96 @@
 ---
 title: "Blog 1"
-date: 2024-01-01
+date: 2025-12-02
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# Introducing Amazon Nova Forge: Build Your Own Frontier Models Using Nova
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+Organizations are increasingly adopting generative AI in many parts of their operations, from internal productivity tools to advanced domain-specific applications. As this adoption grows, the limitations of general-purpose foundation models become more visible. Many enterprise scenarios require models that can understand private knowledge, internal terminology, specialized workflows, and business-specific requirements at a much deeper level than standard prompting can provide.
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+Common customization approaches such as **prompt engineering** and **Retrieval-Augmented Generation (RAG)** are useful for many applications, but they still do not fundamentally reshape the model’s internal representation of knowledge. They mainly help the model respond better at inference time rather than altering what the model has learned in a deeper sense. Other approaches like **supervised fine-tuning** and **reinforcement learning** also help customize a model, but these methods are often applied after the model has already been fully trained. At that stage, the model is harder to steer toward very specific domains of interest.
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+For organizations that want stronger customization, **Continued Pre-Training (CPT)** may appear to be a natural solution. However, if CPT is done only on proprietary enterprise data, the model can experience **catastrophic forgetting**, where it becomes better at the new domain but loses foundational capabilities learned earlier. On top of that, training a frontier model from the beginning remains too expensive and resource-intensive for most organizations because it requires very large datasets, substantial computing infrastructure, and advanced training expertise. AWS introduced **Amazon Nova Forge** as a way to close this gap. With Nova Forge, customers can start from early Amazon Nova checkpoints, combine their own datasets with Amazon Nova-curated training data, and build custom frontier models hosted securely on AWS. AWS positions this as an easier and more cost-effective way to build domain-specific frontier models. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## Architecture Guidance
+## Use Cases and Applications
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Amazon Nova Forge is designed for organizations that already have access to proprietary data, industry-specific knowledge, or specialized operational information and want to turn those assets into stronger AI capabilities. Rather than relying only on a generic model, these organizations can create models that are more aligned with the reality of their domain.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+AWS highlights several example scenarios. In **manufacturing and automation**, organizations can build models that better understand specialized industrial processes, machine data, operational procedures, and equipment-related workflows. In **research and development**, companies can create models trained on internal research materials, private data collections, and domain-specific expertise that may not be captured by public datasets. In **content and media**, teams can develop models that align with a company’s brand voice, internal content standards, and moderation requirements. In **specialized industries** more broadly, Nova Forge can be used to train models that understand sector-specific language, regulations, best practices, and technical conventions.
 
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+Depending on the business objective, Nova Forge can help organizations create differentiated model capabilities, improve task-specific performance, reduce latency in production settings, and lower overall cost compared with approaches that require more extensive retraining or external model adaptation pipelines. :contentReference[oaicite:2]{index=2}
 
 ---
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+## How Nova Forge Works
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+Amazon Nova Forge is designed to address the limitations of traditional model customization by allowing organizations to start development from **early checkpoints** in the model lifecycle. Instead of only working with a fully completed model, customers can begin from **pre-training**, **mid-training**, or **post-training** checkpoints. This provides much more flexibility in how a model is adapted to a specialized domain.
+
+A core capability of Nova Forge is **data blending**. Organizations can combine their proprietary datasets with **Amazon Nova-curated data** across all training phases. AWS states that this training can be run using proven recipes on fully managed infrastructure in **Amazon SageMaker AI**. This means that customers do not need to assemble the entire training stack from scratch. Instead, they can rely on AWS-managed tooling and workflows while still shaping the model using their own data.
+
+This data-mixing strategy is especially important because it helps reduce catastrophic forgetting compared with training only on raw proprietary data. According to AWS, blending curated data with organization-specific data helps preserve foundational skills such as core intelligence, general instruction-following ability, and built-in safety characteristics, while still enabling the model to absorb specialized enterprise knowledge. In practical terms, Nova Forge tries to balance two goals at once: retaining the broad usefulness of a powerful foundation model and adapting it more deeply to a specific domain. :contentReference[oaicite:3]{index=3}
 
 ---
 
-## Technology Choices and Communication Scope
+## Reinforcement Learning in Proprietary Environments
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Nova Forge also supports **reinforcement learning (RL)** using reward functions defined in an organization’s own environment. This allows models to learn from feedback generated under conditions that match real use cases more closely than generic benchmark settings.
 
----
+This capability is useful in situations where success depends on sequential decisions, environment-specific feedback, or business-defined reward logic. AWS explains that customers can use their own orchestrator to manage **multi-turn rollouts**, which makes it possible to support more advanced RL workflows, including complex agent behavior and sequential decision-making tasks.
 
-## The Pub/Sub Hub
-
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
-
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+AWS gives examples such as using chemistry tools to evaluate molecular designs or robotics simulations that reward efficient task completion while penalizing unsafe behavior like collisions. These examples show that Nova Forge is not limited to text-only adaptation. Instead, it can be used in settings where model improvement depends on interaction with specialized tools, simulators, or internal evaluation environments. That makes it relevant for research-heavy industries and advanced operational AI systems that need more than standard fine-tuning. :contentReference[oaicite:4]{index=4}
 
 ---
 
-## Core Microservice
+## Responsible AI and Safety Configuration
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+Beyond training and customization, Nova Forge also includes a built-in **responsible AI toolkit**. This toolkit allows organizations to configure the **safety** and **content moderation** behavior of their custom models. AWS notes that customers can adjust these settings to match specific business needs in areas such as safety, security, and the handling of sensitive content.
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+This is a meaningful part of the platform because enterprise AI deployment is not only about model quality or benchmark performance. In many organizations, production readiness also depends on governance, moderation policies, and content risk controls. By including these options directly in Nova Forge, AWS provides a framework where organizations can work on model customization and model responsibility within the same broader environment. :contentReference[oaicite:5]{index=5}
 
 ---
 
-## Front Door Microservice
+## Getting Started with Nova Forge
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+AWS explains that Nova Forge integrates with existing AWS AI workflows, especially those built around **Amazon SageMaker AI** and **Amazon Bedrock**. Customers can use familiar tools and infrastructure in SageMaker AI to run training jobs, then import the resulting custom Nova models into Amazon Bedrock as **private models**.
 
----
+This integration matters because it allows organizations to continue using the same broader AWS environment for security, APIs, and operational consistency. Instead of building one system for training and another separate stack for serving, teams can move from model development to application deployment using services that are already connected within the AWS ecosystem. AWS specifically notes that this gives customers the same security model, consistent APIs, and broader integrations available to other models in Amazon Bedrock. :contentReference[oaicite:6]{index=6}
 
-## Staging ER7 Microservice
+In **Amazon SageMaker Studio**, users can now build frontier models using Amazon Nova. The high-level workflow described by AWS is straightforward. First, users choose which checkpoint they want to start from, such as a **pre-trained**, **mid-trained**, or **post-trained** checkpoint. They can then upload their own dataset or work with existing datasets already available in their workflow.
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+After selecting the starting checkpoint and data sources, users can blend their training data with curated datasets provided by Nova. AWS notes that these curated datasets are categorized by domain and are intended to help preserve general model performance while reducing the risk of overfitting or catastrophic forgetting. This stage is central to how Nova Forge balances specialization with retention of broad capability.
+
+AWS also notes that users can optionally apply **Reinforcement Fine-Tuning (RFT)**. According to the blog, this can be used to improve factual accuracy and reduce hallucinations in specific domains. After training is complete, the resulting model can be imported into Amazon Bedrock and used in downstream applications. :contentReference[oaicite:7]{index=7}
 
 ---
 
-## New Features in the Solution
+## Things to Know
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+At launch, **Amazon Nova Forge** is available in the **US East (N. Virginia)** AWS Region. AWS states that the offering includes access to multiple Nova model checkpoints, recipes for mixing proprietary data with Amazon Nova-curated training data, established training recipes, and integration with both Amazon SageMaker AI and Amazon Bedrock.
+
+For users who want to explore the service further, AWS points to the **Amazon Nova User Guide** and the **Amazon SageMaker AI console** as primary starting points. AWS also notes that organizations looking for deeper or more specialized support can contact the **Generative AI Innovation Center** for assistance with model development initiatives. :contentReference[oaicite:8]{index=8}
+
+---
+
+## Why This Launch Is Important
+
+Amazon Nova Forge represents a significant development for organizations that want more control over model creation without taking on the full burden of frontier-model training from scratch. In many enterprise settings, the ideal solution is not a completely generic model and not a fully custom model built from zero. Instead, the ideal path is often a hybrid one: begin with a strong existing model, adapt it earlier and more deeply than standard fine-tuning allows, preserve its core capabilities, and then deploy it within a production-ready platform.
+
+Nova Forge is designed around exactly that middle ground. It provides access to Amazon Nova checkpoints, curated data mixing, AWS-managed training infrastructure, reinforcement learning support in proprietary environments, configurable responsible AI settings, and deployment through Amazon Bedrock. Taken together, these capabilities make Nova Forge more than just a fine-tuning feature. It is positioned as a broader framework for building **domain-aware frontier models** that remain aligned with enterprise requirements for performance, safety, and operational integration. :contentReference[oaicite:9]{index=9}
+
+---
+
+## Conclusion
+
+As organizations continue to adopt generative AI, the need for models that deeply understand proprietary data and specialized domains will continue to grow. Standard customization methods remain useful, but they often do not go far enough for enterprises with complex internal knowledge, unique workflows, or high-stakes domain requirements.
+
+Amazon Nova Forge addresses this need by allowing customers to start from early Nova checkpoints, blend their data with Amazon-curated datasets, train using managed SageMaker AI infrastructure, and deploy custom models through Amazon Bedrock. AWS presents this as an easier and more cost-effective way to build frontier models that combine broad foundational capability with deeper domain alignment.
+
+For enterprises that want to move beyond lightweight adaptation and toward more serious model specialization, Nova Forge offers a practical path inside the AWS ecosystem. It reduces some of the biggest barriers traditionally associated with frontier-model development while still giving organizations meaningful control over how their models are trained, adapted, governed, and deployed. :contentReference[oaicite:10]{index=10}
+
+## About the Author
+
+**Danilo Poccia** works with startups and companies of different sizes to support innovation. In his role as **Chief Evangelist (EMEA) at Amazon Web Services**, he helps people bring ideas to life, with particular focus on **serverless architectures**, **event-driven programming**, and the technical and business impact of **machine learning** and **edge computing**. He is also the author of *AWS Lambda in Action*.[oaicite:11]{index=11}

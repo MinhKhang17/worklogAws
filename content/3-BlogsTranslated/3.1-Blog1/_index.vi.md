@@ -1,126 +1,99 @@
 ---
 title: "Blog 1"
-date: 2024-01-01
+date: 2025-12-02
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+# Giới thiệu Amazon Nova Forge: Xây dựng Frontier Model của riêng bạn với Nova
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+Các tổ chức ngày càng áp dụng AI sinh (generative AI) trong nhiều phần của hoạt động vận hành, từ các công cụ tăng năng suất nội bộ đến những ứng dụng chuyên sâu theo từng lĩnh vực. Khi mức độ áp dụng tăng lên, các hạn chế của những foundation model dùng chung cũng trở nên rõ ràng hơn. Nhiều kịch bản trong doanh nghiệp yêu cầu mô hình phải hiểu sâu hơn về kiến thức nội bộ, thuật ngữ riêng của tổ chức, workflow chuyên biệt và các yêu cầu nghiệp vụ đặc thù — những thứ mà chỉ dùng prompt thông thường khó có thể đáp ứng.
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Các phương pháp tùy biến phổ biến như **prompt engineering** và **Retrieval-Augmented Generation (RAG)** hữu ích trong nhiều ứng dụng, nhưng chúng không thực sự thay đổi cách mô hình biểu diễn tri thức bên trong. Những phương pháp này chủ yếu giúp mô hình phản hồi tốt hơn ở thời điểm suy luận (inference time), thay vì thay đổi sâu những gì mô hình đã học. Những cách khác như **supervised fine-tuning** và **reinforcement learning** cũng giúp tùy chỉnh mô hình, nhưng chúng thường được áp dụng sau khi mô hình đã được huấn luyện hoàn chỉnh. Ở giai đoạn đó, việc điều chỉnh mô hình theo các domain rất cụ thể trở nên khó khăn hơn.
 
----
-
-## Hướng dẫn kiến trúc
-
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
-
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
-
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+Đối với các tổ chức muốn mức độ tùy biến mạnh hơn, **Continued Pre-Training (CPT)** có thể là một giải pháp tự nhiên. Tuy nhiên, nếu CPT chỉ được thực hiện trên dữ liệu độc quyền của doanh nghiệp, mô hình có thể gặp vấn đề **catastrophic forgetting** — tức là mô hình trở nên tốt hơn ở domain mới nhưng lại mất đi những năng lực nền tảng đã học trước đó. Ngoài ra, việc huấn luyện một frontier model từ đầu vẫn quá tốn kém và tiêu tốn tài nguyên đối với hầu hết tổ chức, vì nó yêu cầu dataset cực lớn, hạ tầng tính toán đáng kể và chuyên môn huấn luyện nâng cao. AWS đã giới thiệu **Amazon Nova Forge** để thu hẹp khoảng cách này. Với Nova Forge, khách hàng có thể bắt đầu từ các checkpoint sớm của Amazon Nova, kết hợp dataset riêng với dữ liệu huấn luyện được Amazon Nova tuyển chọn, và xây dựng frontier model tùy chỉnh được host an toàn trên AWS. AWS định vị đây là cách dễ hơn và tiết kiệm chi phí hơn để xây dựng frontier model theo domain cụ thể.
 
 ---
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## Use Cases and Applications
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Amazon Nova Forge được thiết kế cho các tổ chức đã có sẵn dữ liệu độc quyền, kiến thức chuyên ngành hoặc thông tin vận hành đặc thù và muốn biến những tài sản này thành năng lực AI mạnh hơn. Thay vì chỉ dựa vào một mô hình generic, các tổ chức này có thể tạo ra mô hình phù hợp hơn với thực tế domain của họ.
+
+AWS đưa ra một số kịch bản ví dụ. Trong **manufacturing và automation**, các tổ chức có thể xây dựng mô hình hiểu rõ hơn các quy trình công nghiệp chuyên biệt, dữ liệu máy móc, quy trình vận hành và workflow liên quan đến thiết bị. Trong **research and development**, các công ty có thể tạo mô hình được huấn luyện trên tài liệu nghiên cứu nội bộ, tập dữ liệu riêng và chuyên môn domain mà dataset công khai không có. Trong **content và media**, các team có thể phát triển mô hình phù hợp với giọng điệu thương hiệu, tiêu chuẩn nội dung nội bộ và các yêu cầu moderation. Trong **các ngành chuyên biệt** nói chung, Nova Forge có thể dùng để huấn luyện mô hình hiểu ngôn ngữ chuyên ngành, quy định, best practice và các quy ước kỹ thuật của từng lĩnh vực.
+
+Tùy vào mục tiêu kinh doanh, Nova Forge có thể giúp tổ chức tạo ra năng lực mô hình khác biệt, cải thiện hiệu năng cho task cụ thể, giảm độ trễ trong môi trường production và giảm chi phí tổng thể so với các phương pháp yêu cầu retraining lớn hoặc pipeline thích nghi mô hình bên ngoài.
 
 ---
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+## How Nova Forge Works
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Amazon Nova Forge được thiết kế để giải quyết các hạn chế của việc tùy chỉnh mô hình truyền thống bằng cách cho phép tổ chức bắt đầu phát triển từ **các checkpoint sớm** trong vòng đời của mô hình. Thay vì chỉ làm việc với một mô hình đã hoàn chỉnh, khách hàng có thể bắt đầu từ các checkpoint **pre-training**, **mid-training** hoặc **post-training**. Điều này mang lại sự linh hoạt lớn hơn trong cách mô hình được điều chỉnh cho một domain chuyên biệt.
 
----
+Một năng lực cốt lõi của Nova Forge là **data blending**. Các tổ chức có thể kết hợp dataset độc quyền của mình với **dữ liệu được Amazon Nova tuyển chọn** trong tất cả các giai đoạn huấn luyện. AWS cho biết quá trình training này có thể chạy bằng các recipe đã được kiểm chứng trên hạ tầng được quản lý hoàn toàn trong **Amazon SageMaker AI**. Điều này có nghĩa là khách hàng không cần tự xây dựng toàn bộ training stack từ đầu. Thay vào đó, họ có thể sử dụng tooling và workflow do AWS quản lý, trong khi vẫn định hình mô hình bằng dữ liệu riêng của mình.
 
-## The pub/sub hub
-
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
-
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+Chiến lược trộn dữ liệu này đặc biệt quan trọng vì nó giúp giảm hiện tượng catastrophic forgetting so với việc chỉ huấn luyện trên dữ liệu độc quyền thô. Theo AWS, việc kết hợp dữ liệu curated với dữ liệu đặc thù của tổ chức giúp giữ lại các kỹ năng nền tảng như khả năng suy luận chung, khả năng làm theo instruction và các đặc tính an toàn tích hợp sẵn, trong khi vẫn cho phép mô hình hấp thụ kiến thức chuyên biệt của doanh nghiệp. Về thực tế, Nova Forge cố gắng cân bằng hai mục tiêu: giữ lại tính hữu dụng rộng của foundation model mạnh và đồng thời thích nghi sâu hơn với một domain cụ thể.
 
 ---
 
-## Core microservice
+## Reinforcement Learning in Proprietary Environments
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+Nova Forge cũng hỗ trợ **reinforcement learning (RL)** sử dụng reward function được định nghĩa trong môi trường riêng của tổ chức. Điều này cho phép mô hình học từ feedback được tạo ra trong điều kiện gần với use case thực tế hơn so với các benchmark chung.
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
+Khả năng này hữu ích trong những tình huống mà thành công phụ thuộc vào chuỗi quyết định liên tiếp, feedback đặc thù môi trường hoặc logic reward do doanh nghiệp định nghĩa. AWS giải thích rằng khách hàng có thể sử dụng orchestrator riêng của họ để quản lý **multi-turn rollouts**, cho phép hỗ trợ các workflow RL nâng cao hơn, bao gồm hành vi agent phức tạp và các bài toán ra quyết định tuần tự.
+
+AWS đưa ra ví dụ như sử dụng công cụ hóa học để đánh giá thiết kế phân tử, hoặc mô phỏng robotics nơi hệ thống được thưởng khi hoàn thành nhiệm vụ hiệu quả và bị phạt khi có hành vi không an toàn như va chạm. Những ví dụ này cho thấy Nova Forge không chỉ giới hạn ở việc thích nghi mô hình cho text. Thay vào đó, nó có thể được sử dụng trong những môi trường mà việc cải thiện mô hình phụ thuộc vào tương tác với các công cụ chuyên biệt, simulator hoặc môi trường đánh giá nội bộ. Điều này khiến Nova Forge phù hợp với các ngành nghiên cứu chuyên sâu và hệ thống AI vận hành nâng cao cần nhiều hơn fine-tuning thông thường.
 
 ---
 
-## Front door microservice
+## Responsible AI and Safety Configuration
 
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+Ngoài việc huấn luyện và tùy chỉnh mô hình, Nova Forge còn bao gồm **bộ công cụ responsible AI** tích hợp sẵn. Bộ công cụ này cho phép tổ chức cấu hình hành vi **safety** và **content moderation** của các mô hình tùy chỉnh.
 
----
+AWS cho biết khách hàng có thể điều chỉnh các thiết lập này để phù hợp với nhu cầu kinh doanh cụ thể trong các lĩnh vực như an toàn, bảo mật và xử lý nội dung nhạy cảm.
 
-## Staging ER7 microservice
-
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
+Đây là một phần quan trọng của nền tảng vì việc triển khai AI trong doanh nghiệp không chỉ liên quan đến chất lượng mô hình hay hiệu năng benchmark. Trong nhiều tổ chức, việc sẵn sàng đưa vào production còn phụ thuộc vào governance, chính sách moderation và kiểm soát rủi ro nội dung. Bằng cách tích hợp các tùy chọn này trực tiếp trong Nova Forge, AWS cung cấp một framework nơi các tổ chức có thể làm việc cả về tùy chỉnh mô hình lẫn trách nhiệm mô hình trong cùng một môi trường.
 
 ---
 
-## Tính năng mới trong giải pháp
+## Getting Started with Nova Forge
 
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+AWS cho biết Nova Forge tích hợp với các workflow AI hiện có trên AWS, đặc biệt là những workflow xoay quanh **Amazon SageMaker AI** và **Amazon Bedrock**. Khách hàng có thể sử dụng các công cụ và hạ tầng quen thuộc trong SageMaker AI để chạy training job, sau đó import các Nova model tùy chỉnh vào Amazon Bedrock dưới dạng **private models**.
+
+Sự tích hợp này quan trọng vì nó cho phép tổ chức tiếp tục sử dụng cùng một môi trường AWS cho bảo mật, API và vận hành. Thay vì xây dựng một hệ thống cho training và một stack khác cho serving, các team có thể đi từ phát triển mô hình đến triển khai ứng dụng bằng các service đã được kết nối sẵn trong hệ sinh thái AWS. AWS nhấn mạnh rằng điều này mang lại cùng một mô hình bảo mật, API nhất quán và khả năng tích hợp rộng giống như các model khác trong Amazon Bedrock.
+
+Trong **Amazon SageMaker Studio**, người dùng hiện có thể xây dựng frontier model bằng Amazon Nova. Workflow ở mức cao mà AWS mô tả khá đơn giản. Trước tiên, người dùng chọn checkpoint mà họ muốn bắt đầu, chẳng hạn như **pre-trained**, **mid-trained** hoặc **post-trained** checkpoint. Sau đó họ có thể upload dataset của riêng mình hoặc sử dụng dataset đã có sẵn trong workflow.
+
+Sau khi chọn checkpoint và nguồn dữ liệu, người dùng có thể trộn dữ liệu training của mình với các dataset curated do Nova cung cấp. AWS cho biết các dataset curated này được phân loại theo domain và nhằm giúp giữ hiệu năng chung của mô hình đồng thời giảm nguy cơ overfitting hoặc catastrophic forgetting. Đây là bước trung tâm trong cách Nova Forge cân bằng giữa specialization và khả năng tổng quát.
+
+AWS cũng cho biết người dùng có thể tùy chọn áp dụng **Reinforcement Fine-Tuning (RFT)**. Theo bài blog, kỹ thuật này có thể được dùng để cải thiện độ chính xác về mặt factual và giảm hallucination trong các domain cụ thể. Sau khi training hoàn tất, mô hình kết quả có thể được import vào Amazon Bedrock và sử dụng trong các ứng dụng downstream.
+
+---
+
+## Things to Know
+
+Tại thời điểm ra mắt, **Amazon Nova Forge** có sẵn trong AWS Region **US East (N. Virginia)**. AWS cho biết dịch vụ này bao gồm quyền truy cập nhiều Nova model checkpoint, recipe để trộn dữ liệu độc quyền với dữ liệu huấn luyện được Amazon Nova tuyển chọn, các recipe huấn luyện đã được thiết lập sẵn, và tích hợp với cả Amazon SageMaker AI và Amazon Bedrock.
+
+Đối với người dùng muốn tìm hiểu sâu hơn về dịch vụ, AWS đề xuất bắt đầu với **Amazon Nova User Guide** và **Amazon SageMaker AI console**. AWS cũng lưu ý rằng các tổ chức cần hỗ trợ sâu hơn hoặc chuyên biệt hơn có thể liên hệ **Generative AI Innovation Center** để được hỗ trợ trong các dự án phát triển mô hình.
+
+---
+
+## Why This Launch Is Important
+
+Amazon Nova Forge là một bước phát triển đáng chú ý cho các tổ chức muốn kiểm soát nhiều hơn quá trình tạo mô hình mà không phải gánh toàn bộ chi phí huấn luyện frontier model từ đầu. Trong nhiều môi trường doanh nghiệp, giải pháp lý tưởng không phải là một mô hình hoàn toàn generic cũng không phải là một mô hình custom hoàn toàn từ số 0. Thay vào đó, con đường phù hợp thường là một mô hình lai: bắt đầu với một mô hình mạnh có sẵn, thích nghi nó sớm hơn và sâu hơn so với fine-tuning thông thường, giữ lại các năng lực cốt lõi, và triển khai nó trên một nền tảng sẵn sàng cho production.
+
+Nova Forge được thiết kế chính xác cho khoảng trung gian đó. Nó cung cấp quyền truy cập các Nova checkpoint, khả năng trộn dữ liệu curated, hạ tầng training do AWS quản lý, hỗ trợ reinforcement learning trong môi trường riêng, cấu hình responsible AI linh hoạt và triển khai thông qua Amazon Bedrock. Khi kết hợp lại, những khả năng này khiến Nova Forge không chỉ đơn giản là một tính năng fine-tuning. Nó được định vị như một framework rộng hơn để xây dựng **frontier model nhận thức domain (domain-aware frontier models)** đồng thời vẫn đáp ứng các yêu cầu doanh nghiệp về hiệu năng, an toàn và tích hợp vận hành.
+
+---
+
+## Conclusion
+
+Khi các tổ chức tiếp tục áp dụng generative AI, nhu cầu về những mô hình hiểu sâu dữ liệu độc quyền và domain chuyên biệt sẽ ngày càng tăng. Các phương pháp tùy chỉnh tiêu chuẩn vẫn hữu ích, nhưng chúng thường chưa đủ cho những doanh nghiệp có tri thức nội bộ phức tạp, workflow độc đáo hoặc yêu cầu domain có mức độ quan trọng cao.
+
+Amazon Nova Forge giải quyết nhu cầu này bằng cách cho phép khách hàng bắt đầu từ các Nova checkpoint sớm, trộn dữ liệu của họ với dataset curated của Amazon, huấn luyện bằng hạ tầng SageMaker AI được quản lý và triển khai mô hình tùy chỉnh thông qua Amazon Bedrock. AWS giới thiệu đây là cách dễ hơn và tiết kiệm chi phí hơn để xây dựng frontier model kết hợp giữa năng lực nền tảng mạnh và sự phù hợp sâu với domain.
+
+Đối với các doanh nghiệp muốn tiến xa hơn các phương pháp thích nghi nhẹ và hướng tới mức độ chuyên biệt hóa mô hình nghiêm túc hơn, Nova Forge cung cấp một con đường thực tế trong hệ sinh thái AWS. Nó giảm bớt một số rào cản lớn nhất vốn gắn liền với việc phát triển frontier model, đồng thời vẫn cho phép tổ chức kiểm soát đáng kể cách mô hình của họ được huấn luyện, thích nghi, quản trị và triển khai.
+
+## About the Author
+
+**Danilo Poccia** làm việc với các startup và các công ty ở nhiều quy mô khác nhau nhằm hỗ trợ đổi mới sáng tạo. Trong vai trò **Chief Evangelist (EMEA) tại Amazon Web Services**, ông giúp mọi người hiện thực hóa các ý tưởng, với trọng tâm đặc biệt vào **kiến trúc serverless**, **lập trình hướng sự kiện (event-driven programming)**, cũng như tác động kỹ thuật và kinh doanh của **machine learning** và **edge computing**. Ông cũng là tác giả của cuốn sách *AWS Lambda in Action*.[oaicite:11]{index=11}

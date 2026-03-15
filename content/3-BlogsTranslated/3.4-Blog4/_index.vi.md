@@ -1,127 +1,114 @@
 ---
 title: "Blog 4"
-date: 2024-01-01
-weight: 1
+date: 2026-03-12
+weight: 4
 chapter: false
 pre: " <b> 3.4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Bảo mật AI agents với Policy trong Amazon Bedrock AgentCore
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+Việc triển khai AI agent một cách an toàn trong các ngành được quản lý chặt chẽ là một thách thức lớn, bởi vì những hệ thống này có thể truy cập dữ liệu nhạy cảm, gọi các công cụ (tools), và thực hiện những hành động có tác động trong thế giới thực. Khác với phần mềm truyền thống, AI agent không chỉ đơn giản thực thi một chuỗi lệnh cố định. Thay vào đó, nó có thể quyết định nên gọi tool nào, truy xuất dữ liệu gì và phản hồi ra sao dựa trên input của người dùng và bối cảnh môi trường. Sự linh hoạt này khiến agent trở nên mạnh mẽ, nhưng đồng thời cũng tạo ra các rủi ro bảo mật mới như truy cập dữ liệu trái phép, giao dịch ngoài ý muốn, prompt injection và việc lạm dụng các hệ thống được kết nối. Trong bài viết AWS *Secure AI agents with Policy in Amazon Bedrock AgentCore*, các tác giả giải thích cách **Policy trong Amazon Bedrock AgentCore** cung cấp một lớp thực thi bảo mật mang tính xác định (deterministic) để bảo vệ AI agent một cách độc lập với khả năng suy luận của chính agent. :contentReference[oaicite:0]{index=0}
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
-
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Bài viết sử dụng ví dụ cụ thể về một **agent đặt lịch khám bệnh trong hệ thống y tế**. Y tế là một lĩnh vực đặc biệt phù hợp để minh họa vì các agent trong môi trường này có thể xử lý **Protected Health Information (PHI)**, quản lý lịch hẹn và truy cập hồ sơ bệnh nhân. Trong bối cảnh như vậy, chỉ dựa vào bản thân mô hình để hành xử an toàn là chưa đủ. Các tổ chức cần một cơ chế đảm bảo **ai có thể truy cập cái gì, trong điều kiện nào và với những hạn chế nào** được thực thi một cách nhất quán. Policy trong Amazon Bedrock AgentCore được thiết kế để cung cấp chính xác loại kiểm soát này bằng cách hoạt động ở **runtime thông qua gateway layer**. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## Hướng dẫn kiến trúc
+## Vì sao AI agents cần thực thi policy từ bên ngoài
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
+Một luận điểm chính của bài blog là việc bảo mật AI agent khó hơn so với bảo mật các ứng dụng truyền thống. Phần mềm truyền thống thường có các **code path rõ ràng**, trong khi agent dựa vào **large language models (LLMs)** có khả năng suy luận theo nhiều hướng mở. Điều này có nghĩa là cùng một mô hình có thể hành xử khác nhau tùy thuộc vào prompt, kết quả từ tool, ngữ cảnh xung quanh hoặc thậm chí input mang tính tấn công. Vì LLM có thể **hallucinate** và không tự phân biệt rõ giữa instruction đáng tin cậy và văn bản không đáng tin cậy, các agent dễ bị tấn công **prompt injection** và các hình thức tấn công tương tự. :contentReference[oaicite:2]{index=2}
 
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
+Một cách phổ biến để giảm rủi ro là bọc agent trong code ứng dụng để giới hạn các tool có thể được gọi và điều kiện gọi chúng. Tuy nhiên, cách tiếp cận này có một số nhược điểm. Logic bảo mật bị phân tán trong codebase, khiến việc review, audit và bảo trì trở nên khó khăn hơn. Ngoài ra, tính đúng đắn của wrapper code cũng trở thành một phần của **security boundary**. Nếu code này có bug, agent vẫn có thể thực hiện các thao tác không an toàn. Bài viết của AWS đề xuất một mô hình khác: **đưa việc thực thi policy ra hoàn toàn bên ngoài agent** và áp dụng nó trước khi bất kỳ tool nào được gọi. :contentReference[oaicite:3]{index=3}
 
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+Sự tách biệt này rất quan trọng vì policy vẫn có hiệu lực bất kể agent được prompt như thế nào, agent “tin” điều gì, hay logic ứng dụng có lỗi hay không. Gateway sẽ đánh giá mọi request dựa trên các policy đã định nghĩa trước khi cho phép truy cập tool. Nhờ đó, các quy tắc bảo mật trở nên **minh bạch, có thể audit và độc lập với hành vi của LLM**. :contentReference[oaicite:4]{index=4}
 
 ---
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## Cedar – nền tảng cho policy mang tính xác định
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Để việc thực thi policy từ bên ngoài trở nên khả thi, Amazon Bedrock AgentCore sử dụng **Cedar**, một ngôn ngữ authorization được thiết kế vừa hiệu quả cho máy xử lý vừa dễ hiểu đối với con người. Cedar policy mô tả ba thành phần chính: **principal** (ai đang thực hiện request), **action** (hành động đang được yêu cầu), và **resource** (tài nguyên được truy cập). Các điều kiện có thể được thêm vào thông qua mệnh đề `when` để đánh giá ngữ cảnh runtime. :contentReference[oaicite:5]{index=5}
+
+Bài blog của AWS nhấn mạnh một số lý do khiến Cedar phù hợp cho bảo mật agent. Thứ nhất, nó có cơ chế **default-deny**, nghĩa là mọi request sẽ bị từ chối trừ khi có rule cho phép rõ ràng. Thứ hai, **forbid rule luôn ghi đè permit rule**, cho phép đội bảo mật chặn hoàn toàn các pattern nguy hiểm ngay cả khi tồn tại quyền truy cập rộng hơn. Thứ ba, Cedar được thiết kế **không có side effects và không có vòng lặp**, giúp việc đánh giá nhanh, dự đoán được và dễ phân tích bằng các phương pháp hình thức. Những đặc tính này hỗ trợ việc thực thi policy mang tính xác định, đặc biệt quan trọng trong môi trường AI agent có hành vi rất động. :contentReference[oaicite:6]{index=6}
+
+Blog cũng giải thích rằng policy trong AgentCore có thể được tạo theo nhiều cách. Developer và đội bảo mật có thể viết Cedar trực tiếp để kiểm soát chi tiết, tạo Cedar từ mô tả policy bằng ngôn ngữ tự nhiên, hoặc sử dụng các công cụ dạng form để định nghĩa rule. Sự linh hoạt này giúp giảm rào cản áp dụng trong khi vẫn giữ được semantics thực thi chính xác. :contentReference[oaicite:7]{index=7}
 
 ---
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+## Policy trong Amazon Bedrock AgentCore
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Policy trong Amazon Bedrock AgentCore hoạt động bằng cách đánh giá mọi request từ agent tới tool thông qua một **policy engine** đã được định nghĩa. Engine này là tập hợp các Cedar policy được gắn với **AgentCore Gateway**. Ở runtime, gateway sẽ chặn request, đánh giá nó dựa trên policy và quyết định có cho phép hay từ chối. Như vậy gateway trở thành **điểm thực thi bảo mật** giữa agent và các tool mà nó muốn gọi. :contentReference[oaicite:8]{index=8}
 
----
+Theo bài viết, dịch vụ không chỉ hỗ trợ viết Cedar trực tiếp mà còn hỗ trợ tạo Cedar từ các policy mô tả bằng tiếng Anh đơn giản. Các policy được tạo ra sẽ được kiểm tra tính hợp lệ cú pháp, xác minh với schema của gateway và phân tích các vấn đề tiềm ẩn như quá permissive hoặc quá restrictive. Khả năng này giúp các team chuyển đổi **business rules thành các kiểm soát thực thi được**, đồng thời giảm nguy cơ cấu hình sai. :contentReference[oaicite:9]{index=9}
 
-## The pub/sub hub
-
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
-
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+Một lợi ích thực tế của mô hình này là tổ chức có thể gắn policy engine ở chế độ **LOG_ONLY** trước. Ở chế độ này, họ có thể quan sát policy sẽ hoạt động ra sao mà không chặn traffic production. Khi xác nhận rằng policy hoạt động đúng như mong muốn, họ có thể chuyển sang chế độ enforcement để thực thi policy thật sự. Cách triển khai theo từng bước này rất hữu ích cho các doanh nghiệp muốn áp dụng kiểm soát nghiêm ngặt mà không làm gián đoạn hệ thống quan trọng. :contentReference[oaicite:10]{index=10}
 
 ---
 
-## Core microservice
+## Ví dụ agent đặt lịch khám bệnh
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+Bài blog minh họa các ý tưởng trên bằng một agent đặt lịch khám bệnh trong hệ thống y tế. Agent này hỗ trợ nhiều tool khác nhau, bao gồm:
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
+- `getPatient` để lấy thông tin hồ sơ bệnh nhân  
+- `searchImmunization` để truy vấn lịch sử tiêm chủng  
+- `bookAppointment` để đặt lịch khám  
+- `getSlots` để lấy danh sách khung giờ khám còn trống :contentReference[oaicite:11]{index=11}
 
----
+Vì các tool này cung cấp khả năng truy cập dữ liệu nhạy cảm, agent phải được quản lý rất cẩn thận. Các tác giả cho thấy nhiều pattern policy có thể kết hợp với nhau để tạo thành một tập policy **an toàn và có thể audit**.
 
-## Front door microservice
+### Policy dựa trên danh tính
 
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+Pattern đầu tiên là **identity-scoped access**. Trong hệ thống y tế, bệnh nhân chỉ nên truy cập hồ sơ của chính họ. Ví dụ, khi agent gọi `getPatient`, `patient_id` trong request phải trùng với ID của người dùng đã được xác thực. Một rule tương tự áp dụng cho việc tìm kiếm dữ liệu tiêm chủng. Điều này đảm bảo người dùng không thể yêu cầu agent truy cập hồ sơ của người khác chỉ bằng cách thay đổi giá trị input. :contentReference[oaicite:12]{index=12}
 
----
+Blog giải thích rằng các rule như vậy có thể viết trực tiếp bằng Cedar hoặc sinh ra từ mô tả policy bằng ngôn ngữ tự nhiên. Trong cả hai trường hợp, policy cuối cùng sẽ so sánh identity đã xác thực với tham số request và chỉ cho phép hành động nếu chúng khớp nhau. :contentReference[oaicite:13]{index=13}
 
-## Staging ER7 microservice
+### Tách quyền đọc và ghi
 
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
+Pattern thứ hai là **phân tách quyền read và write dựa trên scope**. Trong nhiều hệ thống y tế, quyền đọc thường rộng hơn quyền ghi. Người dùng có thể được phép xem thông tin nếu có scope như `fhir:read`, trong khi đặt lịch hoặc thay đổi dữ liệu có thể yêu cầu scope riêng như `appointment:write`. Bằng cách tách quyền như vậy, tổ chức có thể giảm nguy cơ thay đổi dữ liệu trái phép trong khi vẫn cho phép truy cập thông tin cần thiết. :contentReference[oaicite:14]{index=14}
+
+Bài viết cũng minh họa cách sử dụng giao diện tạo policy dạng form để xây dựng các rule như vậy bằng cách xác định effect, principal, resource, action và conditions. Điều này hữu ích cho các team muốn viết policy có cấu trúc mà không cần viết Cedar thủ công. :contentReference[oaicite:15]{index=15}
+
+### Kiểm soát rủi ro trong việc đặt lịch
+
+Pattern thứ ba là sử dụng **risk control rõ ràng** để chặn các request nguy hiểm hoặc có khả năng bị lạm dụng. Ví dụ, policy có thể giới hạn việc truy cập khung giờ khám chỉ trong khoảng **9 AM đến 9 PM UTC**. Những request ngoài khoảng thời gian này sẽ bị từ chối. Loại rule này không chỉ liên quan đến authorization mà còn mã hóa **business constraint và cơ chế chống lạm dụng** trực tiếp trong lớp thực thi runtime. :contentReference[oaicite:16]{index=16}
+
+Đây là nơi mô hình **forbid-wins** của Cedar phát huy tác dụng. Ngay cả khi tồn tại permit rule tổng quát hơn, forbid rule vẫn có thể chặn các thao tác rủi ro cao. Điều này giúp tạo ra cơ chế bảo vệ nhiều lớp vừa dễ hiểu cho auditor vừa có thể thực thi trực tiếp ở runtime. :contentReference[oaicite:17]{index=17}
 
 ---
 
-## Tính năng mới trong giải pháp
+## Kiểm thử mô hình thực thi
 
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Các tác giả AWS cũng trình bày một số kịch bản kiểm thử để minh họa cách hệ thống hoạt động. Trong một test, người dùng đã xác thực là `adult-patient-001` và yêu cầu agent lấy thông tin của chính ID đó. Vì request khớp với identity đã xác thực, quyết định policy là **ALLOW** và hồ sơ bệnh nhân được trả về. :contentReference[oaicite:18]{index=18}
+
+Trong test tiếp theo, cùng người dùng đó yêu cầu thông tin cho `pediatric-patient-001`. Agent, model và tool không thay đổi, nhưng tham số request không còn khớp với identity. Kết quả là gateway từ chối request vì không có permit policy nào phù hợp. Điều này chứng minh rằng **security boundary được thực thi tại gateway**, độc lập với quá trình suy luận của agent. :contentReference[oaicite:19]{index=19}
+
+Một cặp test khác kiểm tra kiểm soát đặt lịch theo thời gian. Khi người dùng yêu cầu khung giờ trong khoảng hợp lệ, ví dụ **2 PM UTC**, forbid condition không khớp nên request được cho phép nếu có permit rule. Nhưng khi request được thực hiện lúc **3 AM UTC**, forbid rule sẽ khớp và request bị từ chối. Các test này cho thấy cách **permit dựa trên identity và forbid dựa trên thời gian** kết hợp để tạo ra kết quả bảo mật mang tính xác định. :contentReference[oaicite:20]{index=20}
+
+---
+
+## Triển khai và vận hành
+
+Để thử ví dụ này, bài blog hướng dẫn clone repository **amazon-bedrock-agentcore-samples** và truy cập vào sample healthcare appointment agent. Repository bao gồm hướng dẫn setup, cấu hình môi trường AWS, triển khai stack và gọi agent end-to-end. :contentReference[oaicite:21]{index=21}
+
+Bài viết cũng liệt kê một số điều kiện cần thiết, bao gồm tài khoản AWS đang hoạt động, sử dụng Region hỗ trợ Policy trong AgentCore và quyền IAM phù hợp để tạo và quản lý policy engine, Cedar policies, tài nguyên tạo policy và gateway association. AWS khuyến nghị trong môi trường production nên giới hạn quyền truy cập vào các resource cụ thể thay vì dùng wildcard rộng. :contentReference[oaicite:22]{index=22}
+
+Về vận hành, quy trình được khuyến nghị là: tạo policy engine, viết policy bằng một trong các phương pháp hỗ trợ, gắn engine vào gateway ở chế độ **LOG_ONLY**, quan sát hành vi qua log, và sau đó chuyển sang chế độ enforcement khi đã xác nhận policy hoạt động đúng. Quy trình này giúp các team áp dụng policy-based enforcement một cách **an toàn và có hệ thống**. :contentReference[oaicite:23]{index=23}
+
+---
+
+## Kết luận
+
+Thông điệp chính của bài blog AWS là **AI agent chỉ đáng tin cậy khi các ranh giới xung quanh nó được thiết lập rõ ràng**. Vì agent có thể suy luận linh hoạt và gọi các tool mạnh mẽ, các kiểm soát bảo mật phải được thực thi **bên ngoài mô hình**. Policy trong Amazon Bedrock AgentCore giải quyết thách thức này bằng cách đặt một lớp policy mang tính xác định và có thể audit tại gateway, nơi mọi tool call được đánh giá trước khi thực thi. :contentReference[oaicite:24]{index=24}
+
+Bằng cách kết hợp Cedar policy, cơ chế default-deny, semantics forbid-overrides và thực thi runtime tại gateway, các tổ chức có thể xây dựng hệ thống agentic **an toàn hơn, minh bạch hơn và dễ audit hơn**. Ví dụ về hệ thống đặt lịch khám bệnh cho thấy cách rule dựa trên identity, phân tách scope và kiểm soát rủi ro theo business có thể phối hợp để bảo vệ các hệ thống nhạy cảm. Với các doanh nghiệp hoạt động trong lĩnh vực được quản lý chặt chẽ, việc tách biệt **khả năng của agent** và **cơ chế thực thi bảo mật** là nền tảng vững chắc cho các AI agent ở cấp độ production. :contentReference[oaicite:25]{index=25}
+
+---
+
+## Về tác giả
+
+**Bharathi Srinivasan** là Generative AI Data Scientist tại AWS Worldwide Specialist Organization. Cô phát triển các giải pháp Responsible AI với trọng tâm là fairness của thuật toán, độ tin cậy của LLM, khả năng giải thích và governance của agent. :contentReference[oaicite:26]{index=26}
+
+**Anil Nadiminti** là Senior Solutions Architect tại AWS tập trung vào lĩnh vực FinTech. Anh làm việc với các tổ chức tài chính doanh nghiệp và các công ty blockchain để cung cấp giải pháp kỹ thuật và chiến lược trong Web3 và DeFi. :contentReference[oaicite:27]{index=27}
+
+**Pushpinder Dua** là Software Development Manager tại AWS Agentic AI. Anh lãnh đạo các sáng kiến liên quan đến governance của hệ thống agentic và sự phát triển của các agentic protocol nhằm cải thiện tính an toàn và độ tin cậy của hệ sinh thái agent. :contentReference[oaicite:28]{index=28}
+
+**Jean-Baptiste Tristan** là Principal Applied Scientist tại AWS Agentic AI. Công việc của ông tập trung vào **an toàn và bảo mật của agentic systems**, kết hợp automated reasoning với generative AI. :contentReference[oaicite:29]{index=29}

@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.3.4 </b> "
 ---
 
-# Save to S3
 
 In this step, we will use PowerShell to save the RC project and FBX model to S3.
 

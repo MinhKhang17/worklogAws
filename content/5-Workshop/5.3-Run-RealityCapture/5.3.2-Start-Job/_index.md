@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.3.2 </b> "
 ---
 
-# Start Job
 
 In this step, we will use PowerShell to start a RealityCapture job. This job will do the following steps: 1/ align image dataset, 2/ construct a high poly base model, 3/ texturize the model, 4/ simplify the mesh into a low poly version.
 

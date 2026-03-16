@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.5. </b> "
 ---
 
-# Learn More
 
 We hope this workshop was helpful in learning how to setup RealityCapture on an Amazon EC2 instance to run photogrammetry workloads on AWS. To explore the elements of this workshop further, reference the following resources:
 

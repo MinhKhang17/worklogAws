@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.2.3 </b> "
 ---
 
-# Setup RealityCapture
 
 Now that we've connected to the EC2 instance and have access to our virtual desktop, we will finalize the workstation setup and activate [RealityCapture](https://www.capturingreality.com/realitycapture/). RealityCapture is a photogrammetry software application for Windows, which enables you to create ultra-realistic 3D models from a set of images and/or laser scans.
 

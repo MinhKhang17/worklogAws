@@ -1,82 +1,128 @@
 ---
-title : "Kiểm tra Gateway Endpoint"
-date : 2024-01-01 
+title : "Khởi chạy Job"
+date : 2026-03-16 
 weight : 2
 chapter : false
 pre : " <b> 5.3.2 </b> "
 ---
 
-#### Tạo S3 bucket
+Trong bước này, chúng ta sẽ sử dụng PowerShell để khởi chạy một job RealityCapture. Job này sẽ thực hiện các bước sau: 1/ căn chỉnh bộ dữ liệu hình ảnh, 2/ xây dựng mô hình base high poly, 3/ tạo texture cho mô hình, 4/ đơn giản hóa mesh thành phiên bản low poly.
 
-1. Đi đến S3 management console
-2. Trong Bucket console, chọn **Create bucket**
+---
 
-![Create bucket](/images/5-Workshop/5.3-S3-vpc/create-bucket.png)
+1.  **Kiểm tra AWS CLI**
+    
+    Trên desktop của virtual workstation, gõ *PowerShell* vào thanh tìm kiếm và mở ứng dụng **Windows PowerShell**.
+    
+    Kiểm tra xem AWS CLI đã được cài đặt hay chưa bằng cách chạy lệnh:
+    
+    ```powershell
+    aws --version
+    ```
+    
+    Nếu đầu ra hiển thị đường dẫn cài đặt, bạn có thể bỏ qua và chuyển sang bước tiếp theo. Nếu không, hãy làm theo hướng dẫn bên dưới để tải AWS CLI.
+    
+    Cài đặt AWS CLI bằng cách chạy lệnh sau:
+    
+    ```powershell
+    msiexec.exe /i [https://awscli.amazonaws.com/AWSCLIV2.msi](https://awscli.amazonaws.com/AWSCLIV2.msi)
+    ```
+    
+    Hoàn tất trình hướng dẫn cài đặt và giữ nguyên mọi tùy chọn mặc định.
 
-3. Trong Create bucket console
-+ Đặt tên bucket: chọn 1 tên mà không bị trùng trong phạm vi toàn cầu (gợi ý: lab\<số-lab\>\<tên-bạn\>)
+---
 
-![Bucket name](/images/5-Workshop/5.3-S3-vpc/bucket-name.png)
+2.  **Thiết lập thông tin xác thực PowerShell**
+    
+    **INTERNAL**
+    
+    Nếu đang sử dụng tài khoản Isengard, hãy truy cập [AWS Console Access Dashboard](https://isengard.amazon.com/console-access). Mở menu temporary credentials của tài khoản Isengard mà bạn đang dùng cho workshop này.
+    
+    Mở rộng menu xổ xuống *PowerShell*, rồi nhấn **Copy Powershell**.
+    
+    ![Set Temporary Credentials](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-temp-creds.png)
+    
+    Để thiết lập temporary credentials, sao chép và dán các thông tin xác thực đó vào ứng dụng PowerShell trên virtual workstation, rồi nhấn **Enter**.
+    
+    **EXTERNAL**
+    
+    Làm theo [hướng dẫn này](https://docs.aws.amazon.com/powershell/latest/userguide/creds-idc-cli.html) để cấu hình credentials cho PowerShell sử dụng IAM Identity Center và AWS CLI.
 
+---
 
-+ Giữ nguyên giá trị của các fields khác (default)
-+ Kéo chuột xuống và chọn **Create bucket**
+3.  **Tạo các thư mục job**
+    
+    Di chuyển tới thư mục `"C:/"` bằng lệnh sau:
+    
+    ```powershell
+    cd ../..
+    ```
+    
+    Tạo một thư mục mới tên là RealityCapture:
+    
+    ```powershell
+    New-Item -Path "C:\" -Name "RealityCapture" -ItemType Directory
+    ```
+    
+    Tạo ba thư mục con có tên `"model"`, `"s3-input-images"`, `"rcproject"`:
+    
+    ```powershell
+    New-Item -Path C:\RealityCapture\model,C:\RealityCapture\s3-input-images,C:\RealityCapture\rcproject -ItemType Directory
+    ```
 
-![Create](/images/5-Workshop/5.3-S3-vpc/create-button.png)    
+---
 
-+ Tạo thành công S3 bucket
+4.  **Tải các file assets**
+    
+    Trên S3 console, vào S3 bucket của workshop và sao chép S3 URI của thư mục **assets** như minh họa trong hình bên dưới:
+    
+    ![S3 Assets URI](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-assets-s3-uri.png)
+    
+    Tải các PowerShell script và file Texture Settings từ S3 về workstation bằng lệnh sau (xóa dấu ngoặc khi thay nội dung):
+    
+    ```powershell
+    aws s3 sync "[ENTER S3 URI OF ASSETS FOLDER]" C:\RealityCapture
+    ```
 
-![Success](/images/5-Workshop/5.3-S3-vpc/bucket-success.png)
+---
 
-#### Kết nối với EC2 bằng session manager
+5.  **Chạy script rcStart**
+    
+    Tương tự bước 4, hãy sao chép S3 URI của thư mục **images**.
+    
+    ℹ️ **Chạy RealityCapture từ PowerShell**  
+    Trong lệnh bên dưới, chúng ta chạy file script **rcStart.ps1** với bốn tham số: 1/ tên job, 2/ S3 input bucket/folder, 3/ số lượng polygon mục tiêu cho bước simplify, 4/ khóa kích hoạt RealityCapture.
+    
+    Khởi chạy một RC job mới bằng cách thực thi file script **rcStart** (xóa dấu ngoặc khi thay nội dung):
+    
+    ```powershell
+    C:\\RealityCapture\\rcStart.ps1 DroneImagery [ENTER S3 URI OF IMAGES FOLDER] 1000000
+    ```
+    
+    ⚠️ **Ước tính thời gian chạy (dựa trên kích thước instance)**
+    * g5.2xlarge = ~18 phút
+    * g5.4xlarge = ~15 phút
+    * g5.8xlarge = ~12 phút
 
-+ Trong workshop này, bạn sẽ dùng AWS Session Manager để kết nối đến các EC2 instances. Session Manager là 1 tính năng trong dịch vụ Systems Manager được quản lý hoàn toàn bởi AWS. System manager cho phép bạn quản lý Amazon EC2 instances và các máy ảo on-premises (VMs)thông qua 1 browser-based shell. Session Manager cung cấp khả năng quản lý phiên bản an toàn và có thể kiểm tra mà không cần mở cổng vào, duy trì máy chủ bastion host hoặc quản lý khóa SSH.
+---
 
-+ First cloud journey [Lab](https://000058.awsstudygroup.com/1-introduce/) để hiểu sâu hơn về Session manager.
+6.  **(Tùy chọn) Xem output của PowerShell**
+    
+    Nếu bạn kiểm tra output của PowerShell, bạn sẽ thấy log của từng bước trong quá trình chạy job.
+    
+    ![PowerShell job start](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-powershell-start.png)
+    
+    ![PowerShell job complete](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-powershell-complete.png)
 
-1. Trong AWS Management Console, gõ Systems Manager trong ô tìm kiếm và nhấn Enter:
+---
 
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm.png)
-
-2. Từ **Systems Manager** menu, tìm **Node Management** ở thanh bên trái và chọn **Session Manager**:
-
-![system manager](/images/5-Workshop/5.3-S3-vpc/sm1.png)
-
-3. Click Start Session, và chọn EC2 instance tên **Test-Gateway-Endpoint**. 
-{{% notice info %}}
-Phiên bản EC2 này đã chạy trong "VPC cloud" và sẽ được dùng để kiểm tra khả năng kết nối với Amazon S3 thông qua điểm cuối Cổng mà bạn vừa tạo (s3-gwe). {{% /notice %}}
-
-![Start session](/images/5-Workshop/5.3-S3-vpc/start-session.png)
-
-Session Manager sẽ mở browser tab mới với shell prompt: sh-4.2 $
-
-![Success](/images/5-Workshop/5.3-S3-vpc/start-session-success.png)
-
-Bạn đã bắt đầu phiên kết nối đến EC2 trong VPC Cloud thành công. Trong bước tiếp theo, chúng ta sẽ tạo một  S3 bucket và một tệp trong đó.
-#### Create a file and upload to s3 bucket
-
-1. Đổi về ssm-user's thư mục bằng lệnh "cd ~" 
-
-![Change user's dir](/images/5-Workshop/5.3-S3-vpc/cli1.png)
-
-2. Tạo 1 file để kiểm tra bằng lệnh "fallocate -l 1G testfile.xyz", 1 file tên "testfile.xyz" có kích thước 1GB sẽ được tạo.
-
-![Create file](/images/5-Workshop/5.3-S3-vpc/cli-file.png)
-
-3. Tải file mình vừa tạo lên S3 với lệnh "aws s3 cp testfile.xyz s3://your-bucket-name". Thay your-bucket-name bằng tên S3 bạn đã tạo.
-
-![Uploaded](/images/5-Workshop/5.3-S3-vpc/uploaded.png)
-
-Bạn đã tải thành công tệp lên bộ chứa S3 của mình. Bây giờ bạn có thể kết thúc session.
-
-#### Kiểm tra object trong S3 bucket
-
-1. Đi đến S3 console.  
-2. Click tên s3 bucket của bạn
-3. Trong Bucket console, bạn sẽ thấy tệp bạn đã tải lên S3 bucket của mình
-
-![Check S3](/images/5-Workshop/5.3-S3-vpc/check-s3-bucket.png)
-
-#### Tóm tắt
-
-Chúc mừng bạn đã hoàn thành truy cập S3 từ VPC. Trong phần này, bạn đã tạo gateway endpoint cho Amazon S3 và sử dụng AWS CLI để tải file lên. Quá trình tải lên hoạt động vì gateway endpoint cho phép giao tiếp với S3 mà không cần Internet gateway gắn vào "VPC Cloud". Điều này thể hiện chức năng của gateway endpoint như một đường dẫn an toàn đến S3 mà không cần đi qua pub    lic Internet.
+7.  **(Tùy chọn) Xem nội dung script rcStart**
+    
+    Trong file script **rcStart.ps1**, hãy xem lệnh *Running RC* ở dòng 48. Lệnh này kết hợp các bước căn chỉnh ảnh (`-align`), dựng mesh (`-calculateNormalModel`), đơn giản hóa mesh (`-simplify`) và tạo texture (`-calculateTexture`) vào trong một câu lệnh duy nhất:
+    
+    ```powershell
+    Write-Output "Running RC..." 
+    & "C:\Program Files\Capturing Reality\RealityCapture\RealityCapture.exe" -newScene -headless -set "appQuitOnError=true"  -set "appProcessAction=ExecuteProgram" -set "appProcessActionTime=0" -stdConsole -writeProgress "C:\RealityCapture\ProcessingProgress.txt" -addFolder "C:\RealityCapture\s3-input-images" -align -selectMaximalComponent -setReconstructionRegionAuto -calculateNormalModel -renameSelectedModel HighPoly -calculateTexture -simplify ${simp} -renameSelectedModel LowPoly -unwrap -reprojectTexture HighPoly LowPoly C:\RealityCapture\TextureReprojectionSettings.xml -selectModel LowPoly -selectMarginalTriangles -removeSelectedTriangles -selectModel LowPoly -exportModel LowPoly C:\RealityCapture\model\LowPolyModel.fbx -save C:\RealityCapture\rcproject\Project.rcproj -quit
+    ```
+    
+    Điều này cho thấy khả năng xâu chuỗi nhiều lệnh thành một quy trình thực thi kết hợp. Để xem đầy đủ danh sách các lệnh CLI của RealityCapture, hãy tham khảo [tài liệu Capturing Reality](https://rchelp.capturingreality.com/en-US/tutorials/commandline.htm).

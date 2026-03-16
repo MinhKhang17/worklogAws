@@ -1,37 +1,48 @@
 ---
 title : "Dọn dẹp tài nguyên"
-date : 2024-01-01
-weight : 6
+date : 2026-03-16
+weight : 4
 chapter : false
-pre : " <b> 5.6. </b> "
+pre : " <b> 5.4. </b> "
 ---
 
-#### Dọn dẹp tài nguyên
+⚠️ **Dừng instance khi không sử dụng**
 
-Xin chúc mừng bạn đã hoàn thành xong lab này!
-Trong lab này, bạn đã học về các mô hình kiến trúc để truy cập Amazon S3 mà không sử dụng Public Internet.
+Bạn có thể **dừng (stop) các EC2 instance** để tránh phát sinh chi phí mà không cần xóa toàn bộ stack. Chỉ cần vào **EC2 Console**, sau đó chọn **Stop instance** trong menu thả xuống **Instance state**.
 
-+ Bằng cách tạo Gateway endpoint, bạn đã cho phép giao tiếp trực tiếp giữa các tài nguyên EC2 và Amazon S3, mà không đi qua Internet Gateway.
-Bằng cách tạo Interface endpoint, bạn đã mở rộng kết nối S3 đến các tài nguyên chạy trên trung tâm dữ liệu trên chỗ của bạn thông qua AWS Site-to-Site VPN hoặc Direct Connect.
+Sau khi dừng instance, bạn sẽ **không còn bị tính phí sử dụng hoặc phí truyền dữ liệu** cho instance đó. Tuy nhiên, bạn vẫn sẽ bị tính phí cho các tài nguyên liên quan, chẳng hạn như **EBS volumes được gắn kèm** và **Elastic IP addresses** liên kết với instance.
 
-#### Dọn dẹp
-1. Điều hướng đến Hosted Zones trên phía trái của bảng điều khiển Route 53. Nhấp vào tên của  s3.us-east-1.amazonaws.com zone. Nhấp vào Delete và xác nhận việc xóa bằng cách nhập từ khóa "delete".
+---
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/delete-zone.png)
+**Thực hiện theo các bước sau để xóa toàn bộ tài nguyên AWS đã tạo trong workshop này.**
 
-2. Disassociate Route 53 Resolver Rule - myS3Rule from "VPC Onprem" and Delete it. 
+1. **Xóa stack: Phần 1**
+    
+    Trên **AWS Console**, vào **CloudFormation** và mở trang **Stacks**.
+    
+    Chọn nút radio (dial) hoặc nhấp vào tên stack, sau đó nhấn nút **Delete**. Thao tác này sẽ xóa tất cả tài nguyên ngoại trừ **S3 bucket**.
+    
+    Sau khi hoàn tất, bạn sẽ thấy thông báo sau:  
+    *Delete Failed: The following resource(s) failed to delete: [S3Bucket]*
+    
+    ![RC Stack Delete Failed](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-delete-failed.png)
 
-![hosted zone](/images/5-Workshop/5.6-Cleanup/vpc.png)
+---
 
-4.Mở console của CloudFormation và xóa hai stack CloudFormation mà bạn đã tạo cho bài thực hành này:
-+ PLOnpremSetup
-+ PLCloudSetup
+2. **Xóa stack: Phần 2**
+    
+    (Tùy chọn) Trước khi thực hiện bước này, bạn có thể tải xuống nội dung của **S3 bucket** trong workshop để lưu lại kết quả làm việc.
+    
+    Trên **AWS Console**, vào **S3** và mở **workshop bucket**.
+    
+    Xóa từng thư mục con: chọn checkbox bên cạnh **cả ba thư mục**, sau đó nhấn **Delete**. Làm theo hướng dẫn trên màn hình để xác nhận việc xóa.
+    
+    Quay lại **CloudFormation Console**, mở **workshop stack**. Sau đó nhấn **Delete** một lần nữa để hoàn tất việc xóa stack.
+    
+    Bạn sẽ thấy thông báo thành công cuối cùng:
+    
+    ![RC Stack Delete Success](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-delete-complete.png)
 
-![delete stack](/images/5-Workshop/5.6-Cleanup/delete-stack.png)
+---
 
-5. Xóa các S3 bucket
-
-+ Mở bảng điều khiển S3
-+ Chọn bucket chúng ta đã tạo cho lab, nhấp chuột và xác nhận là empty. Nhấp Delete và xác nhận delete.
-+ 
-![delete s3](/images/5-Workshop/5.6-Cleanup/delete-s3.png)
+✅ **Workshop hoàn thành**

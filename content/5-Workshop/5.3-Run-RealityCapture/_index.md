@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.3. </b> "
 ---
 
-# Run RealityCapture
 
 Photogrammetry can be summarized in three basic steps: **alignment, construction, and texture**. First step is to align the images of our dataset, then RealityCapture will construct the mesh, and finally generate the textures and apply them to the mesh.
 

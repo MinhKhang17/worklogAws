@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.3.1 </b> "
 ---
 
-# Upload Image Dataset to S3
 
 In this step, we will upload our image dataset to Amazon S3. This Drone Imagery dataset contains 482 images that were captured with a drone and ground control points with precise location information. It can be used to check out how georeferencing works using images or ground control points.
 

@@ -6,8 +6,6 @@ chapter : false
 pre : " <b> 5.3.3 </b> "
 ---
 
-# View output
-
 Congratulations, you have now generated a 3D model from a set of drone images! In this step, we will view the model created inside the RealityCapture application.
 
 ---

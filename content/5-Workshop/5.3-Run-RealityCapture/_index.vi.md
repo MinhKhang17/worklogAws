@@ -1,18 +1,21 @@
 ---
-title : "Truy cập S3 từ VPC"
-date : 2024-01-01 
+title : "Chạy RealityCapture"
+date : 2026-03-16
 weight : 3
 chapter : false
 pre : " <b> 5.3. </b> "
 ---
 
-#### Sử dụng Gateway endpoint
+Photogrammetry có thể được tóm tắt thành ba bước cơ bản: **alignment (căn chỉnh), construction (xây dựng), và texture (tạo texture)**.  
+Bước đầu tiên là căn chỉnh các hình ảnh trong bộ dữ liệu, sau đó RealityCapture sẽ xây dựng **mesh**, và cuối cùng tạo **texture** và áp dụng chúng lên mesh.
 
-Trong phần này, bạn sẽ tạo một Gateway endpoint để truy cập Amazon S3 từ một EC2 instance. Gateway endpoint sẽ cho phép tải một object lên S3 bucket mà không cần sử dụng Internet Công cộng. Để tạo endpoint, bạn phải chỉ định VPC mà bạn muốn tạo endpoint và dịch vụ (trong trường hợp này là S3) mà bạn muốn thiết lập kết nối.
+Nhiều tính năng của RealityCapture có thể được sử dụng trực tiếp thông qua **command line** hoặc bằng cách chạy **script**. Các lệnh này được truyền vào ứng dụng dưới dạng tham số của `RealityCapture.exe` và được thực thi theo một chuỗi. Quá trình này hoạt động tương tự như khi bạn gọi các chức năng thông qua GUI. Ứng dụng vẫn sẽ khởi chạy và bạn có thể tương tác với nó như bình thường trong khi quá trình tính toán đang diễn ra.
 
-![overview](/images/5-Workshop/5.3-S3-vpc/diagram2.png)
+Chúng ta sẽ sử dụng **Windows PowerShell** để thực thi các lệnh của RealityCapture. Bằng cách **chaining (nối) nhiều lệnh lại với nhau**, chúng ta có thể thực hiện cả ba bước nêu trên chỉ với **một lệnh duy nhất**, mà không cần thao tác với GUI. Chúng ta chỉ sử dụng GUI ở bước cuối cùng để xem mô hình đã hoàn thành.
 
-#### Nội dung
+ℹ️ **Lưu ý**
 
-- [Tạo gateway endpoint](3.1-create-gwe/)
-- [Test gateway endpoint](3.2-test-gwe/)
+Việc học cách sử dụng RealityCapture **không cần GUI** là rất quan trọng nếu bạn muốn biến workflow này thành một **pipeline tự động**. Việc xây dựng một **pipeline photogrammetry tự động** sẽ là nội dung của một module trong tương lai của workshop này.
+
+Để xem danh sách đầy đủ các lệnh CLI của RealityCapture, hãy tham khảo tài liệu của Capturing Reality:  
+[Capturing Reality documentation](https://rchelp.capturingreality.com/en-US/tutorials/commandline.htm).

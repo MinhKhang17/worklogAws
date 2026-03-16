@@ -5,7 +5,7 @@ weight : 4
 chapter : false
 pre : " <b> 5.4. </b> "
 ---
-# Cleanup
+
 
 ⚠️ **Stop instances when not in use**
 You can stop the EC2 instances to avoid incurring costs without deleting the entire stack. Simply go to the EC2 console, and choose **Stop instance** under the **Instance state** drop-down.

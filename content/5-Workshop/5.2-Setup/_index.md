@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.2. </b> "
 ---
 
-# Setup Workstation
 
 ✅ **Estimated Deployment Time:** 20 minutes
 

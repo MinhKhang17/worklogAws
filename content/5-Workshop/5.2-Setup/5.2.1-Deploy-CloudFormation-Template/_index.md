@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.2.1 </b> "
 ---
 
-# Deploy CloudFormation Template
 
 [AWS CloudFormation](https://aws.amazon.com/cloudformation/) lets you model, provision, and manage AWS and third-party resources by treating infrastructure as code. In this step, we will deploy a CloudFormation stack to provision a VPC, EC2 instance, and S3 bucket.
 

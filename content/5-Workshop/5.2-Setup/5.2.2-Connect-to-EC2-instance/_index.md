@@ -6,7 +6,6 @@ chapter : false
 pre : " <b> 5.2.2 </b> "
 ---
 
-# Connect to EC2 instance
 
 Now that the stack is successfully deployed, let's connect to the EC2 instance using [NICE DCV](https://aws.amazon.com/hpc/dcv/) remote display protocol (RDP). NICE DCV is a high-performance remote display protocol that provides customers with a secure way to deliver remote desktops and application streaming from any cloud or data center to any device, over varying network conditions. With NICE DCV and Amazon EC2, customers can run graphics-intensive applications remotely on EC2 instances, and stream their user interface to simpler client machines, eliminating the need for expensive dedicated workstations.
 

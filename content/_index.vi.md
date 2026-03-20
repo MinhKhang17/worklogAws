@@ -17,7 +17,7 @@ chapter: false
 
 &emsp; **Ngành:** Trí tuệ Nhân tạo
 
-&emsp; **Lớp:** AWS082025
+&emsp; **Lớp:** FCAJ - FPT - Season 2
 
 &emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
 

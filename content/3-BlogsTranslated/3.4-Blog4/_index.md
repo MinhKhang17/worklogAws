@@ -41,6 +41,7 @@ Policy in Amazon Bedrock AgentCore works by evaluating every agent-to-tool reque
 According to the post, the service supports not only direct Cedar authoring, but also generation of Cedar from plain English policy statements. The generated policies are checked for syntactic correctness, validated against the gateway schema, and analyzed for potential problems such as being overly permissive or overly restrictive. This capability helps teams convert business rules into enforceable controls while reducing the chance of misconfiguration. 
 
 A practical benefit of this model is that organizations can first attach a policy engine in **LOG_ONLY** mode. In that mode, they can observe how policies would behave without actually blocking production traffic. Once they confirm the policies produce the intended behavior, they can switch to enforcement mode and actively govern runtime access. This staged rollout is useful for enterprises that want to introduce strict controls without disrupting critical systems. 
+
 ---
 
 ## Healthcare appointment scheduling agent example
@@ -81,6 +82,7 @@ The AWS authors also walk through policy testing scenarios to show how the syste
 In the next test, the same authenticated user requests patient information for `pediatric-patient-001`. The agent, model, and tool are unchanged, but the request parameter no longer matches the user’s identity. As a result, the gateway denies the request because no matching permit policy exists. This demonstrates that the security boundary is enforced consistently at the gateway, independent of the agent’s reasoning.
 
 A second pair of tests examines time-based scheduling control. When a user requests appointment slots during permitted hours, such as **2 PM UTC**, the relevant forbid condition does not match, so the request is allowed if a permit rule applies. But when the same request is made at **3 AM UTC**, the forbid rule matches and the request is denied. These tests illustrate how identity-based permits and time-based forbids can work together to create deterministic security outcomes.
+
 ---
 
 ## Implementation and operational considerations

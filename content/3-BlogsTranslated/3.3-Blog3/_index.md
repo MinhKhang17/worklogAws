@@ -21,6 +21,7 @@ From the very beginning, Amazon S3 was guided by five fundamental principles tha
 When Amazon S3 first launched, it operated at a scale that was already significant for its time. The service initially offered about **one petabyte** of total storage capacity distributed across approximately **400 storage nodes**, **15 racks**, and **three data centers**, with around **15 Gbps** of total bandwidth. The system was designed to store **tens of billions of objects**, and the maximum object size at launch was **5 GB**. Pricing at that time was **$0.15 per gigabyte**.
 
 Although those numbers were impressive in 2006, they are modest compared with the scale Amazon S3 supports today. Still, the original design choices laid the foundation for a service that could evolve dramatically over two decades without breaking backward compatibility for users. One of the most remarkable aspects of S3 is that code written for it in 2006 can still function today. Even though the infrastructure, storage hardware, and request-handling code have gone through multiple generations of change, AWS has maintained compatibility while continuing to innovate internally. 
+
 ---
 
 ## Amazon S3 today: scale beyond imagination

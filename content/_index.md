@@ -21,13 +21,13 @@ chapter: false
 
 &emsp; **Major:** Artificial Intelligence
 
-&emsp; **Class:** AWS082025
+&emsp; **Class:** FCAJ - FPT - Season 2
 
 &emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 
-&emsp; **Internship Duration:** From 05/01/2025 
+&emsp; **Internship Duration:** From 05/01/2026
 
 ![Avatar](/images/profile.jpg)
 ### Report Content

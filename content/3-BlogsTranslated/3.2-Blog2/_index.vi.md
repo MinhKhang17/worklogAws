@@ -7,10 +7,7 @@ pre: " <b> 3.2. </b> "
 ---
 
 # Triển khai ứng dụng AWS và truy cập tài khoản AWS trên nhiều Region với IAM Identity Center
-
-**Tác giả:** Kushal Agrawal, Neelam Sharma, Mohit Tiwari  
-**Nguồn:** AWS Security Blog  
-**Ngày xuất bản:** 15 March 2026  
+  
 
 AWS IAM Identity Center thường được sử dụng để quản lý tập trung quyền truy cập của nhân viên (workforce) vào các tài khoản AWS và các ứng dụng AWS managed. Khi các tổ chức mở rộng hoạt động sang nhiều quốc gia và đơn vị kinh doanh, họ thường cần các dịch vụ định danh có thể duy trì hoạt động ngay cả khi một Region gặp sự cố, đồng thời vẫn đáp ứng các yêu cầu như triển khai cục bộ, độ trễ thấp hơn và tuân thủ quy định về lưu trữ dữ liệu theo khu vực (data residency). Để giải quyết những nhu cầu này, AWS đã giới thiệu tính năng **multi-Region replication** cho IAM Identity Center. Khả năng này cho phép khách hàng sao chép cấu hình IAM Identity Center từ Region chính sang một hoặc nhiều Region bổ sung, giúp tăng khả năng chịu lỗi cho việc truy cập tài khoản AWS và cho phép triển khai ứng dụng gần người dùng hơn.
 
@@ -104,7 +101,7 @@ Mặc dù multi-Region replication mang lại nhiều lợi ích, nó cũng làm
 
 ---
 
-## Conclusion
+## Kết luận
 
 Tính năng **multi-Region replication** cho AWS IAM Identity Center mang lại cách mạnh mẽ hơn để các tổ chức quản lý truy cập workforce trong môi trường AWS phân tán theo địa lý. Bằng cách sao chép IAM Identity Center từ primary Region sang các Region bổ sung, tổ chức có thể cải thiện khả năng chịu lỗi của truy cập tài khoản AWS và triển khai các AWS managed applications tại những Region phù hợp hơn với vị trí người dùng, mục tiêu độ trễ hoặc yêu cầu data residency.
 
@@ -112,7 +109,7 @@ Tính năng **multi-Region replication** cho AWS IAM Identity Center mang lại 
 
 ---
 
-## About the Author
+## Về tác giả
 
 **Alex Milanovic** là cộng tác viên và tác giả trên AWS Security Blog, tập trung vào các chủ đề liên quan đến bảo mật, quản lý định danh và truy cập, cũng như các kiến trúc multi-Region an toàn trên AWS.
 

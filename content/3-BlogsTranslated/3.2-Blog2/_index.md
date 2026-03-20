@@ -7,10 +7,7 @@ pre: " <b> 3.2. </b> "
 ---
 
 # Deploy AWS Applications and Access AWS Accounts Across Multiple Regions with IAM Identity Center
-
-**Author:** Kushal Agrawal, Neelam Sharma, Mohit Tiwari  
-**Source:** AWS Security Blog  
-**Published date:** 15 March 2026  
+ 
 
 AWS IAM Identity Center is commonly used to centrally manage workforce access to AWS accounts and AWS managed applications. As organizations grow across countries and business units, they often need identity services that remain available even when one Region is disrupted, while also meeting requirements such as local deployment, lower latency, and data residency. To address these needs, AWS introduced **multi-Region replication** for IAM Identity Center. This capability allows customers to replicate their IAM Identity Center configuration from the primary Region to one or more additional Regions, improving resiliency for AWS account access and enabling application deployment closer to users.
 
@@ -33,6 +30,7 @@ A multi-Region IAM Identity Center deployment begins with an existing Identity C
 For AWS account access, this means that workforce users can continue signing in to assigned AWS accounts through IAM Identity Center even if the primary Region experiences a disruption, provided the organization has configured replication correctly. For AWS managed applications, multi-Region support enables deployment in an enabled Region with a connection to IAM Identity Center in that same Region. AWS refers to this as a **Region-local connection**, which improves reliability and performance because authentication and workforce identity access stay local to that Region.
 
 Another key concept is that multi-Region replication is not just a toggle for availability. It requires supporting configuration across the identity, encryption, and networking layers. AWS specifically notes that replication to additional Regions requires a **multi-Region AWS KMS key**, updates to the customer’s **identity provider (IdP)** configuration, and network connectivity to the IAM Identity Center endpoints in the new Regions. 
+
 ---
 
 ## Solution Overview

@@ -1,27 +1,28 @@
 ---
 title: "Workshop"
-date : 2026-03-16 
+date : 2026-03-25 
 weight : 5
 chapter : false
 pre : " <b> 5. </b> "
 ---
 
-# Photogrammetry on AWS with RealityCapture and EC2
+## Running Apache Iceberg on AWS
 
-In this workshop, you will learn how to setup RealityCapture on an Amazon EC2 instance to run photogrammetry workloads on AWS.
+This workshop is intended to provide an hands-on experience to build a Transactional Data Lake using [Apache Iceberg](https://iceberg.apache.org/) on Amazon EMR and Amazon Athena. Apache Iceberg is a new table format for storing large, slow-moving tabular data. It is designed to improve on the de-facto standard table layout built into Hive, Trino, and Spark. Apache Iceberg table formats are currently supported by two AWS services
 
-Epic Games RealityCapture is a photogrammetry software application for Windows, which enables you to create ultra-realistic 3D models from a set of images and/or laser scans. To learn more about about RealityCapture, please visit the [RealityCapture](https://www.capturingreality.com/realitycapture) website.
+1. Amazon Athena and  
+2. Amazon EMR.
 
-![Project Preview](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-photo-to-3d.png)
-
----
-
-**Target Audience:** Developers, DevOps Engineers, 3D Content Creators
-
-**Use Cases:** Surveying & aerial mapping, VFX / Game Industry, Full body & product scanning, Simulation, BIM & AEC, and more
+As part of this workshop, we will analyze Amazon S3 Data Lake using both Amazon Athena and Amazon EMR that supports the Iceberg table format. For this workshop you will need some knowledge of basic SQL commands for athena labs and pyspark for EMR labs.
 
 ---
 
-✅ **Estimated Duration:** 1-2 hours
+**Target Audience:** Data Engineers, Data Analysts, Cloud Engineers, Big Data Developers
+
+**Use Cases:** Building transactional data lakes, querying S3 data with Athena, processing data with EMR & PySpark, managing large-scale tabular data with Apache Iceberg, and modernizing data lake architectures
+
+---
+
+✅ **Estimated Duration:** 2-3 hours
 
 ⚠️ **Cleanup:** When you're done with the workshop, reference the **Cleanup** section to delete resources and avoid incurring unnecessary costs.

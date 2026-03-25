@@ -1,27 +1,14 @@
 ---
-title : "Tìm hiểu thêm"
+title : "Lab 3: EMR Iceberg - sử dụng bảng Iceberg"
 date : 2026-03-16 
 weight : 5 
 chapter : false
 pre : " <b> 5.5. </b> "
 ---
 
-Chúng tôi hy vọng workshop này đã giúp bạn hiểu cách thiết lập **RealityCapture trên Amazon EC2** để chạy các workload **photogrammetry trên AWS**. Để tìm hiểu sâu hơn về các thành phần trong workshop này, bạn có thể tham khảo các tài nguyên sau:
 
----
+Trong bài lab này, đối với các bài lab tự thực hành (self paced labs), chúng ta sẽ tạo một EMR cluster với Phiên bản 6.5 có cài đặt Iceberg. Đối với AWS Events, EMR cluster đã được tạo sẵn. Bài lab này đã được kiểm tra với `EMR 6.5.0`. Do đó, chúng tôi khuyên bạn nên sử dụng cùng một phiên bản EMR cho workshop của mình.
 
-## Amazon Web Services
+Chúng ta sẽ sử dụng PySpark Jupyter Notebook để làm việc tương tác với các bảng Iceberg.
 
-* [Amazon EC2 - G5 Instances](https://aws.amazon.com/ec2/instance-types/g5/)
-* [Amazon EC2 - G4 Instances](https://aws.amazon.com/ec2/instance-types/g4/)
-* [NICE DCV - Remote Display Protocol](https://aws.amazon.com/hpc/dcv/)
-* [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
-
----
-
-## RealityCapture
-
-* [Sample Image Datasets](https://www.capturingreality.com/sample-datasets)
-* [RealityCapture CLI Commands](https://rchelp.capturingreality.com/en-US/tutorials/commandline.htm)
-* [RealityCapture Documentation](https://rchelp.capturingreality.com/en-US/startIndex.htm)
-* [RealityCapture Tutorials](https://www.capturingreality.com/RealityCapture-Tutorials)
+Đối với các bài lab tự thực hành, trước khi bắt đầu bài lab này, hãy đảm bảo rằng bạn đã hoàn thành Bài lab **Tạo S3 bucket** (Create S3 bucket). Đối với các sự kiện AWS, S3 bucket đã được tạo sẵn.

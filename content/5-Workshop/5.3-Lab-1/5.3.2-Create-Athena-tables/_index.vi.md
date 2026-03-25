@@ -1,128 +1,92 @@
 ---
-title : "Khởi chạy Job"
-date : 2026-03-16 
+title : "1.2 Tạo Athena tables"
+date : 2026-03-25 
 weight : 2
 chapter : false
 pre : " <b> 5.3.2 </b> "
 ---
 
-Trong bước này, chúng ta sẽ sử dụng PowerShell để khởi chạy một job RealityCapture. Job này sẽ thực hiện các bước sau: 1/ căn chỉnh bộ dữ liệu hình ảnh, 2/ xây dựng mô hình base high poly, 3/ tạo texture cho mô hình, 4/ đơn giản hóa mesh thành phiên bản low poly.
+1.  Điều hướng tới [Athena Console](https://console.aws.amazon.com/athena/home) 
+    
+    ---
+    
+2.  Mở trình soạn thảo truy vấn **Query Editor** (không phải Notebook editor)
+    
+    ---
+![open query editor](/images/5-Workshops/5.3/5.3.2/5.png)
+
+3.  Khi đã vào trong trình soạn thảo truy vấn của Athena console, hãy nhấp vào '**Edit Settings**' như hình bên dưới:
+    
+
+![Athena console](/images/5-Workshops/5.3/5.3.2/6.png)
 
 ---
 
-1.  **Kiểm tra AWS CLI**
-    
-    Trên desktop của virtual workstation, gõ *PowerShell* vào thanh tìm kiếm và mở ứng dụng **Windows PowerShell**.
-    
-    Kiểm tra xem AWS CLI đã được cài đặt hay chưa bằng cách chạy lệnh:
-    
-    ```powershell
-    aws --version
-    ```
-    
-    Nếu đầu ra hiển thị đường dẫn cài đặt, bạn có thể bỏ qua và chuyển sang bước tiếp theo. Nếu không, hãy làm theo hướng dẫn bên dưới để tải AWS CLI.
-    
-    Cài đặt AWS CLI bằng cách chạy lệnh sau:
-    
-    ```powershell
-    msiexec.exe /i [https://awscli.amazonaws.com/AWSCLIV2.msi](https://awscli.amazonaws.com/AWSCLIV2.msi)
-    ```
-    
-    Hoàn tất trình hướng dẫn cài đặt và giữ nguyên mọi tùy chọn mặc định.
+1.  Nhấp vào Settings và sau đó nhấp vào **Manage**.
+
+![Athena Settings](/images/5-Workshops/5.3.2/7.png)
 
 ---
 
-2.  **Thiết lập thông tin xác thực PowerShell**
-    
-    **INTERNAL**
-    
-    Nếu đang sử dụng tài khoản Isengard, hãy truy cập [AWS Console Access Dashboard](https://isengard.amazon.com/console-access). Mở menu temporary credentials của tài khoản Isengard mà bạn đang dùng cho workshop này.
-    
-    Mở rộng menu xổ xuống *PowerShell*, rồi nhấn **Copy Powershell**.
-    
-    ![Set Temporary Credentials](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-temp-creds.png)
-    
-    Để thiết lập temporary credentials, sao chép và dán các thông tin xác thực đó vào ứng dụng PowerShell trên virtual workstation, rồi nhấn **Enter**.
-    
-    **EXTERNAL**
-    
-    Làm theo [hướng dẫn này](https://docs.aws.amazon.com/powershell/latest/userguide/creds-idc-cli.html) để cấu hình credentials cho PowerShell sử dụng IAM Identity Center và AWS CLI.
+4.  Tại phần Manage Settings, nhấp vào **Browse S3**.
+
+![Athena Settings](/images/5-Workshops/5.3.2/8.png)
 
 ---
 
-3.  **Tạo các thư mục job**
-    
-    Di chuyển tới thư mục `"C:/"` bằng lệnh sau:
-    
-    ```powershell
-    cd ../..
-    ```
-    
-    Tạo một thư mục mới tên là RealityCapture:
-    
-    ```powershell
-    New-Item -Path "C:\" -Name "RealityCapture" -ItemType Directory
-    ```
-    
-    Tạo ba thư mục con có tên `"model"`, `"s3-input-images"`, `"rcproject"`:
-    
-    ```powershell
-    New-Item -Path C:\RealityCapture\model,C:\RealityCapture\s3-input-images,C:\RealityCapture\rcproject -ItemType Directory
-    ```
+5.  Chọn S3 bucket bằng cách nhấp vào nút radio (hình tròn) và sau đó nhấp chọn **Choose**. Đối với các bài lab tự thực hành (self paced labs), hãy chọn S3 bucket mà bạn đã tạo trước đó. Đối với AWS Events, hãy chọn S3 bucket có tên bắt đầu bằng iceberg-workshop-ACCOUNTID (ví dụ: iceberg-workshop-123456789).
+
+![Choose-S3-data-set](/images/5-Workshops/5.3/5.3.2/9.png)
 
 ---
 
-4.  **Tải các file assets**
-    
-    Trên S3 console, vào S3 bucket của workshop và sao chép S3 URI của thư mục **assets** như minh họa trong hình bên dưới:
-    
-    ![S3 Assets URI](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-assets-s3-uri.png)
-    
-    Tải các PowerShell script và file Texture Settings từ S3 về workstation bằng lệnh sau (xóa dấu ngoặc khi thay nội dung):
-    
-    ```powershell
-    aws s3 sync "[ENTER S3 URI OF ASSETS FOLDER]" C:\RealityCapture
-    ```
+6.  Nhấn chọn **Save** để lưu lại S3 location này.
+
+![Save-s3-location](/images/5-Workshops/5.3/5.3.2/10.png)
 
 ---
 
-5.  **Chạy script rcStart**
-    
-    Tương tự bước 4, hãy sao chép S3 URI của thư mục **images**.
-    
-    ℹ️ **Chạy RealityCapture từ PowerShell**  
-    Trong lệnh bên dưới, chúng ta chạy file script **rcStart.ps1** với bốn tham số: 1/ tên job, 2/ S3 input bucket/folder, 3/ số lượng polygon mục tiêu cho bước simplify, 4/ khóa kích hoạt RealityCapture.
-    
-    Khởi chạy một RC job mới bằng cách thực thi file script **rcStart** (xóa dấu ngoặc khi thay nội dung):
-    
-    ```powershell
-    C:\\RealityCapture\\rcStart.ps1 DroneImagery [ENTER S3 URI OF IMAGES FOLDER] 1000000
-    ```
-    
-    ⚠️ **Ước tính thời gian chạy (dựa trên kích thước instance)**
-    * g5.2xlarge = ~18 phút
-    * g5.4xlarge = ~15 phút
-    * g5.8xlarge = ~12 phút
+7.  Nhấp vào **Editor** và copy paste câu truy vấn bên dưới. Cập nhật **YOURBUCKET** thành tên S3 bucket của bạn sau đó nhấn nút **Run**.
+
+```sql
+CREATE EXTERNAL TABLE default.amazon_reviews_parquet(
+marketplace string, 
+customer_id string, 
+review_id string, 
+product_category string,
+product_id string, 
+product_parent string, 
+product_title string, 
+star_rating int, 
+helpful_votes int, 
+total_votes int, 
+vine string, 
+verified_purchase string, 
+review_headline string, 
+review_body string, 
+review_date bigint)
+ROW FORMAT SERDE 
+'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe' 
+STORED AS INPUTFORMAT 
+'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat' 
+OUTPUTFORMAT 
+'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'
+LOCATION
+'s3://YOURBUCKET/productreviews/'; 
+```
+
+![Run-athena-create-table](/images/5-Workshops/5.3/5.3.2/11.png)
 
 ---
 
-6.  **(Tùy chọn) Xem output của PowerShell**
-    
-    Nếu bạn kiểm tra output của PowerShell, bạn sẽ thấy log của từng bước trong quá trình chạy job.
-    
-    ![PowerShell job start](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-powershell-start.png)
-    
-    ![PowerShell job complete](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-powershell-complete.png)
+8.  Sao chép và dán (copy paste) mã lệnh bên dưới trong trình chỉnh sửa truy vấn và nhấn vào **Run**.
 
+Lệnh `MSCK REPAIR TABLE` sẽ quét hệ thống tệp tin (chẳng hạn như Amazon S3) để tìm các phân vùng tương thích với Hive đã được thêm vào hệ thống tệp sau khi bảng được tạo. Lệnh `MSCK REPAIR TABLE` so sánh các phân vùng trong metadata của bảng và các phân vùng trong S3. Nếu có các phân vùng hệ thống mới xuất hiện ở cùng vị trí Amazon S3 mà bạn đã chỉ định lúc bạn tạo bảng, nó sẽ tự động thêm các phân vùng đó cho metadata và cho bảng Athena.
+
+```sql
+MSCK REPAIR TABLE default.amazon_reviews_parquet;
+```
+![Run-athena-repair-table](/images/5-Workshops/5.3/5.3.2/12.png)
 ---
 
-7.  **(Tùy chọn) Xem nội dung script rcStart**
-    
-    Trong file script **rcStart.ps1**, hãy xem lệnh *Running RC* ở dòng 48. Lệnh này kết hợp các bước căn chỉnh ảnh (`-align`), dựng mesh (`-calculateNormalModel`), đơn giản hóa mesh (`-simplify`) và tạo texture (`-calculateTexture`) vào trong một câu lệnh duy nhất:
-    
-    ```powershell
-    Write-Output "Running RC..." 
-    & "C:\Program Files\Capturing Reality\RealityCapture\RealityCapture.exe" -newScene -headless -set "appQuitOnError=true"  -set "appProcessAction=ExecuteProgram" -set "appProcessActionTime=0" -stdConsole -writeProgress "C:\RealityCapture\ProcessingProgress.txt" -addFolder "C:\RealityCapture\s3-input-images" -align -selectMaximalComponent -setReconstructionRegionAuto -calculateNormalModel -renameSelectedModel HighPoly -calculateTexture -simplify ${simp} -renameSelectedModel LowPoly -unwrap -reprojectTexture HighPoly LowPoly C:\RealityCapture\TextureReprojectionSettings.xml -selectModel LowPoly -selectMarginalTriangles -removeSelectedTriangles -selectModel LowPoly -exportModel LowPoly C:\RealityCapture\model\LowPolyModel.fbx -save C:\RealityCapture\rcproject\Project.rcproj -quit
-    ```
-    
-    Điều này cho thấy khả năng xâu chuỗi nhiều lệnh thành một quy trình thực thi kết hợp. Để xem đầy đủ danh sách các lệnh CLI của RealityCapture, hãy tham khảo [tài liệu Capturing Reality](https://rchelp.capturingreality.com/en-US/tutorials/commandline.htm).
+**Bạn đã tạo bảng Athena thành công. Bảng Athena này (`default.amazon_reviews_parquet`) sẽ được dùng để đưa dữ liệu vào những bảng Iceberg mà chúng ta sẽ tạo trong Bài lab (Lab) tiếp theo.**

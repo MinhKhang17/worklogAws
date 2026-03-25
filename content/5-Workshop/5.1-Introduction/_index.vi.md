@@ -1,84 +1,57 @@
 ---
-title : "Tổng quan"
-date : 2026-03-16
-weight : 1
+title : "Giới thiệu về Iceberg trên AWS"
+date : 2026-03-25 
+weight : 1 
 chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-## Bạn sẽ xây dựng gì
-
-Trước tiên, chúng ta sẽ thiết lập một **máy trạm ảo RealityCapture** trên một **Amazon EC2 G5 instance**. Máy trạm ảo RealityCapture cho phép người dùng tạo hoặc khởi tạo một **máy ảo có khả năng xử lý đồ họa** trên **Amazon Web Services (AWS)**, giúp loại bỏ nhu cầu phải chạy các workload của RealityCapture trên máy tính desktop hoặc laptop có GPU tại chỗ.
-
-Sau đó, chúng ta sẽ đi qua từng bước để **chạy quy trình photogrammetry trên cloud**. Bao gồm:
-
-- Tải bộ dữ liệu hình ảnh lên **Amazon S3**
-- Khởi chạy một job mới trên **RealityCapture** bằng **PowerShell**
-- Xuất **model và texture** trở lại **S3**
-
-![RC Diagram](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-workshop-arch.png)
+[Apache Iceberg](https://iceberg.apache.org/) là một định dạng bảng mở dành cho các tập dữ liệu cực lớn và hỗ trợ các hoạt động data lake hiện đại như chèn (insert), cập nhật (update), xóa (delete) ở cấp độ bản ghi và các truy vấn du hành thời gian (time travel). Iceberg quản lý các tập hợp tệp lớn dưới dạng bảng và cho phép tiến hóa bảng liền mạch như tiến hóa schema và phân vùng (partition). Thiết kế của Iceberg được tối ưu hóa cho việc sử dụng trên Amazon S3 và giúp đảm bảo tính đúng đắn của dữ liệu trong các kịch bản ghi đồng thời.
 
 ---
 
-## Những gì bạn cần chuẩn bị
+Một số thuật ngữ phổ biến trong các bảng Apache Iceberg như sau:
 
-* **Tài khoản AWS** – Tài khoản này cần có:
-
-  * Quyền triển khai **EC2 instances** bằng **CloudFormation templates**
-  * **Service quota** (tối thiểu 8) để khởi chạy **EC2 G Type instances**
-  * Loại instance EC2 tối thiểu: **g4dn.2xlarge** hoặc **g5.2xlarge**
-
-ℹ️ **Yêu cầu tăng Quota cho Amazon EC2 G Type**
-
-RealityCapture yêu cầu một **Amazon EC2 graphics instance (G type)**. **Bạn rất có thể cần yêu cầu tăng service quota để thực hiện workshop này.**
-
-Trong tài khoản AWS của bạn:
-
-1. Truy cập **Service Quotas**
-2. Chọn **AWS Services**
-3. Tìm và chọn **Amazon Elastic Cloud Compute (EC2)**
-4. Tìm và chọn **“Running On-Demand G and VT instances”**
-
-Nếu tài khoản của bạn có **ít hơn 8 vCPU** cho loại instance này, hãy yêu cầu **tăng quota lên 8 vCPU hoặc cao hơn**.
-
-**Lưu ý:** Việc tăng quota sẽ được đội ngũ AWS xem xét và **có thể mất vài ngày để xử lý**.
-
-⚠️ **Chi phí**
-
-Các tài khoản **AWS Free Tier** không có quota cho **EC2 G type instances**.
-
-Để biết chi tiết về giá EC2, vui lòng xem:
-https://aws.amazon.com/ec2/pricing/
-
-**Chạy toàn bộ workshop và dọn dẹp sau đó sẽ tốn khoảng ~$10–15 USD.**
-
-*Lưu ý:* Chi phí có thể thay đổi tùy theo:
-
-- Region AWS bạn triển khai
-- Loại và kích thước instance
-- Thời gian bạn khám phá thêm các tính năng của RealityCapture ngoài các bước trong workshop
-
-Khi bạn **không sử dụng EC2 instance**, hãy **tắt instance** để tránh phát sinh chi phí khi instance vẫn đang chạy.
-
-Sau khi **stop instance**, bạn sẽ **không còn bị tính phí sử dụng hoặc truyền dữ liệu** cho instance đó. Tuy nhiên, bạn vẫn sẽ bị tính phí cho các tài nguyên liên quan, ví dụ:
-
-- **EBS volumes** được gắn kèm
-- **Elastic IP addresses**
+-   Schema – Tên và kiểu của các trường trong một bảng.
+-   Partition spec – Định nghĩa về cách các giá trị phân vùng được xuất ra từ các trường dữ liệu.
+-   Snapshot – Trạng thái của một bảng tại một thời điểm, bao gồm tập hợp tất cả các tệp dữ liệu.
+-   Manifest list – Một tệp liệt kê các tệp manifest; mỗi snapshot có một danh sách.
+-   Manifest – Một tệp liệt kê dữ liệu hoặc các tệp đã xóa; một phần con của snapshot.
+-   Data file – Một tệp chứa các hàng của một bảng.
+-   Delete file – Một tệp mã hóa các hàng của một bảng bị xóa theo vị trí hoặc giá trị dữ liệu.
 
 ---
 
-## Regions được hỗ trợ
+Apache Iceberg theo dõi các tệp dữ liệu riêng lẻ trong một bảng thay vì các thư mục. Điều này cho phép user tạo các tệp dữ liệu tại chỗ (in-place) và chỉ thêm tệp vào bảng với một commit rõ ràng. Trạng thái bản được lưu trong file metadata. Tất cả thay đổi tạo ra file metadata mới, thay cho cái cũ. File metadata của bảng chứa schema, cấu hình phân vùng và các snapshot nội dung của bảng. Snapshot cho phép truy xuất dữ liệu hoàn chỉnh của bảng.
 
-Workshop này **chỉ hoạt động trong các AWS Region sau**:
-
-**us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, ap-northeast-1**
+Mỗi snapshot là một tập hợp đầy đủ dữ liệu tại một thời điểm. Snapshot lưu trong file metadata, nhưng dữ liệu lại nằm rải rác ở các file manifest. Chuyển đổi metadata mới tạo ra sự cách ly snapshot. Người xem sẽ thấy snapshot ở thời điểm tải metadata lên và không bị thay đổi cho đến khi refresh. Đường dẫn tới tệp dữ liệu nằm ở các manifest. Snapshot bao gồm nhiều manifest, và chúng có thể chia sẻ tệp để tránh làm nặng hệ thống.
 
 ---
 
-## Bạn sẽ học được gì
+**Apache Iceberg trên Amazon Athena**
 
-Trong workshop này, bạn sẽ học cách:
+Bảng Iceberg hỗ trợ AWS Glue catalog, định dạng Parquet. Cú pháp:
 
-* Sử dụng **NICE DCV remote display protocol (RDP)** để chạy các ứng dụng đồ họa nặng từ xa trên **EC2 instances** thông qua **virtual workstation**
-* Sử dụng **PowerShell** để tạo **textured mesh** bằng **RealityCapture** và lưu mesh vào **S3**
-* Triển khai **AWS CloudFormation template**
+```sql
+CREATE TABLE
+  [db_name.]table_name (col_name data_type [COMMENT col_comment] [, ...] )
+  [PARTITIONED BY (col_name | transform, ... )]
+  LOCATION 's3://DOC-EXAMPLE-BUCKET/your-folder/'
+  TBLPROPERTIES ( 'table_type' ='ICEBERG' [, property_name=property_value] )
+```
+
+---
+
+**Apache Iceberg trên Amazon EMR**
+
+Bắt đầu với Amazon EMR 6.5.0, hỗ trợ Apache Spark 3 và Iceberg định dạng. Thiết lập cluster như sau:
+
+```java
+[{ "Classification":"iceberg-defaults",
+    "Properties":{"iceberg.enabled":"true"}
+}]
+```
+
+Hoặc thêm tệp '/usr/share/aws/iceberg/lib/iceberg-spark3-runtime.jar'.
+
+Lưu ý: Workshop mất 2 giờ, sử dụng `us-east-1` region.

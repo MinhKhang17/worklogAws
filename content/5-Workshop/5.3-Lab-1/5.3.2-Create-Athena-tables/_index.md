@@ -13,35 +13,35 @@ pre : " <b> 5.3.2 </b> "
 2.  Open the Query Editor (not Notebook editor)
     
     ---
-![open query editor](/images/5-Workshops/5.3.2/5.png)
+![open query editor](/images/5-Workshops/5.3/5.3.2/5.png)
 3.  Once in the Athena console Query editor, click on '**Edit Settings**' as shown below:
     
 
-![Athena console](/images/5-Workshops/5.3.2/6.png)
+![Athena console](/images/5-Workshops/5.3/5.3.2/6.png)
 
 ---
 
 1.  Click on Settings and then click **Manage**
 
-![Athena Settings](/images/5-Workshops/5.3.2/7.png)
+![Athena Settings](/images/5-Workshops/5.3/5.3.2/7.png)
 
 ---
 
 4.  Under Manage Settings, click on **Browse S3**.
 
-![Athena Settings](/images/5-Workshops/5.3.2/8.png)
+![Athena Settings](/images/5-Workshops/5.3/5.3.2/8.png)
 
 ---
 
 5.  Choose the S3 bucket by clicking on the radio button and then click **Choose**. For self paced labs, choose the S3 bucket created previously. For AWS Events, choose the S3 bucket with the title iceberg-workshop-ACCOUNTID (for example: iceberg-workshop-123456789)
 
-![Choose-S3-data-set](/images/5-Workshops/5.3.2/9.png)
+![Choose-S3-data-set](/images/5-Workshops/5.3/5.3.2/9.png)
 
 ---
 
 6.  Click on **Save** to save the S3 location
 
-![Save-s3-location](/images/5-Workshops/5.3.2/10.png)
+![Save-s3-location](/images/5-Workshops/5.3/5.3.2/10.png)
 
 ---
 

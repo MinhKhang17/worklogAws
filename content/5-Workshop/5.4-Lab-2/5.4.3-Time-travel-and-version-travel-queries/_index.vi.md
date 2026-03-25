@@ -1,66 +1,39 @@
 ---
-title : "Tải bộ dữ liệu hình ảnh lên S3"
-date : 2026-03-16
-weight : 1
+title : "2.3 Truy vấn du hành thời gian và du hành phiên bản (Time travel and version travel queries)"
+date : 2026-03-25
+weight : 3
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.4.3 </b> "
 ---
 
-Trong bước này, chúng ta sẽ tải bộ dữ liệu hình ảnh lên Amazon S3. Bộ dữ liệu Drone Imagery này chứa 482 hình ảnh được chụp bằng drone cùng với các ground control point có thông tin vị trí chính xác. Bộ dữ liệu này có thể được dùng để kiểm tra cách georeferencing hoạt động thông qua hình ảnh hoặc ground control point.
+1.  Hãy truy xuất snapshot của bảng iceberg bằng cách sử dụng bảng bên dưới. Sao chép và dán lệnh bên dưới vào trình soạn thảo truy vấn và nhấp vào **Run**. Lưu/sao chép "snapshot\_id" cũ hơn vì bạn sẽ cần nó cho bước tiếp theo.
 
-Truy cập trang Capturing Reality để xem thêm các [bộ dữ liệu mẫu](https://www.capturingreality.com/sample-datasets).
+```sql
+SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
+```
 
----
-
-1.  **Tải xuống và giải nén bộ dữ liệu hình ảnh**
-    
-    Tải bộ dữ liệu từ [đây](https://www.capturingreality.com/download/files/GCP-Drone-Sample-Dataset) và giải nén thư mục.
-
----
-
-2.  **Tạo thư mục input trên S3**
-    
-    Trên CloudFormation console, mở stack bạn đã tạo ở phần *Setup Workstation* trước đó và vào tab **Resources**.
-    
-    Kéo xuống cho đến khi bạn thấy tài nguyên có tên **S3 Bucket**, sau đó nhấn vào **Physical ID**. Thao tác này sẽ mở S3 console trong một tab mới.
-    
-    Nhấn **Create Folder**, đặt tên thư mục là **Images** và giữ nguyên tất cả các thiết lập mặc định khác.
-    
-    ![S3 Create Folder](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-create-folder.png)
+![snapshot-timetravel](/images/5-Workshops/5.4/5.4.3/20.png)
 
 ---
 
-3.  **Tải bộ dữ liệu hình ảnh lên S3**
-    
-    Mở thư mục bộ dữ liệu hình ảnh mà bạn đã tải ở bước 1, rồi tìm các ảnh trong đường dẫn *DroneImagery_GCP/orthoPhoto/Images*.
-    
-    Trên S3 console, mở thư mục **images**, sau đó nhấn **Upload**.
-    
-    ![S3 Upload Images](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload.png)
-    
-    Tải ảnh lên S3 bằng cách kéo thả trực tiếp, hoặc nhấn nút **Add Files** để chọn file.
-    
-    ![S3 Final Upload](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload-confirm.png)
-    
-    Ở cuối màn hình, giữ nguyên tất cả các thiết lập mặc định rồi nhấn **Upload** (bước này sẽ mất khoảng 5 phút).
+2.  Bây giờ hãy truy vấn snapshot tại thời điểm trước khi chúng ta thêm cột `comment`. Sao chép dán đoạn mã bên dưới vào trình soạn thảo truy vấn, thay thế `snapshot_id` trước khi bạn nhấp **Run** đối với truy vấn bên dưới rồi sau đó nhấp vào **Run**.
+
+Sau khi bạn chạy truy vấn với `snapshot_id` cũ hơn, hãy xác minh rằng kết quả hiển thị không có cột `comment`.
+
+```sql
+select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<replace snapshot_id>>
+where marketplace ='UK'
+```
+
+![retrive-snapshot](/images/5-Workshops/5.4/5.4.3/21.png)
 
 ---
 
-4.  **Tạo thư mục assets**
-    
-    Quay về thư mục gốc của S3 bucket và tạo một thư mục mới có tên **assets**.
+3.  Chúng ta có thể sử dụng thời gian tĩnh `made_current_at` để truy vấn snapshot. Sao chép dán lệnh bên dưới vào trình soạn thảo truy vấn, thay thế `made_current_at time` trong truy vấn và sau đó nhấp vào **Run**.
 
----
+**Ngoài ra**, chúng ta cũng có thể sử dụng **cột** `made_current_at` làm thời gian để truy vấn snapshot.
 
-5.  **Tải các file Texture Projection Settings và PowerShell Script lên S3**
-    
-    Tải xuống và giải nén các file sau: [Assets](https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/e26c223d-6107-4ca8-a3c1-d8da486d7ea2/rc-assets.zip)
-    
-    Trong S3 console, mở thư mục **assets** đã tạo ở bước 4, rồi nhấn **Upload**.
-    
-    Tải các file **rcStart**, **rcSave** và **TextureReprojectionSettings** lên thư mục **assets** trên S3.
-    
-    ✅ **Tìm hiểu thêm về các file assets:**
-    * **Texture Reprojection Settings:** File này cho phép bạn chiếu texture từ một model đã được gán texture sang một model khác trong cùng một component được tạo trong RealityCapture. Bạn có thể chiếu texture được tạo trên model có độ chi tiết cao sang một model đã được đơn giản hóa mạnh hơn để rút ngắn đáng kể thời gian xử lý, đồng thời vẫn đạt được texture sắc nét nhất có thể.
-    * **rcStart:** Script này chịu trách nhiệm tải bộ dữ liệu hình ảnh từ S3 xuống EC2 instance, kích hoạt giấy phép RealityCapture, và khởi chạy một tác vụ RealityCapture mới với các tham số được cung cấp.
-    * **rcSave:** Script này lưu model đầu ra và các file project lên S3.
+```sql
+select * from iceberg_database.amazon_reviews_iceberg for TIMESTAMP AS OF TIMESTAMP '<<replace with made_current_at time>>' 
+where marketplace ='UK'
+```

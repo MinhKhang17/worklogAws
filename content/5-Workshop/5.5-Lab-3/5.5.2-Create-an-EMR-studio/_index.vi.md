@@ -1,66 +1,45 @@
 ---
-title : "Tải bộ dữ liệu hình ảnh lên S3"
-date : 2026-03-16
-weight : 1
+title : "3.2 Tạo EMR Studio và gắn nó vào EMR cluster"
+date : 2026-03-25
+weight : 2
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.5.2 </b> "
 ---
 
-Trong bước này, chúng ta sẽ tải bộ dữ liệu hình ảnh lên Amazon S3. Bộ dữ liệu Drone Imagery này chứa 482 hình ảnh được chụp bằng drone cùng với các ground control point có thông tin vị trí chính xác. Bộ dữ liệu này có thể được dùng để kiểm tra cách georeferencing hoạt động thông qua hình ảnh hoặc ground control point.
+**A. Lấy VPC và Subnet ID của EMR cluster của bạn**
 
-Truy cập trang Capturing Reality để xem thêm các [bộ dữ liệu mẫu](https://www.capturingreality.com/sample-datasets).
+1.  Đi tới [Amazon EMR Console](https://console.aws.amazon.com/emr/home). Trong thanh điều hướng bên trái, trong phần **EMR on EC2**, chọn **Clusters**.
 
----
-
-1.  **Tải xuống và giải nén bộ dữ liệu hình ảnh**
-    
-    Tải bộ dữ liệu từ [đây](https://www.capturingreality.com/download/files/GCP-Drone-Sample-Dataset) và giải nén thư mục.
+2.  Nhấp vào **Cluster ID** của cluster của bạn để mở trang chi tiết của nó. Trên trang chi tiết cluster, đi tới thẻ **Summary** và cuộn xuống mục **Network and security**. Sao chép cả **VPC ID** và **Subnet ID** — bạn sẽ cần chúng khi tạo Studio.
 
 ---
 
-2.  **Tạo thư mục input trên S3**
-    
-    Trên CloudFormation console, mở stack bạn đã tạo ở phần *Setup Workstation* trước đó và vào tab **Resources**.
-    
-    Kéo xuống cho đến khi bạn thấy tài nguyên có tên **S3 Bucket**, sau đó nhấn vào **Physical ID**. Thao tác này sẽ mở S3 console trong một tab mới.
-    
-    Nhấn **Create Folder**, đặt tên thư mục là **Images** và giữ nguyên tất cả các thiết lập mặc định khác.
-    
-    ![S3 Create Folder](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-create-folder.png)
+**B. Tạo EMR Studio và Workspace**
 
----
+1.  Trong ngăn điều hướng bên trái, vẫn nằm trong mục **EMR on EC2**, chọn **Studios**. Sau đó bấm **Create Studio**.
 
-3.  **Tải bộ dữ liệu hình ảnh lên S3**
-    
-    Mở thư mục bộ dữ liệu hình ảnh mà bạn đã tải ở bước 1, rồi tìm các ảnh trong đường dẫn *DroneImagery_GCP/orthoPhoto/Images*.
-    
-    Trên S3 console, mở thư mục **images**, sau đó nhấn **Upload**.
-    
-    ![S3 Upload Images](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload.png)
-    
-    Tải ảnh lên S3 bằng cách kéo thả trực tiếp, hoặc nhấn nút **Add Files** để chọn file.
-    
-    ![S3 Final Upload](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload-confirm.png)
-    
-    Ở cuối màn hình, giữ nguyên tất cả các thiết lập mặc định rồi nhấn **Upload** (bước này sẽ mất khoảng 5 phút).
+    ![EMRStudioPage](/images/5-Workshops/5.5/5.5.2/1.png)
+    ![EMRStudioPage2](/images/5-Workshops/5.5/5.5.2/2.png)
 
----
+2.  Trên trang **Create a Studio**:
+    - Chọn **Custom setup**.
+    - Bấm **Browse S3** để chọn S3 bucket của bạn làm vị trí lưu trữ cho notebooks.
+    - Trong mục **Service role**, chọn **EMR\_Iceberg\_Notebook\_Role**.
 
-4.  **Tạo thư mục assets**
-    
-    Quay về thư mục gốc của S3 bucket và tạo một thư mục mới có tên **assets**.
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5/5.5.2/3.png)
 
----
+3.  Cuộn xuống phần **Networking and security**. Chọn **VPC ID** và **Subnet ID** mà bạn đã sao chép ở Bước A.2. Sau đó nhấp vào **Create Studio**.
 
-5.  **Tải các file Texture Projection Settings và PowerShell Script lên S3**
-    
-    Tải xuống và giải nén các file sau: [Assets](https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/e26c223d-6107-4ca8-a3c1-d8da486d7ea2/rc-assets.zip)
-    
-    Trong S3 console, mở thư mục **assets** đã tạo ở bước 4, rồi nhấn **Upload**.
-    
-    Tải các file **rcStart**, **rcSave** và **TextureReprojectionSettings** lên thư mục **assets** trên S3.
-    
-    ✅ **Tìm hiểu thêm về các file assets:**
-    * **Texture Reprojection Settings:** File này cho phép bạn chiếu texture từ một model đã được gán texture sang một model khác trong cùng một component được tạo trong RealityCapture. Bạn có thể chiếu texture được tạo trên model có độ chi tiết cao sang một model đã được đơn giản hóa mạnh hơn để rút ngắn đáng kể thời gian xử lý, đồng thời vẫn đạt được texture sắc nét nhất có thể.
-    * **rcStart:** Script này chịu trách nhiệm tải bộ dữ liệu hình ảnh từ S3 xuống EC2 instance, kích hoạt giấy phép RealityCapture, và khởi chạy một tác vụ RealityCapture mới với các tham số được cung cấp.
-    * **rcSave:** Script này lưu model đầu ra và các file project lên S3.
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5/5.5.2/4.png)
+    ![Create Studio Bucket/Role2](/images/5-Workshops/5.5/5.5.2/5.png)   
+
+4.  Sau khi Studio được tạo, hãy nhấp vào **Launch Studio** để mở nó trong tab trình duyệt mới. Bạn sẽ thấy giao diện JupyterLab.
+
+    > **Lưu ý:** Nếu tab mới không tự động mở, hãy kiểm tra trình chặn cửa sổ bật lên (popup blocker) của trình duyệt và cho phép cửa sổ bật lên đối với các tên miền (domain) của AWS Console.
+
+5.  Bên trong giao diện JupyterLab, nhấp vào biểu tượng **Cluster** (hoặc biểu tượng **Compute**) ở thanh bên trái. Trong phần **Compute type**, chọn **EMR on EC2 cluster**, sau đó chọn cluster của bạn từ danh sách thả xuống. Bấm **Attach** ở phía cuối bảng điều khiển để kết nối cluster với workspace của bạn.
+
+    ![Create Studio Bucket/Role](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/AttachCluster.png)
+
+
+**Chúc mừng! Bạn đã hoàn thành thiết lập EMR Studio/Workspace, bây giờ là lúc để khám phá các tính năng của Iceberg trên EMR.**

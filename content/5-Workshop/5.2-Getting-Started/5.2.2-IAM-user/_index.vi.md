@@ -1,134 +1,58 @@
 ---
-title : "Kết nối tới EC2 instance"
-date : 2026-03-16
+title : "Tạo một IAM User"
+date : 2026-03-25
 weight : 2
 chapter : false
 pre : " <b> 5.2.2 </b> "
 ---
 
-Bây giờ stack đã được triển khai thành công, hãy kết nối tới EC2 instance bằng giao thức remote display [NICE DCV](https://aws.amazon.com/hpc/dcv/) (RDP). NICE DCV là một giao thức hiển thị từ xa hiệu năng cao, cung cấp cho khách hàng một cách an toàn để truyền desktop từ xa và stream ứng dụng từ bất kỳ môi trường cloud hoặc data center nào tới bất kỳ thiết bị nào, ngay cả trong các điều kiện mạng khác nhau. Với NICE DCV và Amazon EC2, khách hàng có thể chạy từ xa các ứng dụng yêu cầu đồ họa cao trên EC2 instance, rồi truyền giao diện người dùng tới các máy khách đơn giản hơn, từ đó không còn cần đến các máy trạm chuyên dụng đắt tiền.
+Các dịch vụ trong AWS, ví dụ như Athena, yêu cầu bạn cung cấp thông tin xác thực khi truy cập, để dịch vụ có thể xác định xem bạn có đủ quyền hạn truy cập tài nguyên của nó hay không. Giao diện điều khiển (console) cần mật khẩu của bạn. Bạn có thể tạo khóa truy cập (access keys) cho tài khoản AWS để truy cập qua giao diện dòng lệnh hoặc API. Tuy nhiên, tôi không khuyến khích bạn truy cập AWS bằng thông tin xác thực của tài khoản AWS gốc; tôi khuyên bạn nên sử dụng AWS Identity and Access Management (IAM). Hãy tạo một IAM user, sau đó thêm user đó vào nhóm IAM với quyền Administrator hoặc cấp trực tiếp quyền Administrator cho user này. Khi đó, bạn có thể truy cập AWS bằng một URL đặc biệt và bằng thông tin xác thực của IAM user.
 
-⚠️ **Warning**  
-Các lệnh dòng lệnh trên trang này được viết cho máy Mac/Linux. Nếu bạn dùng Windows, bạn vẫn có thể thực hiện các bước này bằng Command Prompt hoặc PowerShell, tuy nhiên bạn cần tham khảo tài liệu dành cho Windows để tìm các lệnh tương đương.
+Nếu bạn đã đăng ký tài khoản AWS nhưng chưa tạo một IAM user cho chính mình, bạn có thể tạo một user thông qua IAM console. Nếu bạn chưa quen với việc sử dụng console, hãy xem "Working with the AWS Management Console" để có cái nhìn tổng quan.
 
----
+**Để tạo một IAM user cho bản thân và thêm user vào nhóm Administrators**
 
-1.  **Tạo file key pair**
-    
-    Trên AWS console, dùng thanh tìm kiếm và gõ **Parameter Store**.
-    
-    ℹ️ **Note**  
-    Bạn cũng có thể truy cập Parameter Store bằng cách vào Systems Manager console. Bạn sẽ tìm thấy **Parameter Store** trong menu điều hướng bên trái, dưới mục **Application Management**.
-    
-    Tìm parameter có tên `"/ec2/keypair/key-***********"`, nhấn vào tên để mở trang chi tiết parameter.
-    
-    Trong trường **Value**, chọn **Show** để hiển thị RSA private key.
-    
-    Sao chép toàn bộ giá trị từ `"-----BEGIN RSA PRIVATE KEY-----"` đến `"-----END RSA PRIVATE KEY-----"`.
-    
-    ![EC2 Parameter Details](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-keypair.png)
-    
-    Mở terminal và tạo file key-pair bằng lệnh sau:
-    
-    ℹ️ **Note**  
-    Bạn có thể đặt tên file tùy ý, nhưng file phải kết thúc bằng đuôi **.pem**
-    
-    ```bash
-    touch reality-capture.pem
-    ```
-    
-    Chỉnh sửa file này bằng lệnh sau:
-    
-    ```bash
-    nano reality-capture.pem
-    ```
-    
-    Sao chép và dán RSA private key từ AWS console vào file này. Sau đó lưu file bằng **Ctrl+O** --> **Enter**.
-    
-    Thoát nano editor bằng **Ctrl+X**.
+1.  Sử dụng địa chỉ email và mật khẩu tài khoản AWS của bạn để đăng nhập với tư cách `root user` của tài khoản AWS vào IAM console tại [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/). Lưu ý: Tôi thực sự khuyên bạn tuân thủ thực tiễn tốt nhất là sử dụng IAM user với quyền Administrator bên dưới và cất giữ thông tin xác thực của root user ở nơi an toàn. Chỉ đăng nhập với tư cách root user để thực hiện một vài tác vụ quản lý tài khoản và quản trị dịch vụ.
 
 ---
 
-2.  **Xác minh instance đã khởi chạy và sao chép địa chỉ IP**
+1.  Trong ngăn điều hướng (navigation pane) của console, hãy chọn **Users**, sau đó chọn **Create user**.
     
-    Trên AWS console, dùng thanh tìm kiếm và gõ **EC2**.
+2.  Ở mục **User name**, nhập thông tin `Administrator`.
     
-    Trong EC2 console, dưới mục *Resources*, nhấn vào liên kết **Instances (running)**. Bạn sẽ thấy hai instance được CloudFormation tạo ra: **rc-workshop-workstation-base-ec2** và **rc-workshop-jumpbox-ec2**.
+3.  Chọn hộp kiểm bên cạnh **AWS Management Console access**, chọn **Custom password**, và gõ mật khẩu của người dùng mới vào textbox. Bạn cũng có thể tuỳ chọn **Require password reset** để buộc người dùng tạo một mật khẩu mới ở lần đăng nhập tiếp theo.
     
-    Tùy vào tốc độ cấp phát, VM của bạn có thể tạm thời hiển thị trạng thái *initializing*.
+4.  Chọn **Next: Permissions**.
     
-    Khi VM hoàn tất quá trình cấp phát, nó sẽ hiển thị trạng thái *running* với toàn bộ kiểm tra ở trạng thái **passed**.
+5.  Trên trang **Set permissions**, chọn **Add user to group**.
     
-    ![Instance Status Passed](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-instance-running.png)
+6.  Chọn **Create group**.
     
-    Với instance có tên **rc-workshop-workstation-base-ec2**, hãy sao chép địa chỉ IP private bằng cách nhấn vào liên kết màu xanh dưới **Instance ID**, sau đó tại trang *Instance summary*, tìm trường **Private IPv4 Address**. Dán địa chỉ này vào nơi an toàn vì bạn sẽ dùng nó ở bước tiếp theo.
+7.  Trong hộp thoại **Create group**, tại phần **Group name**, hãy nhập `Administrators`.
     
-    ![Instance Public IP](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-private-ip.png)
+8.  Tại phần **Filter policies**, chọn hộp kiểm cho **AWS managed - job function**.
     
-    Với jump box instance có tên **rc-workshop-jumpbox-ec2**, hãy sao chép địa chỉ IP public bằng cách nhấn vào liên kết màu xanh dưới **Instance ID**, sau đó tại trang *Instance summary*, tìm trường **Public IPv4 Address**. Dán địa chỉ này vào nơi an toàn vì bạn sẽ dùng nó ở bước tiếp theo.
+9.  Trong danh sách policy, chọn hộp kiểm cho **AdministratorAccess**. Sau đó chọn **Create group**.
     
-    ✅ **Jump Box**  
-    Jump server hoặc jump box là một hệ thống trong mạng dùng để truy cập và quản lý các thiết bị nằm trong một vùng bảo mật riêng biệt.
-    
-    ![Instance Public IP](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/public-ip.jpeg)
-    
-    ℹ️ **Note**  
-    Tùy thuộc vào thiết lập bảo mật AWS của bạn, có thể bạn sẽ cần thêm hoặc chỉnh sửa security group trước khi kết nối tới VM. Hãy tham khảo đội ngũ IT/Bảo mật thông tin của bạn để được hướng dẫn phù hợp.
+10. Quay trở lại danh sách nhóm (groups list), chọn hộp kiểm cho nhóm bạn vừa tạo. Nhấn **Refresh** nếu cần để cập nhật danh sách nhóm.
+     
+11. Chọn **Next: Tags** để thêm metadata cho user bằng cách gắn thẻ dữ liệu dưới dạng các cặp key-value.
+     
+12. Chọn **Next: Review** để xem qua danh sách các thành viên của nhóm được thêm vào người dùng mới. Nếu đã sẵn sàng tiến hành, nhấn chọn **Create user**.
+     
 
 ---
 
-3.  **Thiết lập kết nối SSH**
-    
-    Mở terminal. Di chuyển tới thư mục chứa file key pair (.pem) mà bạn đã lưu.
-    
-    Đảm bảo quyền của file là 400 bằng cách chạy lệnh sau:
-    
-    ```bash
-    chmod 400 reality-capture.pem
-    ```
-    
-    Dùng lệnh SSH sau để kết nối vào jump box public, đồng thời mở cổng 8888 trên máy local và ánh xạ nó tới cổng 8443 trên instance private:
-    
-    ```bash
-    ssh -i reality-capture.pem -L 8888:[INSERT PRIVATE IP SAVED IN STEP 2]:8443 ec2-user@[INSERT PUBLIC JUMPBOX IP]
-    ```
-    
-    *Lưu ý: Khi chèn địa chỉ IP public và private vào lệnh SSH, hãy bỏ các dấu ngoặc vuông bao quanh.*
-    
-    Trả lời **yes** khi được hỏi. Lúc này bạn sẽ kết nối thành công tới instance và thấy hình sau trong cửa sổ terminal.
-    
-    ![Terminal Instance Connected](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-ssh-connected.png)
+Bạn có thể sử dụng cùng quy trình này để tạo nhiều nhóm và người dùng hơn, và cấp cho users quyền truy cập tài nguyên AWS của mình.
 
----
+Để đăng nhập dưới tư cách IAM user mới này, hãy đăng xuất khỏi AWS console, sau đó sử dụng URL bên dưới, với việc thay your\_aws\_account\_id bằng chính mã số tài khoản AWS của bạn không bao gồm dấu gạch ngang (ví dụ, nếu mã số đó là 1234-5678-9012, thì ID tài khoản AWS của bạn là 123456789012):
 
-4.  **Kết nối tới EC2 instance**
-    
-    Để kết nối tới EC2 instance, chúng ta sẽ sử dụng ứng dụng NICE DCV client. Hãy làm theo [hướng dẫn cài đặt NICE DCV](https://docs.aws.amazon.com/dcv/latest/userguide/client.html) phù hợp với máy tính của bạn.
-    
-    Sau khi cài đặt NICE DCV client, hãy mở ứng dụng và nhập **localhost:8888**. Sau đó chọn **Connect**.
-    
-    Nếu bạn nhận được thông báo sau, hãy chọn **Trust and Connect**.
-    
-    Để tìm username và password, vào EC2 console, rồi nhấn vào instance có tên **rc-workshop-workstation-base-ec2**.
-    
-    Trong trang Instance summary, tìm và chọn nút **Connect** ở góc trên bên phải màn hình.
-    
-    Chọn tab **RDP Client**.
-    
-    ![RDP Connect](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-rdp-connect.png)
-    
-    Sao chép username (Administrator) và nhập vào màn hình đăng nhập của NICE DCV client.
-    
-    Giải mã và sao chép mật khẩu:
-    
-    * Trong mục Password, nhấn **Get password**, một màn hình mới sẽ mở ra.
-    * Nhấn **Upload private key file**, tìm và chọn file key pair bạn đã tạo ở bước 1.
-        * *Bạn có thể bỏ qua tên file trong mục "Key pair associated with this instance".*
-    * Nhấn **Decrypt password**, sau đó mật khẩu đã giải mã sẽ xuất hiện. Sao chép và dán mật khẩu này vào NICE DCV client để hoàn tất đăng nhập.
-    
-    ℹ️ **Note**  
-    Nếu bạn nhận được thông báo lỗi từ NICE DCV rằng không thể kết nối tới instance, hãy đảm bảo máy tính của bạn có outbound access tới địa chỉ Public hoặc Private IP trên cổng TCP 8443.
-    
-    Nếu thành công, màn hình desktop Microsoft Windows sẽ xuất hiện.
-    
-    ![RC Virtual Desktop](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-desktop.png)
+[https://your\_aws\_account\_id.signin.aws.amazon.com/console/](https://your_aws_account_id.signin.aws.amazon.com/console/) 
+
+Nhập tên IAM user (không phải email của bạn) và password mà bạn mới tạo. Khi bạn đăng nhập, thanh điều hướng sẽ hiển thị "your\_user\_name @ your\_aws\_account\_id".
+
+Nếu không muốn URL trang đăng nhập chứa ID tài khoản của bạn, bạn hoàn toàn có thể chọn cho tài khoản của mình một bí danh (Alias). Từ IAM Console hãy chọn Dashboard ở thanh điều hướng phụ. Tại trang dashboard này, chọn Customize rồi nhập một bí danh, ví dụ tên công ty của bạn. Để có thể đăng nhập với bí danh mới này, sử dụng URL sau:
+
+[https://your\_account\_alias.signin.aws.amazon.com/console/](https://your_account_alias.signin.aws.amazon.com/console/) 
+
+Để xác nhận URL đường dẫn đăng nhập dành cho IAM user của account bạn, chỉ việc kiểm tra mục IAM users sign-in link trong Dashboard của IAM.

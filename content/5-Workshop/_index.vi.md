@@ -1,27 +1,28 @@
 ---
 title: "Workshop"
-date : 2026-03-16 
-weight : 6
+date : 2026-03-25 
+weight : 5
 chapter : false
-pre : " <b> 5.6 </b> "
+pre : " <b> 5. </b> "
 ---
 
-# Photogrammetry trên AWS với RealityCapture và EC2
+## Chạy Apache Iceberg trên AWS
 
-Trong workshop này, bạn sẽ học cách thiết lập **RealityCapture trên một Amazon EC2 instance** để chạy các workload **photogrammetry trên AWS**.
+Workshop này nhằm cung cấp trải nghiệm thực tế để xây dựng Data Lake giao dịch bằng cách sử dụng [Apache Iceberg](https://iceberg.apache.org/) trên Amazon EMR và Amazon Athena. Apache Iceberg là một định dạng bảng mới để lưu trữ dữ liệu dạng bảng lớn, ít thay đổi. Nó được thiết kế để cải thiện bố cục bảng tiêu chuẩn thực tế được tích hợp trong Hive, Trino và Spark. Các định dạng bảng Apache Iceberg hiện được hỗ trợ bởi hai dịch vụ AWS:
 
-**Epic Games RealityCapture** là một ứng dụng phần mềm photogrammetry dành cho Windows, cho phép bạn tạo ra các **mô hình 3D siêu chân thực** từ một tập hợp hình ảnh và/hoặc dữ liệu quét laser. Để tìm hiểu thêm về RealityCapture, vui lòng truy cập trang web [RealityCapture](https://www.capturingreality.com/realitycapture).
+1. Amazon Athena.  
+2. Amazon EMR.
 
-![Project Preview](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-photo-to-3d.png)
-
----
-
-**Đối tượng mục tiêu:** Developers, DevOps Engineers, 3D Content Creators
-
-**Các trường hợp sử dụng:** Khảo sát & lập bản đồ trên không, VFX / ngành công nghiệp game, quét toàn thân & sản phẩm, mô phỏng, BIM & AEC, và nhiều hơn nữa
+Là một phần của workshop này, chúng ta sẽ phân tích Amazon S3 Data Lake sử dụng cả Amazon Athena và Amazon EMR có hỗ trợ định dạng bảng Iceberg. Đối với workshop này, bạn sẽ cần một số kiến thức về các lệnh SQL cơ bản cho các bài lab Athena và pyspark cho các bài lab EMR.
 
 ---
 
-✅ **Thời gian ước tính:** 1–2 giờ
+**Đối tượng mục tiêu:** Kỹ sư dữ liệu (Data Engineers), Nhà phân tích dữ liệu (Data Analysts), Kỹ sư điện toán đám mây (Cloud Engineers), Nhà phát triển Big Data (Big Data Developers)
 
-⚠️ **Dọn dẹp:** Sau khi hoàn thành workshop, hãy tham khảo phần **Cleanup** để xóa các tài nguyên và tránh phát sinh chi phí không cần thiết.
+**Các Use Case:** Xây dựng transactional data lakes, truy vấn dữ liệu S3 với Athena, xử lý dữ liệu với EMR & PySpark, quản lý dữ liệu dạng bảng quy mô lớn với Apache Iceberg, và hiện đại hóa kiến trúc data lake
+
+---
+
+✅ **Thời lượng ước tính:** 2-3 giờ
+
+⚠️ **Dọn dẹp:** Khi bạn hoàn thành workshop, hãy tham khảo phần **Dọn dẹp** (Cleanup) để xóa các tài nguyên và tránh phát sinh chi phí không cần thiết.

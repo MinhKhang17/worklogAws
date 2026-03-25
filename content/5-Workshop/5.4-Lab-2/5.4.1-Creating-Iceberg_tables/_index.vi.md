@@ -1,66 +1,80 @@
 ---
-title : "Tải bộ dữ liệu hình ảnh lên S3"
-date : 2026-03-16
+title : "2.1 Tạo các bảng Iceberg (Iceberg tables)"
+date : 2026-03-25
 weight : 1
 chapter : false
-pre : " <b> 5.3.1 </b> "
+pre : " <b> 5.4.1 </b> "
 ---
 
-Trong bước này, chúng ta sẽ tải bộ dữ liệu hình ảnh lên Amazon S3. Bộ dữ liệu Drone Imagery này chứa 482 hình ảnh được chụp bằng drone cùng với các ground control point có thông tin vị trí chính xác. Bộ dữ liệu này có thể được dùng để kiểm tra cách georeferencing hoạt động thông qua hình ảnh hoặc ground control point.
 
-Truy cập trang Capturing Reality để xem thêm các [bộ dữ liệu mẫu](https://www.capturingreality.com/sample-datasets).
+1.  Để tạo Cơ sở dữ liệu (Database), sao chép và dán (copy paste) đoạn mã bên dưới vào trình soạn thảo truy vấn và nhấp vào **Run**. Bạn cần ở trong Athena Query Editor để chạy các lệnh bên dưới.
 
----
+```sql
+create database iceberg_database;
+```
 
-1.  **Tải xuống và giải nén bộ dữ liệu hình ảnh**
-    
-    Tải bộ dữ liệu từ [đây](https://www.capturingreality.com/download/files/GCP-Drone-Sample-Dataset) và giải nén thư mục.
-
----
-
-2.  **Tạo thư mục input trên S3**
-    
-    Trên CloudFormation console, mở stack bạn đã tạo ở phần *Setup Workstation* trước đó và vào tab **Resources**.
-    
-    Kéo xuống cho đến khi bạn thấy tài nguyên có tên **S3 Bucket**, sau đó nhấn vào **Physical ID**. Thao tác này sẽ mở S3 console trong một tab mới.
-    
-    Nhấn **Create Folder**, đặt tên thư mục là **Images** và giữ nguyên tất cả các thiết lập mặc định khác.
-    
-    ![S3 Create Folder](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-create-folder.png)
+![create-iceberg-db](/images/5-Workshops/5.4/5.4.1/13.png)
 
 ---
 
-3.  **Tải bộ dữ liệu hình ảnh lên S3**
-    
-    Mở thư mục bộ dữ liệu hình ảnh mà bạn đã tải ở bước 1, rồi tìm các ảnh trong đường dẫn *DroneImagery_GCP/orthoPhoto/Images*.
-    
-    Trên S3 console, mở thư mục **images**, sau đó nhấn **Upload**.
-    
-    ![S3 Upload Images](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload.png)
-    
-    Tải ảnh lên S3 bằng cách kéo thả trực tiếp, hoặc nhấn nút **Add Files** để chọn file.
-    
-    ![S3 Final Upload](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload-confirm.png)
-    
-    Ở cuối màn hình, giữ nguyên tất cả các thiết lập mặc định rồi nhấn **Upload** (bước này sẽ mất khoảng 5 phút).
+2.  Để tạo bảng Iceberg, hãy sao chép dán đoạn mã bên dưới vào trình soạn thảo truy vấn, thay thế `<<update-s3-bucket>>` bằng S3 bucket được tạo trong phần điều kiện tiên quyết **Tạo S3 bucket** (Create S3 bucket) và nhấp vào **Run** .
+
+Trong thuộc tính bảng mà chúng ta đã chỉ định, `'write_target_data_file_size_bytes'='536870912'`, thuộc tính này dùng để chỉ định kích thước mục tiêu tính bằng byte của các tệp được tạo bởi Athena. Trong ví dụ này, kích thước tệp mục tiêu (target file size) là 512MB.
+
+```sql
+CREATE TABLE iceberg_database.amazon_reviews_iceberg(
+marketplace string,
+customer_id string,
+review_id string,
+product_category string,
+product_id string,
+product_parent string,
+product_title string,
+star_rating int,
+helpful_votes int,
+total_votes int,
+vine string,
+verified_purchase string,
+review_headline string,
+review_body string,
+review_date bigint)
+LOCATION 's3://<<update-s3-bucket>>/amazon_reviews_iceberg/'
+TBLPROPERTIES (
+'table_type'='ICEBERG',
+'format'='parquet',
+'write_target_data_file_size_bytes'='536870912'
+)
+```
+
+![Create-iceberg-table](/images/5-Workshops/5.4/5.4.1/14.png)
 
 ---
 
-4.  **Tạo thư mục assets**
-    
-    Quay về thư mục gốc của S3 bucket và tạo một thư mục mới có tên **assets**.
+3.  Chèn (insert) dữ liệu vào bảng `iceberg_database.amazon_reviews_iceberg` lấy từ `amazon_reviews_parquet`
+
+Sao chép rồi dán (Copy Paste) truy vấn bên dưới vào trình soạn thảo và nhấp vào **Run** . (Chúng ta chỉ tải một vài Danh mục Sản phẩm (Product Categories) cho nhanh.)
+
+Bước này có thể mất tối đa 1 phút để hoàn thành.
+
+```sql
+insert into iceberg_database.amazon_reviews_iceberg
+select *
+from default.amazon_reviews_parquet
+where product_category in ('Gift_Card', 'Apparel','Software')
+```
+
+![insert-into-iceberg-table](/images/5-Workshops/5.4/5.4.1/15.png)
 
 ---
 
-5.  **Tải các file Texture Projection Settings và PowerShell Script lên S3**
-    
-    Tải xuống và giải nén các file sau: [Assets](https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/e26c223d-6107-4ca8-a3c1-d8da486d7ea2/rc-assets.zip)
-    
-    Trong S3 console, mở thư mục **assets** đã tạo ở bước 4, rồi nhấn **Upload**.
-    
-    Tải các file **rcStart**, **rcSave** và **TextureReprojectionSettings** lên thư mục **assets** trên S3.
-    
-    ✅ **Tìm hiểu thêm về các file assets:**
-    * **Texture Reprojection Settings:** File này cho phép bạn chiếu texture từ một model đã được gán texture sang một model khác trong cùng một component được tạo trong RealityCapture. Bạn có thể chiếu texture được tạo trên model có độ chi tiết cao sang một model đã được đơn giản hóa mạnh hơn để rút ngắn đáng kể thời gian xử lý, đồng thời vẫn đạt được texture sắc nét nhất có thể.
-    * **rcStart:** Script này chịu trách nhiệm tải bộ dữ liệu hình ảnh từ S3 xuống EC2 instance, kích hoạt giấy phép RealityCapture, và khởi chạy một tác vụ RealityCapture mới với các tham số được cung cấp.
-    * **rcSave:** Script này lưu model đầu ra và các file project lên S3.
+4.  Kiểm tra xem dữ liệu đã được tải chưa bằng cách truy vấn bảng. Sao chép và dán đoạn mã bên dưới vào trình soạn thảo truy vấn sau đó nhấp vào **Run**
+
+```sql
+SELECT * FROM "iceberg_database"."amazon_reviews_iceberg" limit 10;
+```
+
+![iceberg-test-query](/images/5-Workshops/5.4/5.4.1/16.png)
+
+---
+
+**Chúc mừng bạn đã tạo thành công bảng Athena Iceberg! Bây giờ hãy cùng khám phá một số tính năng chính của Athena Iceberg nhé.**

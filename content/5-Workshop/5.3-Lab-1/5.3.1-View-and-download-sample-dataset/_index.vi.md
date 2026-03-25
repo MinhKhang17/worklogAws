@@ -1,66 +1,39 @@
 ---
-title : "Tải bộ dữ liệu hình ảnh lên S3"
-date : 2026-03-16
+title : "1.1 Xem và tải xuống tập dữ liệu mẫu (sample dataset)"
+date : 2026-03-25
 weight : 1
 chapter : false
 pre : " <b> 5.3.1 </b> "
 ---
 
-Trong bước này, chúng ta sẽ tải bộ dữ liệu hình ảnh lên Amazon S3. Bộ dữ liệu Drone Imagery này chứa 482 hình ảnh được chụp bằng drone cùng với các ground control point có thông tin vị trí chính xác. Bộ dữ liệu này có thể được dùng để kiểm tra cách georeferencing hoạt động thông qua hình ảnh hoặc ground control point.
+Chúng ta sẽ sử dụng phiên bản mô phỏng của bộ dữ liệu Đánh giá Sản phẩm trên Amazon (Amazon Product Reviews dataset) cho các bài lab Athena và EMR. Hãy dành chút thời gian để làm quen với bộ dữ liệu này.
 
-Truy cập trang Capturing Reality để xem thêm các [bộ dữ liệu mẫu](https://www.capturingreality.com/sample-datasets).
+**Tập dữ liệu Đánh giá của khách hàng Amazon**
 
----
+Đánh giá của khách hàng (hay còn gọi là Đánh giá sản phẩm) trên Amazon là một trong những sản phẩm mang tính biểu tượng của Amazon. Trong khoảng thời gian hơn hai thập kỷ kể từ bài đánh giá đầu tiên vào năm 1995, hàng triệu khách hàng của Amazon đã đóng góp hơn một trăm triệu bài đánh giá để bày tỏ ý kiến ​​và mô tả trải nghiệm của họ về các sản phẩm trên trang web Amazon.com. Điều này làm cho Đánh giá của khách hàng trên Amazon trở thành một nguồn thông tin phong phú cho các nhà nghiên cứu học thuyết trong các lĩnh vực Xử lý ngôn ngữ tự nhiên (NLP), Truy xuất thông tin (IR) và Machine Learning (ML), v.v. Theo đó, chúng tôi đang phát hành dữ liệu này để nghiên cứu sâu hơn về nhiều quy tắc liên quan đến việc hiểu trải nghiệm sản phẩm của khách hàng. Cụ thể, bộ dữ liệu này được xây dựng để thể hiện một mẫu đánh giá và ý kiến ​​của khách hàng, sự thay đổi trong nhận thức về sản phẩm giữa các khu vực địa lý, cũng như ý định quảng cáo hoặc sự thiên lệch trong các bài đánh giá.
 
-1.  **Tải xuống và giải nén bộ dữ liệu hình ảnh**
-    
-    Tải bộ dữ liệu từ [đây](https://www.capturingreality.com/download/files/GCP-Drone-Sample-Dataset) và giải nén thư mục.
+LƯU Ý: Bộ dữ liệu mà chúng ta sử dụng là dạng mô phỏng và chứa các số liệu, tên và từ ngữ ngẫu nhiên.
 
----
+**Tải xuống bộ dữ liệu mẫu vào máy tính cục bộ của bạn và tải nó lên S3**
 
-2.  **Tạo thư mục input trên S3**
+1.  Tải xuống bộ dữ liệu từ một trong các liên kết bên dưới
     
-    Trên CloudFormation console, mở stack bạn đã tạo ở phần *Setup Workstation* trước đó và vào tab **Resources**.
+    -   [Dữ liệu mẫu (Sample Data) - us-east-1](https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/e57af944-04b9-41f5-8285-90295ed32bdc/simulatedproductreviews.parquet)
+        
+    -   [Dữ liệu mẫu (Sample Data) - us-west-2](https://ws-assets-prod-iad-r-pdx-f3b3f9f1a7d6a3d0.s3.us-west-2.amazonaws.com/e57af944-04b9-41f5-8285-90295ed32bdc/simulatedproductreviews.parquet)
+        
+2.  Điều hướng tới [bảng điều khiển giao diện AWS S3](https://s3.console.aws.amazon.com/s3/buckets) của bạn.
     
-    Kéo xuống cho đến khi bạn thấy tài nguyên có tên **S3 Bucket**, sau đó nhấn vào **Physical ID**. Thao tác này sẽ mở S3 console trong một tab mới.
+3.  Nhấp vào tên của S3 bucket được tạo cho bạn.
     
-    Nhấn **Create Folder**, đặt tên thư mục là **Images** và giữ nguyên tất cả các thiết lập mặc định khác.
+4.  Nhấp **Create folder**.
     
-    ![S3 Create Folder](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-create-folder.png)
+![create folder](/images/5-Workshops/5.3/5.3.1/3.png)
 
----
+5.  Nhập tên thư mục là **productreviews** sau đó nhấp vào nút **Create folder**.
+    
+6.  Di chuyển vào thư mục mới bằng cách chọn **productreviews**, sau đó nhấp vào nút **Upload**.
+    
+7.  Nhấp vào **Add files**, chọn tệp dữ liệu mà bạn đã tải về ở bước 1 bên trên, sau đó nhấp **Upload**.
 
-3.  **Tải bộ dữ liệu hình ảnh lên S3**
-    
-    Mở thư mục bộ dữ liệu hình ảnh mà bạn đã tải ở bước 1, rồi tìm các ảnh trong đường dẫn *DroneImagery_GCP/orthoPhoto/Images*.
-    
-    Trên S3 console, mở thư mục **images**, sau đó nhấn **Upload**.
-    
-    ![S3 Upload Images](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload.png)
-    
-    Tải ảnh lên S3 bằng cách kéo thả trực tiếp, hoặc nhấn nút **Add Files** để chọn file.
-    
-    ![S3 Final Upload](https://static.us-east-1.prod.workshops.aws/public/ad6e3d8e-34b4-4fb9-af41-c9fbe3055ac5/static/rc-s3-upload-confirm.png)
-    
-    Ở cuối màn hình, giữ nguyên tất cả các thiết lập mặc định rồi nhấn **Upload** (bước này sẽ mất khoảng 5 phút).
-
----
-
-4.  **Tạo thư mục assets**
-    
-    Quay về thư mục gốc của S3 bucket và tạo một thư mục mới có tên **assets**.
-
----
-
-5.  **Tải các file Texture Projection Settings và PowerShell Script lên S3**
-    
-    Tải xuống và giải nén các file sau: [Assets](https://ws-assets-prod-iad-r-iad-ed304a55c2ca1aee.s3.us-east-1.amazonaws.com/e26c223d-6107-4ca8-a3c1-d8da486d7ea2/rc-assets.zip)
-    
-    Trong S3 console, mở thư mục **assets** đã tạo ở bước 4, rồi nhấn **Upload**.
-    
-    Tải các file **rcStart**, **rcSave** và **TextureReprojectionSettings** lên thư mục **assets** trên S3.
-    
-    ✅ **Tìm hiểu thêm về các file assets:**
-    * **Texture Reprojection Settings:** File này cho phép bạn chiếu texture từ một model đã được gán texture sang một model khác trong cùng một component được tạo trong RealityCapture. Bạn có thể chiếu texture được tạo trên model có độ chi tiết cao sang một model đã được đơn giản hóa mạnh hơn để rút ngắn đáng kể thời gian xử lý, đồng thời vẫn đạt được texture sắc nét nhất có thể.
-    * **rcStart:** Script này chịu trách nhiệm tải bộ dữ liệu hình ảnh từ S3 xuống EC2 instance, kích hoạt giấy phép RealityCapture, và khởi chạy một tác vụ RealityCapture mới với các tham số được cung cấp.
-    * **rcSave:** Script này lưu model đầu ra và các file project lên S3.
+![upload file](/images/5-Workshops/5.3/5.3.1/4.png)

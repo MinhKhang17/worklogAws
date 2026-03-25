@@ -28,8 +28,12 @@ NOTE: The dataset we will be using is simulated and contains random numbers, nam
     
 4.  Click **Create folder**
     
+![create folder]("/images/5-Workshops/5.3.1/3.png")
+
 5.  Enter **productreviews** as Folder name then click **Create folder** button
     
 6.  Navigate into the new folder by selecting **productreviews** then click the **Upload** button
     
 7.  Click **Add files**, select the dataset you downloaded from step 1 above, then click **Upload**
+
+![upload file]("/images/5-Workshops/5.3.1/4.png")

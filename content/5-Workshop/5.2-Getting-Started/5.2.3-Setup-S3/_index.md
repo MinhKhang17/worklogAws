@@ -15,13 +15,13 @@ If you are running this workshop in your own account you need to follow below st
 
 2.  Click on **Create Bucket**
 
-![services menu type Athena](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/S3-create-bucket.png)
+![services menu type Athena]("/images/5-Workshops/5.2.3/1.png")
 
 ---
 
 3.  Create bucket `athena-iceberg-workshop-<random number>`, note bucket names should be uninque. Keep all default selection, scroll down and click on **Create Bucket** button.
 
-![s3 bucket name](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/s3-bucket-name.png)
+![s3 bucket name]("/images/5-Workshops/5.2.3/2.png")
 
 ---
 

@@ -13,35 +13,35 @@ pre : " <b> 5.3.2 </b> "
 2.  Open the Query Editor (not Notebook editor)
     
     ---
-    
+![open query editor](/images/5-Workshops/5.3.2/5.png)
 3.  Once in the Athena console Query editor, click on '**Edit Settings**' as shown below:
     
 
-![Athena console](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/athena_save_qry_result.png)
+![Athena console](/images/5-Workshops/5.3.2/6.png)
 
 ---
 
 1.  Click on Settings and then click **Manage**
 
-![Athena Settings](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/athena_save_qry_result_manage.png)
+![Athena Settings](/images/5-Workshops/5.3.2/7.png)
 
 ---
 
 4.  Under Manage Settings, click on **Browse S3**.
 
-![Athena Settings](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/athena_save_qry_result_manage_settings.png)
+![Athena Settings](/images/5-Workshops/5.3.2/8.png)
 
 ---
 
 5.  Choose the S3 bucket by clicking on the radio button and then click **Choose**. For self paced labs, choose the S3 bucket created previously. For AWS Events, choose the S3 bucket with the title iceberg-workshop-ACCOUNTID (for example: iceberg-workshop-123456789)
 
-![Choose-S3-data-set](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/Choose-S3-data-set.png)
+![Choose-S3-data-set](/images/5-Workshops/5.3.2/9.png)
 
 ---
 
 6.  Click on **Save** to save the S3 location
 
-![Save-s3-location](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/Save-s3-location.png)
+![Save-s3-location](/images/5-Workshops/5.3.2/10.png)
 
 ---
 
@@ -74,7 +74,7 @@ LOCATION
 's3://YOURBUCKET/productreviews/'; 
 ```
 
-![Run-athena-create-table](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/Run-athena-create-table.png)
+![Run-athena-create-table](/images/5-Workshops/5.3.2/11.png)
 
 ---
 
@@ -86,7 +86,7 @@ The `MSCK REPAIR TABLE` command scans a file system such as Amazon S3 for Hive c
 1
 MSCK REPAIR TABLE default.amazon_reviews_parquet;
 ```
-
+![Run-athena-repair-table](/images/5-Workshops/5.3.2/12.png)
 ---
 
 **You have created Athena table successfully. This Athena table (`default.amazon_reviews_parquet`) will be used to load data into Iceberg tables which we will be creating in next Lab.**

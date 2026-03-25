@@ -26,7 +26,7 @@ Copy paste below code in query editor and click on **Run**
 ALTER TABLE iceberg_database.amazon_reviews_iceberg ADD COLUMNS (comment string)
 ```
 
-![add-column](/images/5-Workshops/5.4.2/17.png)
+![add-column](/images/5-Workshops/5.4/5.4.2/17.png)
 
 ---
 
@@ -40,7 +40,7 @@ Where star_rating >=4;
 
 It will take couple of minutes to finish this query
 
-![update-column](/images/5-Workshops/5.4.2/18.png)
+![update-column](/images/5-Workshops/5.4/5.4.2/18.png)
 
 ---
 
@@ -53,5 +53,5 @@ Where star_rating >=4 limit 10
 
 Scroll the result window to right you will see new column `comment` and the values.
 
-![add-column](/images/5-Workshops/5.4.2/19.png)
+![add-column](/images/5-Workshops/5.4/5.4.2/19.png)
 

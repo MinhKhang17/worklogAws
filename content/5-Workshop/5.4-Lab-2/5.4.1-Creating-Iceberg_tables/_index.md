@@ -13,7 +13,7 @@ pre : " <b> 5.4.1 </b> "
 create database iceberg_database;
 ```
 
-![create-iceberg-db](/images/5-Workshops/5.4.1/13.png)
+![create-iceberg-db](/images/5-Workshops/5.4/5.4.1/13.png)
 
 ---
 
@@ -46,7 +46,7 @@ TBLPROPERTIES (
 )
 ```
 
-![Create-iceberg-table](/images/5-Workshops/5.4.1/14.png)
+![Create-iceberg-table](/images/5-Workshops/5.4/5.4.1/14.png)
 
 ---
 
@@ -63,7 +63,7 @@ from default.amazon_reviews_parquet
 where product_category in ('Gift_Card', 'Apparel','Software')
 ```
 
-![insert-into-iceberg-table](/images/5-Workshops/5.4.1/15.png)
+![insert-into-iceberg-table](/images/5-Workshops/5.4/5.4.1/15.png)
 
 ---
 
@@ -73,7 +73,7 @@ where product_category in ('Gift_Card', 'Apparel','Software')
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg" limit 10;
 ```
 
-![iceberg-test-query](/images/5-Workshops/5.4.1/16.png)
+![iceberg-test-query](/images/5-Workshops/5.4/5.4.1/16.png)
 
 ---
 

@@ -12,7 +12,7 @@ pre : " <b> 5.4.5 </b> "
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 ```
 
-![retrive-rows](/images/5-Workshops/5.4.5/23.png)
+![retrive-rows](/images/5-Workshops/5.4/5.4.5/23.png)
 
 ---
 
@@ -24,7 +24,7 @@ select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<Enter
 where product_category = 'Software' limit 10
 ```
 
-![retrive-rows](/images/5-Workshops/5.4.5/24.png)
+![retrive-rows](/images/5-Workshops/5.4/5.4.5/24.png)
 
 ---
 
@@ -35,5 +35,5 @@ Select * from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software' limit 10
 ```
 
-![rows-retrived](/images/5-Workshops/5.4.5/25.png)
+![rows-retrived](/images/5-Workshops/5.4/5.4.5/25.png)
 

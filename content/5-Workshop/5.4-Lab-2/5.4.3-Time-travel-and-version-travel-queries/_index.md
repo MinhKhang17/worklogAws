@@ -12,7 +12,7 @@ pre : " <b> 5.4.3 </b> "
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 ```
 
-![snapshot-timetravel](/images/5-Workshops/5.4.3/20.png)
+![snapshot-timetravel](/images/5-Workshops/5.4/5.4.3/20.png)
 
 ---
 
@@ -25,7 +25,7 @@ select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<repla
 where marketplace ='UK'
 ```
 
-![retrive-snapshot](/images/5-Workshops/5.4.3/21.png)
+![retrive-snapshot](/images/5-Workshops/5.4/5.4.3/21.png)
 
 ---
 

@@ -15,7 +15,7 @@ delete from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software'
 ```
 
-![delete-rows](/images/5-Workshops/5.4.4/21.png)
+![delete-rows](/images/5-Workshops/5.4/5.4.4/21.png)
 
 ---
 
@@ -25,4 +25,4 @@ where product_category = 'Software'
 Select * from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software'
 ```
-![delete-rows](/images/5-Workshops/5.4.4/22.png)
+![delete-rows](/images/5-Workshops/5.4/5.4.4/22.png)

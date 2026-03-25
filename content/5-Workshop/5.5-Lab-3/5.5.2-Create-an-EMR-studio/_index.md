@@ -18,20 +18,20 @@ pre : " <b> 5.5.2 </b> "
 
 1.  In the left navigation pane, still under **EMR on EC2**, choose **Studios**. Then click **Create Studio**.
 
-    ![EMRStudioPage](/images/5-Workshops/5.5.2/1.png)
-    ![EMRStudioPage2](/images/5-Workshops/5.5.2/2.png)
+    ![EMRStudioPage](/images/5-Workshops/5.5/5.5.2/1.png)
+    ![EMRStudioPage2](/images/5-Workshops/5.5/5.5.2/2.png)
 
 2.  On the **Create a Studio** page:
     - Select **Custom setup**.
     - Click **Browse S3** to select your S3 bucket as the storage location for notebooks.
     - Under **Service role**, choose **EMR\_Iceberg\_Notebook\_Role**.
 
-    ![Create Studio Bucket/Role](/images/5-Workshops/5.5.2/3.png)
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5/5.5.2/3.png)
 
 3.  Scroll down to the **Networking and security** section. Select the **VPC ID** and **Subnet ID** you copied from Step A.2. Then click **Create Studio**.
 
-    ![Create Studio Bucket/Role](/images/5-Workshops/5.5.2/4.png)
-    ![Create Studio Bucket/Role2](/images/5-Workshops/5.5.2/5.png)   
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5/5.5.2/4.png)
+    ![Create Studio Bucket/Role2](/images/5-Workshops/5.5/5.5.2/5.png)   
 
 4.  After the Studio is created, click **Launch Studio** to open it in a new browser tab. You will be presented with the JupyterLab interface.
 

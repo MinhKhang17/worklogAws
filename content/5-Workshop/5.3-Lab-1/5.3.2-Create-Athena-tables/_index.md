@@ -74,7 +74,7 @@ LOCATION
 's3://YOURBUCKET/productreviews/'; 
 ```
 
-![Run-athena-create-table](/images/5-Workshops/5.3.2/11.png)
+![Run-athena-create-table](/images/5-Workshops/5.3/5.3.2/11.png)
 
 ---
 
@@ -86,7 +86,7 @@ The `MSCK REPAIR TABLE` command scans a file system such as Amazon S3 for Hive c
 1
 MSCK REPAIR TABLE default.amazon_reviews_parquet;
 ```
-![Run-athena-repair-table](/images/5-Workshops/5.3.2/12.png)
+![Run-athena-repair-table](/images/5-Workshops/5.3/5.3.2/12.png)
 ---
 
 **You have created Athena table successfully. This Athena table (`default.amazon_reviews_parquet`) will be used to load data into Iceberg tables which we will be creating in next Lab.**

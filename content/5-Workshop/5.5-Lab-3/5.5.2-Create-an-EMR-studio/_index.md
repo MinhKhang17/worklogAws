@@ -8,31 +8,39 @@ pre : " <b> 5.5.2 </b> "
 
 **A. Get your EMR cluster's VPC and Subnet ID**
 
-1.  First let's go to the [EMR console](https://console.aws.amazon.com/emr/home)  and on the left pane, select **Clusters** if it's not selected yet. You should see 1 cluster pre-provisioned for you.
-    
-2.  Click the Cluster ID to get your cluster details. In the cluster details page scroll to the bottom, and in the _Network and security_ section, copy the **VPC ID** and **Subnet ID** associated with your cluster. You will need these to create your Studio
-    
+1.  Go to the [Amazon EMR Console](https://console.aws.amazon.com/emr/home). In the left navigation pane, under **EMR on EC2**, choose **Clusters**.
+
+2.  Click on your cluster's **Cluster ID** to open its details page. On the cluster details page, go to the **Summary** tab and scroll down to the **Network and security** section. Copy both the **VPC ID** and **Subnet ID** — you will need them when creating the Studio.
 
 ---
 
-**B. Create the EMR Studio environment**
+**B. Create the EMR Studio and Workspace**
 
-1.  Now let's create a Studio environment, which is based on Jupyter, to connect to the EMR Cluster and do interactive development. Click on the **Studios** option from the left panel and then click on **Create Studio** button.
-    
-    ![EMRStudioPage](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/EMRStudioPage.png)
-    
-2.  From the Create a Studio page, select **Custom setup** then Click on **Browse S3** button to select your bucket for the S3 location for storage, then select **EMR\_Iceberg\_Notebook\_Role** for the Service role.
-    
-    ![Create Studio Bucket/Role](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/studio_setting_custom.png)
-    
-3.  Scroll down to the **Networking and security** section and select the VPC ID and subnet ID of your EMR cluster from Step A.2. Then click on **Create Studio and Launch Workspace**. After a few seconds, a new browser tab should open and you should see a familiar Jupyter notebook environment. (If a new tab does not open, please check on your popup blocker)
-    
-    ![Create Studio Bucket/Role](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/CreateStudioNetworkSetup.png)
-    
-4.  Once you see the notebook interface, click on the **Compute** icon on the left panel. Select **EMR on EC2 cluster** as the Compute type, then **select your cluster** from the drop down. Click **Attach** at the bottom.
-    
+1.  In the left navigation pane, still under **EMR on EC2**, choose **Studios**. Then click **Create Studio**.
+
+    ![EMRStudioPage](/images/5-Workshops/5.5.2/1.png)
+    ![EMRStudioPage2](/images/5-Workshops/5.5.2/2.png)
+
+2.  On the **Create a Studio** page:
+    - Select **Custom setup**.
+    - Click **Browse S3** to select your S3 bucket as the storage location for notebooks.
+    - Under **Service role**, choose **EMR\_Iceberg\_Notebook\_Role**.
+
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5.2/3.png)
+
+3.  Scroll down to the **Networking and security** section. Select the **VPC ID** and **Subnet ID** you copied from Step A.2. Then click **Create Studio**.
+
+    ![Create Studio Bucket/Role](/images/5-Workshops/5.5.2/4.png)
+    ![Create Studio Bucket/Role2](/images/5-Workshops/5.5.2/5.png)   
+
+4.  After the Studio is created, click **Launch Studio** to open it in a new browser tab. You will be presented with the JupyterLab interface.
+
+    > **Note:** If a new tab does not open automatically, check your browser's popup blocker and allow popups for the AWS Console domain.
+
+5.  Inside the JupyterLab interface, click the **Cluster** icon (or **Compute** icon) in the left sidebar. Under **Compute type**, select **EMR on EC2 cluster**, then choose your cluster from the dropdown list. Click **Attach** at the bottom of the panel to connect the cluster to your workspace.
+
     ![Create Studio Bucket/Role](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/AttachCluster.png)
-    
+
 
 **Congratulations! You have completed the EMR Studio/Workspace setup, now it's time to explore Iceberg features on EMR.**
 

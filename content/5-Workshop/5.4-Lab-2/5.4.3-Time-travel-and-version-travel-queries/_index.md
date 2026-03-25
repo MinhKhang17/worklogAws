@@ -12,7 +12,7 @@ pre : " <b> 5.4.3 </b> "
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 ```
 
-![snapshot-timetravel](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/snapshot-timetravel.png)
+![snapshot-timetravel](/images/5-Workshops/5.4.3/20.png)
 
 ---
 
@@ -25,7 +25,7 @@ select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<repla
 where marketplace ='UK'
 ```
 
-![retrive-snapshot](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/retrive-snapshot.png)
+![retrive-snapshot](/images/5-Workshops/5.4.3/21.png)
 
 ---
 
@@ -38,5 +38,4 @@ select * from iceberg_database.amazon_reviews_iceberg for TIMESTAMP AS OF TIMEST
 where marketplace ='UK'
 ```
 
-![snapshot-using-sys-time](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/snapshot-using-sys-time.png)
 

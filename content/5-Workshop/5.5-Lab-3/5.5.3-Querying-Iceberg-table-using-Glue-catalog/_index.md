@@ -6,30 +6,27 @@ chapter : false
 pre : " <b> 5.5.3 </b> "
 ---
 
-1.  Download the jupyter notebook [EMR-Notebook-Iceberg-using-glue-catalog.ipynb](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/EMR-Notebook-Iceberg-using-glue-catalog.ipynb)
+1.  Download the Jupyter notebook: [EMR-Notebook-Iceberg-using-glue-catalog.ipynb](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/EMR-Notebook-Iceberg-using-glue-catalog.ipynb)
 
 ---
 
-2.  In the Launcher, choose Python3 as shown below
-
-![Jupyterlab-upload-icon](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/launcher.png)
-
----
-
-3.  In Jupyterlab click on upload icon
+2.  In the EMR Studio JupyterLab interface, click the **Upload Files** icon (↑) in the top-left file browser toolbar.
 
 ![Jupyterlab-upload-icon](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/Jupyterlab-upload-icon.png)
 
 ---
 
-4.  Browse to the location of the saved file and click on **Open**. Make sure that you are using Python3 kernel
+3.  Browse to the location where you downloaded the notebook file and click **Open** to upload it.
 
-![click-on-1-open](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/Glue-Jupyterlab-upload-icon.png)
-
----
-
-5.  Double click on **EMR-Notebook-Iceberg-using-glue-catalog.ipynb** to open it
 
 ---
 
-6.  Follow the instructions embedded in the notebook. Click on the “Run” button at the top of the screen to execute the notebook cell by cell. Once you finish the notebook, you will complete the lab.
+4.  In the file browser on the left, double-click **EMR-Notebook-Iceberg-using-glue-catalog.ipynb** to open it.
+
+---
+
+5.  When prompted to select a kernel, choose **PySpark**. If the notebook is already open, you can verify or change the kernel from the kernel selector in the top-right of the notebook toolbar.
+
+---
+
+6.  Follow the instructions embedded in the notebook cells. Use the **▶ Run** button in the toolbar (or press **Shift + Enter**) to execute cells one by one. Once you have successfully executed all cells, you have completed this section.

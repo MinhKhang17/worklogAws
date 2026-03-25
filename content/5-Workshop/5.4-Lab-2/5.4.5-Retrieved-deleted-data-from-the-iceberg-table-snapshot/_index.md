@@ -12,7 +12,7 @@ pre : " <b> 5.4.5 </b> "
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 ```
 
-![retrive-rows](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/retrive-rows.png)
+![retrive-rows](/images/5-Workshops/5.4.5/23.png)
 
 ---
 
@@ -24,6 +24,8 @@ select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<Enter
 where product_category = 'Software' limit 10
 ```
 
+![retrive-rows](/images/5-Workshops/5.4.5/24.png)
+
 ---
 
 3.  Query the main table to verify that deleted rows are retrieved successfully. Copy Paste below query into editor and click on **Run**
@@ -33,5 +35,5 @@ Select * from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software' limit 10
 ```
 
-![rows-retrived](https://static.us-east-1.prod.workshops.aws/public/ebc00129-fa83-4c1d-931e-1f301fc04542/static/rows-retrived.png)
+![rows-retrived](/images/5-Workshops/5.4.5/25.png)
 

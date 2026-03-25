@@ -15,6 +15,8 @@ delete from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software'
 ```
 
+![delete-rows](/images/5-Workshops/5.4.4/21.png)
+
 ---
 
 2.  You should get zero records for below query, verifying that the rows are deleted. Copy paste below code in query editor and click on **Run**
@@ -23,3 +25,4 @@ where product_category = 'Software'
 Select * from iceberg_database.amazon_reviews_iceberg
 where product_category = 'Software'
 ```
+![delete-rows](/images/5-Workshops/5.4.4/22.png)

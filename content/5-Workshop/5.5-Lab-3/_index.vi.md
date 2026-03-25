@@ -7,7 +7,7 @@ pre : " <b> 5.5. </b> "
 ---
 
 
-Trong bài lab này, đối với các bài lab tự thực hành (self paced labs), chúng ta sẽ tạo một EMR cluster với Phiên bản 6.5 có cài đặt Iceberg. Đối với AWS Events, EMR cluster đã được tạo sẵn. Bài lab này đã được kiểm tra với `EMR 6.5.0`. Do đó, chúng tôi khuyên bạn nên sử dụng cùng một phiên bản EMR cho workshop của mình.
+Trong bài lab này, đối với các bài lab tự thực hành (self paced labs), chúng ta sẽ tạo một EMR cluster với Phiên bản 7.5 có cài đặt Iceberg. Đối với AWS Events, EMR cluster đã được tạo sẵn. Bài lab này đã được kiểm tra với `EMR 7.5.0`. Do đó, chúng tôi khuyên bạn nên sử dụng cùng một phiên bản EMR cho workshop của mình.
 
 Chúng ta sẽ sử dụng PySpark Jupyter Notebook để làm việc tương tác với các bảng Iceberg.
 

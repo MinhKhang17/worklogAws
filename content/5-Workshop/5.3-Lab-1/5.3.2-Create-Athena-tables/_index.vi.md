@@ -24,13 +24,13 @@ pre : " <b> 5.3.2 </b> "
 
 1.  Nhấp vào Settings và sau đó nhấp vào **Manage**.
 
-![Athena Settings](/images/5-Workshops/5.3.2/7.png)
+![Athena Settings](/images/5-Workshops/5.3/5.3.2/7.png)
 
 ---
 
 4.  Tại phần Manage Settings, nhấp vào **Browse S3**.
 
-![Athena Settings](/images/5-Workshops/5.3.2/8.png)
+![Athena Settings](/images/5-Workshops/5.3/5.3.2/8.png)
 
 ---
 

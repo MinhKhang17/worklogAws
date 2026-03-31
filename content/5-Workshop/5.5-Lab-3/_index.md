@@ -1,5 +1,5 @@
 ---
-title : "Lab 3: EMR Iceberg - using Iceberg tables"
+title : "Lab 3: Working with Iceberg Tables on EMR"
 date : 2026-03-16 
 weight : 5 
 chapter : false
@@ -7,9 +7,10 @@ pre : " <b> 5.5. </b> "
 ---
 
 
-In this lab, for self paced labs we will create an EMR cluster with Release 7.5 with Iceberg installed. For AWS Events the EMR cluster is pre-created. This lab has been tested with `EMR 7.5.0`. Hence, we recommend that you use the same EMR release for your workshop.
+For self-paced labs, we will provision an EMR cluster using Release 7.5 with Iceberg pre-installed. For AWS Events, the EMR cluster has already been provisioned for you. This lab has been validated against `EMR 7.5.0`, so we recommend using the same release version to ensure compatibility.
 
-We will use PySpark Jupyter Notebook to work interactively with Iceberg tables.
+We will use a PySpark Jupyter Notebook within EMR Studio for interactive work with Iceberg tables.
 
-For self paced labs, before you begin this lab make sure you have completed **Create S3 bucket** Lab. For AWS events the S3 bucket is pre created.
+If you are following the self-paced path, ensure you have completed the **Create S3 bucket** lab before starting this one. For AWS Events, the S3 bucket has been pre-created.
+
 

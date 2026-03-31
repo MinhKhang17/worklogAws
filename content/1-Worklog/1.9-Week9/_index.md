@@ -26,15 +26,16 @@ pre: " <b> 1.9. </b> "
 
 * **Backend — User Metric module**:
   * `BodyMetric` records persisted with proper validation (height ≥ 50 cm, weight ≥ 20 kg, age ≥ 10).
+  * AWS Secrets Manager integration implemented to securely load PostgreSQL credentials and JWT secrets at runtime, encrypted via AWS KMS.
   * BMR computed correctly using Mifflin-St Jeor equation; TDEE applies activity multipliers (1.2 – 1.9).
   * `POST /api/metrics/calculate` returns `HealthCalculationResponse` with BMI, BMR, TDEE, and derived macros (protein/carbs/fat grams for goal type).
   * History endpoints return records sorted by `createdAt DESC`.
 * **Frontend — Health Dashboard**:
   * `HealthDashboardScreen` wheel pickers provide smooth UX for entering height/weight.
-  * Results display immediately in `HealthResultCard` after API response.
+  * Results display immediately in `HealthResultCard` after API response, with logic optimized to prevent redundant BMI/BMR recalculations on every render.
+  * Built using `react-native-gifted-charts`, ensuring high performance and customizability.
   * `BMITrendChart` color-codes data points: underweight (blue), normal (green), overweight (yellow), obese (red).
   * `WeightChart` shows moving average trend line when user has ≥ 7 data points.
-  * `CalorieEnergyCharts` allows toggling between BMR-only, TDEE-only, and combined view.
   * `BodyMetricListScreen` shows full measurement history with inline edit/delete.
 
 ### AWS Knowledge Learned:

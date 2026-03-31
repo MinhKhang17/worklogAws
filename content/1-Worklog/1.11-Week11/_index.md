@@ -33,10 +33,11 @@ pre: " <b> 1.11. </b> "
   * `myFit-api/README.md` covers full setup guide, environment variable reference, and all endpoint descriptions.
   * Frontend `guide.md` updated with navigation diagram, screen inventory, and AWS service configuration.
   * Architecture overview documented: Spring Boot API ↔ PostgreSQL ↔ AWS Cognito ↔ AWS S3 ↔ React Native App ↔ AWS Bedrock.
-* **Code Quality**:
+* **CI/CD & Code Quality**:
+  * Implemented GitHub Actions workflows (`.github/workflows`) that automatically lint, test, build, and trigger rolling deployment updates to **Amazon ECS Fargate** upon merge.
   * Zero `console.log` or `System.out.println` remaining in production paths.
-  * TypeScript build (`npx expo export`) passes with zero errors.
-  * Maven `mvn clean package` builds final JAR cleanly.
+  * Automated TypeScript build (`npx expo export`) passes with zero errors in CI.
+  * Automated Maven `mvn clean package` builds final JAR cleanly in CI.
 * **Project Retrospective — Key Lessons Learned**:
   * **IDOR prevention** via JWT `sub` extraction is a critical security pattern that must be applied consistently throughout a user-scoped REST API.
   * **Soft delete** with `@SQLRestriction` is more user-friendly than hard delete for user-owned data — allows potential recovery.

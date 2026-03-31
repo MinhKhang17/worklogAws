@@ -12,10 +12,9 @@ pre: " <b> 1.10. </b> "
   * Refine API endpoints — improve input validation, pagination, and write unit tests for core service methods.
   * Final API review, Docker Compose production-readiness, and complete environment variable documentation.
 * **Frontend**:
-  * Build the `ChatScreen` with AWS Bedrock AI integration and `ProfileScreen` with user account management.
-  * Deliver the AI-powered assistant feature as a differentiating value-add for the application.
+  * Build the `ChatScreen` integrating **AWS Bedrock (Claude 3.5 Haiku)** with a sliding-window memory, and `ProfileScreen` with user account management.
+  * Implement robust **token refresh logic** via Axios interceptor queues for seamless UX during session expiration.
   * Build `HomeScreen` as the central dashboard, resolve all outstanding bugs, and polish the overall UX across the app.
-  * Achieve a fully functional, integrated application ready for final testing.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
@@ -26,7 +25,7 @@ pre: " <b> 1.10. </b> "
 | 5   | - Build **ChatScreen** (Frontend) <br>&emsp; + Full-screen chat UI with message bubble list (user / bot) <br>&emsp; + Animated "typing" indicator (3 bouncing dots) while waiting for response <br>&emsp; + 4 quick-option chips: "Suggest exercises", "Today’s menu", "Calorie goal", "Weight loss advice" <br>&emsp; + Vietnamese initial greeting from the fitness bot <br>&emsp; + Animated keyboard avoidance <br>&emsp; + `notifyAlert` error handling via global alert proxy | 03/20/2026 | 03/20/2026 | |
 | 6   | - Build **ProfileScreen** (Frontend) <br>&emsp; + Display avatar (initial-letter fallback), name, email, username, birthdate, gender <br>&emsp; + Edit modal: update birthdate (YYYY-MM-DD) and gender via `updateUserProfile` API + `dispatch(updateUserProfile)` <br>&emsp; + Logout: `signOut` (Cognito revoke) + `dispatch(logout)` + clear secure storage <br>&emsp; + Delete account: `deleteUserProfile` + `signOut` — both gated by `ConfirmModal` | 03/21/2026 | 03/21/2026 | |
 | 2   | - Build **HomeScreen** (Frontend) — 5 parallel data fetches on mount <br>&emsp; + Today’s meals: sum MealFood calories → daily calorie progress bar vs. 2500 kcal target <br>&emsp; + Latest `HealthCalculation` → show BMI <br>&emsp; + Latest `BodyMetric` → show current height/weight <br>&emsp; + Active workout plan name → quick link to PlanDetail <br>&emsp; + This-week session count → weekly progress vs. 4 sessions target | 03/24/2026 | 03/24/2026 | |
-| 3   | - Backend **Docker Compose** final refinements <br>&emsp; + Add `healthcheck` to `postgres` service: `pg_isready` with `interval`, `timeout`, `retries` <br>&emsp; + Add `depends_on.db.condition: service_healthy` to API service <br>&emsp; + Verify `Spring Actuator` `/actuator/health` liveness + readiness probes <br>&emsp; + Complete `.env.example` with all required variables documented | 03/25/2026 | 03/25/2026 | |
+| 3   | - Backend deployment preparation <br>&emsp; + Refine Docker Compose with `postgres` health checks and `Spring Actuator` liveness/readiness probes <br>&emsp; + CI/CD: Push immutable backend image to **Amazon ECR** <br>&emsp; + Define **ECS Fargate** task definition mapped to **ALB** for serverless runtime <br>&emsp; + Protect public endpoints with **AWS WAF** | 03/25/2026 | 03/25/2026 | |
 | 4   | - Comprehensive **bug fix** session across all Frontend screens <br>&emsp; + Fix `WorkoutSessionScreen`: edge case when all exercises completed before timer finishes <br>&emsp; + Fix `DietScreen`: ensure `ensureDailyMeals` not called on every render — move to `useEffect` with empty deps <br>&emsp; + Fix `HealthDashboardScreen`: loading state shown during `calculateMetrics` call <br>&emsp; + Fix `BMITrendChart`: empty state when user has fewer than 2 health calculations | 03/26/2026 | 03/26/2026 | |
 | 5   | - **Response interceptor** improvements (Axios `client.ts`) <br>&emsp; + Implement token refresh with request queue: concurrent `401` responses queued, one refresh attempted, all retried <br>&emsp; + On refresh failure: `forceLogout` clears tokens + dispatches Redux `logout` + navigates to Login <br>&emsp; + Handle `code === 4040` "user not found for cognitoId" → auto `forceLogout` | 03/27/2026 | 03/27/2026 | |
 | 6   | - **UX polish** pass across all screens <br>&emsp; + Add `NotificationBox` global alert component (replaces native `Alert.alert` via `installAlertProxy`) <br>&emsp; + Add pull-to-refresh on `HomeScreen` <br>&emsp; + Ensure consistent loading spinners and error states across all screens <br>&emsp; + Add `ActivityLevelLabels` Vietnamese display names for all enum values <br>&emsp; + Vietnamese label consistency check across navigation tabs and headings | 03/28/2026 | 03/28/2026 | |
@@ -41,6 +40,7 @@ pre: " <b> 1.10. </b> "
   * BMI/BMR/TDEE formulas verified with edge case inputs (min/max allowed ranges).
   * Health check on PostgreSQL service ensures the API container waits for DB to be fully ready.
   * `GET /actuator/health` returns `{status: UP}` with liveness/readiness sub-probes.
+  * Production image pushed successfully to **Amazon ECR**, ready to be pulled by **ECS Fargate** clusters routing through **ALB** and protected by **WAF**.
   * `.env.example` fully documents all 10+ required environment variables with descriptions.
 * **Frontend**:
   * `chatService.sendChatToBedrock` calls AWS Bedrock Runtime directly using credentials from `.env`.

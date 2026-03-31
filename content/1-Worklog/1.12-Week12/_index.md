@@ -54,9 +54,9 @@ pre: " <b> 1.12. </b> "
 | Finalization | 12 | Documentation, final presentation, report submission |
 
 **AWS Services Mastered:**
-* Amazon Cognito, Amazon S3, Amazon Bedrock
+* Amazon Cognito, Amazon S3, **Amazon CloudFront (with OAC)**, Amazon Bedrock
 * AWS Secrets Manager, IAM Policies, KMS
-* Architecture planning for ECS (Fargate), ALB, Route 53, and CloudFront
+* Architecture planning for ECS (Fargate), ALB, Route 53
 
 **Project Statistics:**
 * 10+ core REST API modules fully developed (Auth, Food, Workout, Metrics, etc.)

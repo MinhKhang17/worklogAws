@@ -6,47 +6,47 @@ chapter : false
 pre : " <b> 5.3.2 </b> "
 ---
 
-1.  Điều hướng tới [Athena Console](https://console.aws.amazon.com/athena/home) 
+1.  Truy cập [Athena Console](https://console.aws.amazon.com/athena/home)
     
     ---
     
-2.  Mở trình soạn thảo truy vấn **Query Editor** (không phải Notebook editor)
+2.  Mở **Query Editor** (không phải Notebook editor)
     
     ---
 ![open query editor](/images/5-Workshops/5.3/5.3.2/5.png)
 
-3.  Khi đã vào trong trình soạn thảo truy vấn của Athena console, hãy nhấp vào '**Edit Settings**' như hình bên dưới:
+3.  Sau khi vào trong Query Editor của Athena console, nhấn vào **Edit Settings** như hình bên dưới:
     
 
 ![Athena console](/images/5-Workshops/5.3/5.3.2/6.png)
 
 ---
 
-1.  Nhấp vào Settings và sau đó nhấp vào **Manage**.
+1.  Vào **Settings** rồi nhấn **Manage**
 
 ![Athena Settings](/images/5-Workshops/5.3/5.3.2/7.png)
 
 ---
 
-4.  Tại phần Manage Settings, nhấp vào **Browse S3**.
+4.  Trong Manage Settings, nhấn **Browse S3**.
 
 ![Athena Settings](/images/5-Workshops/5.3/5.3.2/8.png)
 
 ---
 
-5.  Chọn S3 bucket bằng cách nhấp vào nút radio (hình tròn) và sau đó nhấp chọn **Choose**. Đối với các bài lab tự thực hành (self paced labs), hãy chọn S3 bucket mà bạn đã tạo trước đó. Đối với AWS Events, hãy chọn S3 bucket có tên bắt đầu bằng iceberg-workshop-ACCOUNTID (ví dụ: iceberg-workshop-123456789).
+5.  Chọn S3 bucket bằng cách tích vào nút radio tương ứng rồi nhấn **Choose**. Với self-paced labs, chọn bucket đã tạo trước đó. Với AWS Events, chọn bucket có tên iceberg-workshop-ACCOUNTID (ví dụ: iceberg-workshop-123456789).
 
 ![Choose-S3-data-set](/images/5-Workshops/5.3/5.3.2/9.png)
 
 ---
 
-6.  Nhấn chọn **Save** để lưu lại S3 location này.
+6.  Nhấn **Save** để lưu vị trí S3 output.
 
 ![Save-s3-location](/images/5-Workshops/5.3/5.3.2/10.png)
 
 ---
 
-7.  Nhấp vào **Editor** và copy paste câu truy vấn bên dưới. Cập nhật **YOURBUCKET** thành tên S3 bucket của bạn sau đó nhấn nút **Run**.
+7.  Chuyển sang tab **Editor**, dán câu truy vấn bên dưới. Thay **YOURBUCKET** bằng tên S3 bucket của bạn, rồi nhấn **Run**.
 
 ```sql
 CREATE EXTERNAL TABLE default.amazon_reviews_parquet(
@@ -79,9 +79,9 @@ LOCATION
 
 ---
 
-8.  Sao chép và dán (copy paste) mã lệnh bên dưới trong trình chỉnh sửa truy vấn và nhấn vào **Run**.
+8.  Dán đoạn lệnh bên dưới vào trình soạn thảo truy vấn và nhấn **Run**.
 
-Lệnh `MSCK REPAIR TABLE` sẽ quét hệ thống tệp tin (chẳng hạn như Amazon S3) để tìm các phân vùng tương thích với Hive đã được thêm vào hệ thống tệp sau khi bảng được tạo. Lệnh `MSCK REPAIR TABLE` so sánh các phân vùng trong metadata của bảng và các phân vùng trong S3. Nếu có các phân vùng hệ thống mới xuất hiện ở cùng vị trí Amazon S3 mà bạn đã chỉ định lúc bạn tạo bảng, nó sẽ tự động thêm các phân vùng đó cho metadata và cho bảng Athena.
+Lệnh `MSCK REPAIR TABLE` quét hệ thống tệp (chẳng hạn Amazon S3) để phát hiện các phân vùng tương thích Hive đã được thêm vào sau khi bảng được tạo. Lệnh này so sánh phân vùng trong metadata của bảng với phân vùng trên S3. Nếu phân vùng mới tồn tại ở vị trí S3 được chỉ định, chúng sẽ được tự động cập nhật vào metadata và bảng Athena.
 
 ```sql
 MSCK REPAIR TABLE default.amazon_reviews_parquet;
@@ -89,4 +89,4 @@ MSCK REPAIR TABLE default.amazon_reviews_parquet;
 ![Run-athena-repair-table](/images/5-Workshops/5.3/5.3.2/12.png)
 ---
 
-**Bạn đã tạo bảng Athena thành công. Bảng Athena này (`default.amazon_reviews_parquet`) sẽ được dùng để đưa dữ liệu vào những bảng Iceberg mà chúng ta sẽ tạo trong Bài lab (Lab) tiếp theo.**
+**Bảng Athena đã được tạo thành công. Bảng này (`default.amazon_reviews_parquet`) sẽ được dùng làm nguồn dữ liệu để nạp vào các bảng Iceberg trong bài lab tiếp theo.**

@@ -1,36 +1,36 @@
 ---
-title : "Giới thiệu về Iceberg trên AWS"
+title : "Giới thiệu về Apache Iceberg trên AWS"
 date : 2026-03-25 
 weight : 1 
 chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
-[Apache Iceberg](https://iceberg.apache.org/) là một định dạng bảng mở dành cho các tập dữ liệu cực lớn và hỗ trợ các hoạt động data lake hiện đại như chèn (insert), cập nhật (update), xóa (delete) ở cấp độ bản ghi và các truy vấn du hành thời gian (time travel). Iceberg quản lý các tập hợp tệp lớn dưới dạng bảng và cho phép tiến hóa bảng liền mạch như tiến hóa schema và phân vùng (partition). Thiết kế của Iceberg được tối ưu hóa cho việc sử dụng trên Amazon S3 và giúp đảm bảo tính đúng đắn của dữ liệu trong các kịch bản ghi đồng thời.
+[Apache Iceberg](https://iceberg.apache.org/) là một định dạng bảng mở được thiết kế đặc biệt cho các tập dữ liệu phân tích cực kỳ lớn. Định dạng này hỗ trợ nhiều tác vụ data lake hiện đại như chèn (insert), cập nhật (update), xóa (delete) ở cấp độ bản ghi và truy vấn du hành thời gian (time travel). Iceberg tổ chức các tập hợp tệp lớn dưới dạng các bảng có cấu trúc, cho phép tiến hóa schema và phân vùng một cách trơn tru mà không cần viết lại dữ liệu. Kiến trúc của nó được tối ưu hóa riêng cho Amazon S3 và đảm bảo tính nhất quán dữ liệu ngay cả trong các tình huống ghi đồng thời.
 
 ---
 
-Một số thuật ngữ phổ biến trong các bảng Apache Iceberg như sau:
+Một số thuật ngữ quan trọng trong Apache Iceberg bao gồm:
 
--   Schema – Tên và kiểu của các trường trong một bảng.
--   Partition spec – Định nghĩa về cách các giá trị phân vùng được xuất ra từ các trường dữ liệu.
--   Snapshot – Trạng thái của một bảng tại một thời điểm, bao gồm tập hợp tất cả các tệp dữ liệu.
--   Manifest list – Một tệp liệt kê các tệp manifest; mỗi snapshot có một danh sách.
--   Manifest – Một tệp liệt kê dữ liệu hoặc các tệp đã xóa; một phần con của snapshot.
--   Data file – Một tệp chứa các hàng của một bảng.
--   Delete file – Một tệp mã hóa các hàng của một bảng bị xóa theo vị trí hoặc giá trị dữ liệu.
+-   Schema – Tên và kiểu dữ liệu của tất cả các trường trong một bảng.
+-   Partition spec – Định nghĩa cách tính các giá trị phân vùng từ các trường dữ liệu.
+-   Snapshot – Ảnh chụp trạng thái bảng tại một thời điểm, bao gồm toàn bộ tập hợp các tệp dữ liệu tại thời điểm đó.
+-   Manifest list – Tệp liệt kê tất cả các manifest file liên kết với một snapshot nhất định.
+-   Manifest – Tệp chứa danh sách các data file hoặc delete file tạo nên một phần của snapshot.
+-   Data file – Tệp chứa dữ liệu hàng thực tế của bảng.
+-   Delete file – Tệp ghi lại những hàng đã bị xóa, theo vị trí hoặc theo giá trị dữ liệu.
 
 ---
 
-Apache Iceberg theo dõi các tệp dữ liệu riêng lẻ trong một bảng thay vì các thư mục. Điều này cho phép user tạo các tệp dữ liệu tại chỗ (in-place) và chỉ thêm tệp vào bảng với một commit rõ ràng. Trạng thái bản được lưu trong file metadata. Tất cả thay đổi tạo ra file metadata mới, thay cho cái cũ. File metadata của bảng chứa schema, cấu hình phân vùng và các snapshot nội dung của bảng. Snapshot cho phép truy xuất dữ liệu hoàn chỉnh của bảng.
+Iceberg theo dõi từng tệp dữ liệu riêng lẻ thay vì theo thư mục. Các writer có thể tạo tệp độc lập và thêm vào bảng bằng một commit duy nhất và rõ ràng. Trạng thái bảng được lưu trữ trong các metadata file, và mỗi thay đổi đối với bảng sẽ tạo ra một metadata file mới thay thế file cũ theo cơ chế nguyên tử (atomically). Metadata file lưu trữ schema bảng, cấu hình phân vùng và toàn bộ lịch sử snapshot. Mỗi snapshot đại diện cho trạng thái đầy đủ của bảng tại một thời điểm cụ thể và là điểm truy cập để truy vấn toàn bộ tập dữ liệu.
 
-Mỗi snapshot là một tập hợp đầy đủ dữ liệu tại một thời điểm. Snapshot lưu trong file metadata, nhưng dữ liệu lại nằm rải rác ở các file manifest. Chuyển đổi metadata mới tạo ra sự cách ly snapshot. Người xem sẽ thấy snapshot ở thời điểm tải metadata lên và không bị thay đổi cho đến khi refresh. Đường dẫn tới tệp dữ liệu nằm ở các manifest. Snapshot bao gồm nhiều manifest, và chúng có thể chia sẻ tệp để tránh làm nặng hệ thống.
+Mỗi snapshot là một ảnh hoàn chỉnh của dữ liệu tại một thời điểm nhất định. Các snapshot được liệt kê trong metadata file, nhưng tham chiếu tệp thực tế nằm rải rác ở các manifest file riêng biệt. Việc chuyển đổi nguyên tử giữa các metadata file cung cấp khả năng cách ly snapshot, cho phép người đọc làm việc với phiên bản nhất quán mà không bị ảnh hưởng bởi các thay đổi đang diễn ra. Đường dẫn tệp dữ liệu được lưu trong manifest, mỗi manifest chứa siêu dữ liệu về từng tệp bao gồm thông tin phân vùng và thống kê. Manifest có thể được chia sẻ giữa các snapshot để giảm thiểu việc ghi lại siêu dữ liệu không thay đổi.
 
 ---
 
 **Apache Iceberg trên Amazon Athena**
 
-Bảng Iceberg hỗ trợ AWS Glue catalog, định dạng Parquet. Cú pháp:
+Các bảng Iceberg đã đăng ký trong AWS Glue catalog được Athena hỗ trợ đầy đủ, tuân theo thông số kỹ thuật của [Glue Catalog implementation](https://iceberg.apache.org/docs/latest/aws/#glue-catalog) mã nguồn mở. Athena hỗ trợ bảng Iceberg v2 ở định dạng Parquet. Để tạo bảng Iceberg qua Athena, đặt thuộc tính `table_type` thành `ICEBERG` trong mệnh đề `TBLPROPERTIES`, như cú pháp bên dưới:
 
 ```sql
 CREATE TABLE
@@ -44,7 +44,7 @@ CREATE TABLE
 
 **Apache Iceberg trên Amazon EMR**
 
-Bắt đầu với Amazon EMR 6.5.0, hỗ trợ Apache Spark 3 và Iceberg định dạng. Thiết lập cluster như sau:
+Từ Amazon EMR phiên bản 7.5.0, bạn có thể chạy Apache Spark 3 trên EMR cluster với hỗ trợ định dạng bảng Iceberg. EMR 7.5.0 đi kèm với Iceberg phiên bản 1.6.0. Để kích hoạt hỗ trợ Iceberg, hãy thêm phân loại (classification) sau vào cấu hình cluster:
 
 ```java
 [{ "Classification":"iceberg-defaults",
@@ -52,6 +52,6 @@ Bắt đầu với Amazon EMR 6.5.0, hỗ trợ Apache Spark 3 và Iceberg đị
 }]
 ```
 
-Hoặc thêm tệp '/usr/share/aws/iceberg/lib/iceberg-spark3-runtime.jar'.
+Ngoài ra, bạn có thể tạo EMR cluster kèm ứng dụng Spark và đưa tệp `/usr/share/aws/iceberg/lib/iceberg-spark3-runtime.jar` vào làm dependency JAR trong các Spark job của mình.
 
-Lưu ý: Workshop mất 2 giờ, sử dụng `us-east-1` region.
+Bài thực hành này dự kiến kéo dài tối đa 2 giờ. Vui lòng sử dụng region **us-east-1** trong suốt quá trình thực hành, vì bộ dữ liệu sử dụng trong bài nằm ở region này.

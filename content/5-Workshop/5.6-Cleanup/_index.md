@@ -6,16 +6,16 @@ chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-Follow these steps to Clean up the resources which you have built for this lab to avoid having to pay for unused resources.
+Follow the steps below to clean up the resources you created during this workshop and avoid incurring charges for unused services.
 
-1.  Navigate to [AWS S3 console](https://s3.console.aws.amazon.com/s3/home)  and delete the S3 bucket which you create for this lab. You will have to delete the content of S3 buckets first before deleting the actual S3 bucket.
+1.  Go to the [AWS S3 console](https://s3.console.aws.amazon.com/s3/home) and delete the S3 bucket you created for this workshop. You must first empty the bucket contents before you can delete the bucket itself.
     
-2.  Navigate to [EMR Console](https://console.aws.amazon.com/elasticmapreduce/home) . Check the Check box for the **EMR Cluster** which we create in EMR Iceberg Lab and click on **Terminate** button, this will terminate the EMR Cluster.
+2.  Go to the [EMR Console](https://console.aws.amazon.com/elasticmapreduce/home). Check the box next to the **EMR Cluster** created for this workshop and click **Terminate** to shut it down.
     
-3.  From Right Hand menu on EMR Console, click on **Notebooks**. Click on checkbox for the **Notebook** which you create in EMR Iceberg Lab. Click on **Delete** button to delete the Notebook environment.
+3.  From the right-hand menu in the EMR Console, click **Notebooks**. Select the checkbox for the **Notebook** you created in this workshop. Click **Delete** to remove the notebook environment.
     
 
 # Thank you!
 
 
-I hope you learned something new today and got inspired.
+We hope you gained valuable hands-on experience and came away with new ideas to explore.

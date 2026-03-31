@@ -1,11 +1,11 @@
 ---
-title : "Lab 1: Athena set up"
+title : "Lab 1: Setting Up Athena"
 date : 2026-03-25
 weight : 3
 chapter : false
 pre : " <b> 5.3. </b> "
 ---
 
-In this lab we will set up Athena and we will create an Athena table. This Athena table will be used to load data into the Iceberg table. We are using this approach to simplify the data loading process for Iceberg table.
+In this lab, we will configure Athena and create an Athena table that will serve as the data source for loading into an Iceberg table. This approach is used to streamline and simplify the data ingestion process for Iceberg.
 
-If are you doing this lab on your own, you will need to complete **Create S3 bucket** prerequisite.
+If you are working through this lab independently, make sure you have completed the **Create S3 bucket** prerequisite beforehand.

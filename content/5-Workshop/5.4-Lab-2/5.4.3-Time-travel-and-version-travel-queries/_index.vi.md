@@ -1,12 +1,12 @@
 ---
-title : "2.3 Truy vấn du hành thời gian và du hành phiên bản (Time travel and version travel queries)"
+title : "2.3 Truy vấn du hành thời gian và du hành phiên bản"
 date : 2026-03-25
 weight : 3
 chapter : false
 pre : " <b> 5.4.3 </b> "
 ---
 
-1.  Hãy truy xuất snapshot của bảng iceberg bằng cách sử dụng bảng bên dưới. Sao chép và dán lệnh bên dưới vào trình soạn thảo truy vấn và nhấp vào **Run**. Lưu/sao chép "snapshot\_id" cũ hơn vì bạn sẽ cần nó cho bước tiếp theo.
+1.  Hãy lấy lịch sử snapshot của bảng Iceberg bằng truy vấn bên dưới. Dán vào trình soạn thảo và nhấn **Run**. Sao chép giá trị **snapshot_id** cũ hơn — bạn sẽ cần nó ở bước tiếp theo.
 
 ```sql
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
@@ -16,9 +16,9 @@ SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 
 ---
 
-2.  Bây giờ hãy truy vấn snapshot tại thời điểm trước khi chúng ta thêm cột `comment`. Sao chép dán đoạn mã bên dưới vào trình soạn thảo truy vấn, thay thế `snapshot_id` trước khi bạn nhấp **Run** đối với truy vấn bên dưới rồi sau đó nhấp vào **Run**.
+2.  Bây giờ hãy truy vấn snapshot từ trước khi chúng ta thêm cột `comment`. Dán truy vấn bên dưới vào trình soạn thảo, thay thế phần giữ chỗ `snapshot_id` bằng giá trị cũ hơn bạn đã sao chép, rồi nhấn **Run**.
 
-Sau khi bạn chạy truy vấn với `snapshot_id` cũ hơn, hãy xác minh rằng kết quả hiển thị không có cột `comment`.
+Sau khi chạy, xác nhận rằng kết quả không có cột `comment`.
 
 ```sql
 select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<replace snapshot_id>>
@@ -29,9 +29,9 @@ where marketplace ='UK'
 
 ---
 
-3.  Chúng ta có thể sử dụng thời gian tĩnh `made_current_at` để truy vấn snapshot. Sao chép dán lệnh bên dưới vào trình soạn thảo truy vấn, thay thế `made_current_at time` trong truy vấn và sau đó nhấp vào **Run**.
+3.  Chúng ta cũng có thể sử dụng timestamp `made_current_at` để truy vấn một snapshot cụ thể. Dán truy vấn bên dưới vào trình soạn thảo, thay thế phần giữ chỗ bằng giá trị timestamp thực tế, rồi nhấn **Run**.
 
-**Ngoài ra**, chúng ta cũng có thể sử dụng **cột** `made_current_at` làm thời gian để truy vấn snapshot.
+**Ngoài ra**, bạn có thể dùng trực tiếp giá trị của cột `made_current_at` để truy cập snapshot theo thời gian.
 
 ```sql
 select * from iceberg_database.amazon_reviews_iceberg for TIMESTAMP AS OF TIMESTAMP '<<replace with made_current_at time>>' 

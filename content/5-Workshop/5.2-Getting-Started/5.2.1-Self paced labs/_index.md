@@ -6,19 +6,20 @@ chapter : false
 pre : " <b> 5.2.1 </b> "
 ---
 
-## Sign Up for AWS
+## Creating an AWS Account
 
 
-When you sign up for Amazon Web Services (AWS), your AWS account is automatically signed up for all services in AWS, including Athena. You are charged only for the services that you use.
+When you register for Amazon Web Services (AWS), your new account is automatically enrolled in all available AWS services, including Athena. Charges only apply to the services you actually use.
 
-If you have an AWS account already, skip to the next task. If you don't have an AWS account, use the following procedure to create one.
+If you already have an AWS account, you can skip ahead to the next step. If you don't yet have one, follow the procedure below to create your account.
 
 **To create an AWS account**
 
-1.  Open [https://aws.amazon.com/](https://aws.amazon.com/)  and then choose Create an AWS Account. Note: If you previously signed in to the AWS Management Console using AWS account root user credentials, choose Sign in to a different account. If you previously signed in to the console using IAM credentials, choose Sign-in using root account credentials. Then choose Create a new AWS account.
+1.  Visit [https://aws.amazon.com/](https://aws.amazon.com/) and click **Create an AWS Account**. Note: If you have previously signed in to the AWS Management Console as the root user, select **Sign in to a different account**. If you signed in using IAM credentials, choose **Sign-in using root account credentials**, then select **Create a new AWS account**.
 
 ---
 
-2.  Follow the online instructions. Part of the sign-up procedure involves receiving a phone call and entering a verification code using the phone keypad
+2.  Complete the on-screen steps to finish registration. Part of the process requires receiving a phone call and confirming a verification code via the phone keypad.
 
-Note your AWS account number, because you'll need it for the next task.
+Take note of your AWS account number, as you will need it in the following step.
+

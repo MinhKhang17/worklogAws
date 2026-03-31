@@ -6,7 +6,7 @@ chapter : false
 pre : " <b> 5.4.3 </b> "
 ---
 
-1.  Let's retrieve snapshot of iceberg using below table. Copy paste below code in query editor and click on **Run**. Save/copy the older "snapshot\_id" as you will need this for the next step.
+1.  Let's retrieve the snapshot history of the Iceberg table using the query below. Paste it into the query editor and click **Run**. Copy the older **snapshot_id** value — you will need it in the next step.
 
 ```sql
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
@@ -16,9 +16,9 @@ SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 
 ---
 
-2.  Now query the snapshot before we added the `comment` column. Copy paste below code in query editor, replace the snapshot\_id before you **Run** below query and then click on **Run**.
+2.  Now query the snapshot from before we added the `comment` column. Paste the query below into the editor, replace the `snapshot_id` placeholder with the older value you copied, then click **Run**.
 
-Once you run the query with older snapshot\_id, verify that the results displayed doesn’t have the `comment` column.
+After running the query, confirm that the results do not include the `comment` column.
 
 ```sql
 select * from iceberg_database.amazon_reviews_iceberg FOR VERSION AS OF  <<replace snapshot_id>>
@@ -29,13 +29,14 @@ where marketplace ='UK'
 
 ---
 
-3.  We can use the made\_current\_at time to query the snapshot. Copy paste below code in query editor, replace the `made_current_at time` in the query and then click on **Run**.
+3.  We can also use the `made_current_at` timestamp to query a specific snapshot. Paste the query below into the editor, replace the `made_current_at time` placeholder with the actual timestamp value, then click **Run**.
 
-**Alternately** we can use the `made_current_at` **column** time to query the snapshot.
+**Alternatively**, you can use the `made_current_at` **column** value directly for timestamp-based access.
 
 ```sql
 select * from iceberg_database.amazon_reviews_iceberg for TIMESTAMP AS OF TIMESTAMP '<<replace with made_current_at time>>' 
 where marketplace ='UK'
 ```
+
 
 

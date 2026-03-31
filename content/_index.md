@@ -23,7 +23,7 @@ chapter: false
 
 &emsp; **Class:** FCAJ - FPT - Season 2
 
-&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
+&emsp; **Internship Company:** Bootcamp - First Cloud AI Journey @ AWS Study Group
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 

@@ -35,10 +35,11 @@ pre: " <b> 1.11. </b> "
   * `guide.md` của frontend được cập nhật với sơ đồ navigation, danh sách screen và cấu hình dịch vụ AWS.
   * Tổng quan kiến trúc được tài liệu hóa: Spring Boot API ↔ PostgreSQL ↔ AWS Cognito ↔ AWS S3 ↔ React Native App ↔ AWS Bedrock.
 
-* **Chất lượng code**:
+* **CI/CD & Chất lượng code**:
+  * Tích hợp quy trình GitHub Actions (`.github/workflows`) để tự động hóa linting, testing, build và tự động trigger rolling update lên cluster **Amazon ECS Fargate** khi có code mới.
   * Không còn `console.log` hoặc `System.out.println` trong code production.
-  * Build TypeScript (`npx expo export`) hoàn thành mà không có lỗi.
-  * Maven `mvn clean package` build file JAR cuối cùng thành công.
+  * Build TypeScript tự động (`npx expo export`) trên CI hoàn thành không có lỗi.
+  * Maven `mvn clean package` tự động build file JAR cuối cùng thành công trên CI.
 
 * **Đánh giá dự án — Bài học chính**:
   * **Phòng chống IDOR** thông qua việc trích xuất `sub` từ JWT là một mẫu bảo mật quan trọng và cần được áp dụng nhất quán trong toàn bộ REST API có phạm vi người dùng.

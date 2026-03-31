@@ -6,23 +6,23 @@ chapter : false
 pre : " <b> 5. </b> "
 ---
 
-## Chạy Apache Iceberg trên AWS
+## Xây dựng Data Lake Hiện Đại với Apache Iceberg trên AWS
 
-Workshop này nhằm cung cấp trải nghiệm thực tế để xây dựng Data Lake giao dịch bằng cách sử dụng [Apache Iceberg](https://iceberg.apache.org/) trên Amazon EMR và Amazon Athena. Apache Iceberg là một định dạng bảng mới để lưu trữ dữ liệu dạng bảng lớn, ít thay đổi. Nó được thiết kế để cải thiện bố cục bảng tiêu chuẩn thực tế được tích hợp trong Hive, Trino và Spark. Các định dạng bảng Apache Iceberg hiện được hỗ trợ bởi hai dịch vụ AWS:
+Bài thực hành này được xây dựng nhằm mang lại trải nghiệm thực chiến trong việc triển khai một Transactional Data Lake sử dụng [Apache Iceberg](https://iceberg.apache.org/) trên Amazon EMR và Amazon Athena. Apache Iceberg là một định dạng bảng mở, phù hợp với các tập dữ liệu phân tích cực kỳ lớn mà ít có sự biến đổi. Định dạng này ra đời nhằm khắc phục những hạn chế của bố cục bảng truyền thống vốn có trong Hive, Trino và Spark. Các dịch vụ AWS hiện hỗ trợ định dạng bảng Apache Iceberg bao gồm:
 
 1. Amazon Athena.  
 2. Amazon EMR.
 
-Là một phần của workshop này, chúng ta sẽ phân tích Amazon S3 Data Lake sử dụng cả Amazon Athena và Amazon EMR có hỗ trợ định dạng bảng Iceberg. Đối với workshop này, bạn sẽ cần một số kiến thức về các lệnh SQL cơ bản cho các bài lab Athena và pyspark cho các bài lab EMR.
+Trong bài thực hành này, chúng ta sẽ thực hành phân tích S3 Data Lake thông qua cả Amazon Athena lẫn Amazon EMR với sự hỗ trợ của định dạng bảng Iceberg. Để thực hiện bài thực hành, bạn cần có kiến thức cơ bản về các lệnh SQL cho các phần lab Athena và có hiểu biết về PySpark cho các phần lab EMR.
 
 ---
 
-**Đối tượng mục tiêu:** Kỹ sư dữ liệu (Data Engineers), Nhà phân tích dữ liệu (Data Analysts), Kỹ sư điện toán đám mây (Cloud Engineers), Nhà phát triển Big Data (Big Data Developers)
+**Đối tượng hướng đến:** Kỹ sư dữ liệu (Data Engineers), Nhà phân tích dữ liệu (Data Analysts), Kỹ sư đám mây (Cloud Engineers), Nhà phát triển Big Data (Big Data Developers)
 
-**Các Use Case:** Xây dựng transactional data lakes, truy vấn dữ liệu S3 với Athena, xử lý dữ liệu với EMR & PySpark, quản lý dữ liệu dạng bảng quy mô lớn với Apache Iceberg, và hiện đại hóa kiến trúc data lake
+**Các tình huống ứng dụng:** Xây dựng transactional data lakes, truy vấn dữ liệu S3 qua Athena, xử lý dữ liệu bằng EMR & PySpark, quản lý dữ liệu dạng bảng quy mô lớn bằng Apache Iceberg, và nâng cấp kiến trúc data lake hiện đại
 
 ---
 
 ✅ **Thời lượng ước tính:** 2-3 giờ
 
-⚠️ **Dọn dẹp:** Khi bạn hoàn thành workshop, hãy tham khảo phần **Dọn dẹp** (Cleanup) để xóa các tài nguyên và tránh phát sinh chi phí không cần thiết.
+⚠️ **Dọn dẹp tài nguyên:** Sau khi hoàn thành bài thực hành, tham khảo phần **Dọn dẹp** (Cleanup) để xóa các tài nguyên đã tạo và tránh phát sinh chi phí ngoài mong muốn.

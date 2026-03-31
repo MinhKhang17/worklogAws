@@ -6,6 +6,6 @@ chapter : false
 pre : " <b> 5.3. </b> "
 ---
 
-Trong bài thực hành (lab) này, chúng ta sẽ thiết lập Athena và tạo một bảng Athena. Bảng Athena này sẽ được dùng để tải dữ liệu vào bảng Iceberg. Chúng tôi sử dụng phương pháp này để đơn giản hóa quá trình tải dữ liệu cho bảng Iceberg.
+Trong bài lab này, chúng ta sẽ cấu hình Athena và tạo một bảng Athena để sử dụng làm nguồn dữ liệu khi nạp dữ liệu vào bảng Iceberg. Cách tiếp cận này giúp đơn giản hóa và tối ưu hóa quy trình nạp dữ liệu cho Iceberg.
 
-Nếu bạn đang tự thực hiện bài lab này, bạn sẽ cần hoàn thành yêu cầu tiên quyết là **Tạo S3 bucket** (Create S3 bucket).
+Nếu bạn đang tự thực hiện bài lab này, hãy đảm bảo đã hoàn thành điều kiện tiên quyết **Tạo S3 bucket** (Create S3 bucket) trước khi bắt đầu.

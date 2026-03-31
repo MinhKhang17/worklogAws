@@ -1,12 +1,12 @@
 ---
-title : "2.5 Khôi phục dữ liệu đã xóa từ snapshot của bảng Iceberg"
+title : "2.5 Khôi phục dữ liệu đã xóa từ snapshot bảng Iceberg"
 date : 2026-03-25
 weight : 5
 chapter : false
 pre : " <b> 5.4.5 </b> "
 ---
 
-1.  Hãy lấy snapshot của iceberg bằng cách sử dụng bảng bên dưới. Sao chép và dán truy vấn bên dưới vào trình soạn thảo và nhấp vào **Run**
+1.  Lấy lịch sử snapshot của bảng Iceberg bằng truy vấn bên dưới. Dán vào trình soạn thảo và nhấn **Run**.
 
 ```sql
 SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
@@ -16,7 +16,7 @@ SELECT * FROM "iceberg_database"."amazon_reviews_iceberg$history"
 
 ---
 
-2.  Sử dụng truy vấn bên dưới để lấy ra các hàng đã xóa từ snapshot và chèn vào bảng chính, bạn sẽ cần cập nhật đoạn `<<Enter Snapshot ID>>` trước khi chạy truy vấn. Sao chép và Dán truy vấn bên dưới vào trình soạn thảo và nhấp vào **Run**
+2.  Dùng truy vấn bên dưới để lấy lại các hàng đã xóa từ một snapshot cụ thể và chèn trở lại vào bảng chính. Thay `<<Enter Snapshot ID>>` bằng Snapshot ID phù hợp trước khi chạy. Dán truy vấn vào trình soạn thảo và nhấn **Run**.
 
 ```sql
 insert into iceberg_database.amazon_reviews_iceberg
@@ -28,7 +28,7 @@ where product_category = 'Software' limit 10
 
 ---
 
-3.  Truy vấn bảng chính để xác nhận rằng các dòng đã xóa được truy xuất thành công. Sao chép và Dán truy vấn bên dưới vào trình soạn thảo và nhấp vào **Run**
+3.  Truy vấn bảng chính để xác nhận các hàng đã xóa đã được khôi phục thành công. Dán truy vấn bên dưới vào trình soạn thảo và nhấn **Run**.
 
 ```sql
 Select * from iceberg_database.amazon_reviews_iceberg

@@ -6,23 +6,23 @@ chapter : false
 pre : " <b> 5.5.1 </b> "
 ---
 
-If you are running this workshop in your own account you need to follow below steps to create the EMR Cluster.
+If you are running this workshop in your own AWS account, follow the steps below to create the EMR Cluster.
 
-1.  Navigate to the [Amazon EMR Console](https://console.aws.amazon.com/emr/home). In the left navigation pane, under **EMR on EC2**, choose **Clusters**.
+1.  Go to the [Amazon EMR Console](https://console.aws.amazon.com/emr/home). In the left navigation pane, under **EMR on EC2**, choose **Clusters**.
 
 ---
 
-2.  Click on **Create cluster** button in the top-right corner.
+2.  Click the **Create cluster** button in the upper-right corner.
 
 ![click-create-cluster](/images/5-Workshops/5.5/5.5.1/1.png)
 
 ---
 
-3.  On the **Create cluster** page, under **Name and applications**, enter a descriptive **Cluster name**.
+3.  On the **Create cluster** page, under **Name and applications**, provide a meaningful **Cluster name**.
 
 ![go-to-advance-option](/images/5-Workshops/5.5/5.5.1/3.png)
 
-4.  Under **Amazon EMR release**, select `emr-7.5.0`. In the **Application bundle** section, choose **Custom** to manually select the following applications:
+4.  Under **Amazon EMR release**, choose `emr-7.5.0`. In the **Application bundle** section, select **Custom** to manually pick the following applications:
     
     1.  Hadoop
     2.  Hive
@@ -30,7 +30,7 @@ If you are running this workshop in your own account you need to follow below st
     4.  Spark
     5.  Livy
 
-5.  Expand the **Software settings** section. From the **Edit software settings** dropdown, choose **Enter configuration** and paste the following JSON to enable Iceberg support:
+5.  Expand the **Software settings** section. From the **Edit software settings** dropdown, select **Enter configuration** and paste the following JSON to enable Iceberg:
 
 ```json
 [{
@@ -45,10 +45,11 @@ If you are running this workshop in your own account you need to follow below st
 
 ![Create-Cluster-Advanced-Options](/images/5-Workshops/5.5/5.5.1/2.png)
 
-6.  Scroll down to the **Cluster termination** section. By default, **Automatically terminate cluster after idle time** is enabled. **Disable** this option to keep the cluster running for the duration of this workshop.
+6.  Scroll down to the **Cluster termination** section. By default, **Automatically terminate cluster after idle time** is enabled. **Disable** this option to keep the cluster active for the duration of this workshop.
 
 ![Create-Cluster-Advanced-Options](/images/5-Workshops/5.5/5.5.1/4.png)
 
-7.  Leave all other settings at their defaults. Click **Create cluster** to launch the EMR cluster. The cluster will pass through `Starting` → `Bootstrapping` → `Waiting` states. **Wait until the cluster status shows `Waiting`** (approximately 10–15 minutes) before proceeding to the next section.
+7.  Leave all remaining settings at their defaults. Click **Create cluster** to launch the EMR cluster. The cluster will transition through `Starting` → `Bootstrapping` → `Waiting` states. **Wait until the cluster status shows `Waiting`** (approximately 10–15 minutes) before proceeding.
 
 ---
+

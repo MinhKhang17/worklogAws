@@ -1,21 +1,21 @@
 ---
-title : "Dọn dẹp (Clean up)"
+title : "Dọn dẹp tài nguyên"
 date : 2026-03-25
 weight : 6
 chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-Thực hiện theo các bước sau để Dọn dẹp các tài nguyên mà bạn đã xây dựng cho bài lab này nhằm tránh phải trả phí cho các tài nguyên không sử dụng.
+Hãy thực hiện các bước dưới đây để xóa toàn bộ tài nguyên đã tạo trong quá trình thực hành, tránh phát sinh chi phí cho các dịch vụ không còn sử dụng.
 
-1.  Điều hướng tới [giao diện AWS S3 console](https://s3.console.aws.amazon.com/s3/home) và xóa S3 bucket mà bạn đã tạo cho bài lab này. Bạn sẽ phải xóa nội dung của các S3 bucket trước khi xóa chính S3 bucket hiện tại.
+1.  Truy cập [AWS S3 console](https://s3.console.aws.amazon.com/s3/home) và xóa S3 bucket mà bạn đã tạo trong workshop này. Bạn phải làm trống nội dung bucket trước khi có thể xóa chính bucket đó.
     
-2.  Điều hướng tới [giao diện EMR Console](https://console.aws.amazon.com/elasticmapreduce/home). Tích chọn hộp kiểm cho **EMR Cluster** mà chúng ta đã tạo trong Bài lab EMR Iceberg và nhấp vào nút **Terminate**, điều này sẽ chấm dứt hoạt động của EMR Cluster.
+2.  Truy cập [EMR Console](https://console.aws.amazon.com/elasticmapreduce/home). Tích chọn hộp kiểm bên cạnh **EMR Cluster** đã tạo trong workshop và nhấn **Terminate** để dừng cluster.
     
-3.  Từ menu ngang bên tay phải trên EMR Console, nhấp vào mục **Notebooks**. Tích chọn hộp kiểm cho **Notebook** mà bạn đã tạo trong Bài lab EMR Iceberg. Nhấp vào nút **Delete** để xóa môi trường Notebook đó.
+3.  Từ menu bên phải trong EMR Console, nhấn **Notebooks**. Chọn hộp kiểm của **Notebook** mà bạn đã tạo trong workshop. Nhấn **Delete** để xóa môi trường notebook.
     
 
-# Xin cảm ơn bạn!
+# Xin cảm ơn!
 
 
-Tôi hy vọng bạn đã học được điều gì đó mới mẻ ngày hôm nay và có thêm nhiều cảm hứng mới.
+Chúng tôi hy vọng bạn đã tích lũy được kinh nghiệm thực tế quý giá và có thêm nhiều ý tưởng mới để khám phá.

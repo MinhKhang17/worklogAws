@@ -12,10 +12,9 @@ pre: " <b> 1.10. </b> "
   * Tinh chỉnh các API endpoint — cải thiện xác thực đầu vào, phân trang và viết unit test cho các phương thức service cốt lõi.
   * Đánh giá API lần cuối, chuẩn bị sẵn sàng môi trường production cho Docker Compose và hoàn thiện tài liệu về biến môi trường.
 * **Frontend**:
-  * Xây dựng `ChatScreen` tích hợp AI AWS Bedrock và `ProfileScreen` để quản lý tài khoản người dùng.
-  * Cung cấp tính năng trợ lý AI như một giá trị gia tăng khác biệt cho ứng dụng.
-  * Xây dựng `HomeScreen` làm bảng điều khiển trung tâm, giải quyết tất cả các lỗi còn tồn đọng và hoàn thiện trải nghiệm người dùng (UX) trên toàn bộ ứng dụng.
-  * Đạt được một ứng dụng tích hợp, đầy đủ chức năng và sẵn sàng cho đợt kiểm thử cuối cùng.
+  * Xây dựng `ChatScreen` tích hợp **AWS Bedrock (Claude 3.5 Haiku)** với bộ nhớ ngữ cảnh dạng cửa sổ trượt, và `ProfileScreen` quản lý tài khoản.
+  * Triển khai cấu trúc gián đoạn (interceptor queue) tự động làm mới token an toàn giúp duy trì phiên đăng nhập không gián đoạn.
+  * Xây dựng `HomeScreen` làm bảng điều khiển trung tâm, giải quyết tất cả các chuẩn lỗi và hoàn thiện trải nghiệm người dùng (UX).
 
 ### Các nhiệm vụ cần thực hiện trong tuần này:
 | Ngày | Nhiệm vụ | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo |
@@ -26,7 +25,7 @@ pre: " <b> 1.10. </b> "
 | 5   | - Xây dựng **ChatScreen** (Frontend) <br>&emsp; + Giao diện chat toàn màn hình với danh sách bong bóng tin nhắn (người dùng / bot) <br>&emsp; + Hiệu ứng "đang gõ" (3 dấu chấm nảy) trong lúc chờ phản hồi <br>&emsp; + 4 chip tùy chọn nhanh: "Gợi ý bài tập", "Thực đơn hôm nay", "Mục tiêu calo", "Lời khuyên giảm cân" <br>&emsp; + Lời chào ban đầu bằng tiếng Việt từ bot thể hình <br>&emsp; + Hiệu ứng tránh bàn phím <br>&emsp; + Xử lý lỗi `notifyAlert` qua proxy thông báo toàn cục | 20/03/2026 | 20/03/2026 | |
 | 6   | - Xây dựng **ProfileScreen** (Frontend) <br>&emsp; + Hiển thị avatar (chữ cái đầu tiên nếu không có ảnh), tên, email, username, ngày sinh, giới tính <br>&emsp; + Modal chỉnh sửa: cập nhật ngày sinh (YYYY-MM-DD) và giới tính qua API `updateUserProfile` + `dispatch(updateUserProfile)` <br>&emsp; + Đăng xuất: `signOut` (thu hồi Cognito) + `dispatch(logout)` + xóa secure storage <br>&emsp; + Xóa tài khoản: `deleteUserProfile` + `signOut` — cả hai đều được bảo vệ bởi `ConfirmModal` | 21/03/2026 | 21/03/2026 | |
 | 2   | - Xây dựng **HomeScreen** (Frontend) — Gọi song song 5 luồng dữ liệu khi mount màn hình <br>&emsp; + Bữa ăn hôm nay: tổng calo MealFood → thanh tiến độ calo hàng ngày so với mục tiêu 2500 kcal <br>&emsp; + `HealthCalculation` mới nhất → hiển thị BMI <br>&emsp; + `BodyMetric` mới nhất → hiển thị chiều cao/cân nặng hiện tại <br>&emsp; + Tên kế hoạch tập luyện đang hoạt động → liên kết nhanh đến PlanDetail <br>&emsp; + Số phiên tập tuần này → tiến độ hàng tuần so với mục tiêu 4 phiên | 24/03/2026 | 24/03/2026 | |
-| 3   | - Tinh chỉnh lần cuối **Docker Compose** cho Backend <br>&emsp; + Thêm `healthcheck` cho service `postgres`: `pg_isready` với `interval`, `timeout`, `retries` <br>&emsp; + Thêm `depends_on.db.condition: service_healthy` vào service API <br>&emsp; + Xác minh các probe liveness + readiness của `Spring Actuator` `/actuator/health` <br>&emsp; + Hoàn thiện `.env.example` với tài liệu đầy đủ cho các biến bắt buộc | 25/03/2026 | 25/03/2026 | |
+| 3   | - Chuẩn bị môi trường Serverless <br>&emsp; + Tinh chỉnh `healthcheck` Postgres và verify `Spring Actuator` liveness trên Docker Compose <br>&emsp; + CI/CD: Build và đẩy image lên kho **Amazon ECR** <br>&emsp; + Viết definition cluster cho **ECS Fargate** đứng sau **ALB** cân bằng tải <br>&emsp; + Kích hoạt chốt chặn **AWS WAF** để chống spam/DDoS | 25/03/2026 | 25/03/2026 | |
 | 4   | - Phiên **sửa lỗi toàn diện** trên tất cả các màn hình Frontend <br>&emsp; + Sửa lỗi `WorkoutSessionScreen`: trường hợp ngoại lệ khi hoàn thành tất cả bài tập trước khi đồng hồ đếm ngược kết thúc <br>&emsp; + Sửa lỗi `DietScreen`: đảm bảo `ensureDailyMeals` không bị gọi trên mỗi lần render — chuyển vào `useEffect` với deps rỗng <br>&emsp; + Sửa lỗi `HealthDashboardScreen`: hiển thị trạng thái loading trong lúc gọi `calculateMetrics` <br>&emsp; + Sửa lỗi `BMITrendChart`: trạng thái trống khi người dùng có ít hơn 2 lần tính toán sức khỏe | 26/03/2026 | 26/03/2026 | |
 | 5   | - Cải thiện **Response interceptor** (Axios `client.ts`) <br>&emsp; + Triển khai token refresh với hàng đợi request: xếp hàng các phản hồi `401` đồng thời, thử refresh một lần, sau đó thử lại tất cả <br>&emsp; + Khi refresh thất bại: `forceLogout` xóa token + gọi Redux `logout` + điều hướng về trang Đăng nhập <br>&emsp; + Xử lý `code === 4040` "không tìm thấy user cho cognitoId" → tự động `forceLogout` | 27/03/2026 | 27/03/2026 | |
 | 6   | - Đợt **chuốt lại UX** trên tất cả các màn hình <br>&emsp; + Thêm component thông báo toàn cục `NotificationBox` (thay thế `Alert.alert` mặc định thông qua `installAlertProxy`) <br>&emsp; + Thêm thao tác kéo-để-tải-lại (pull-to-refresh) trên `HomeScreen` <br>&emsp; + Đảm bảo tính nhất quán của các vòng xoay tải (loading spinners) và trạng thái lỗi trên toàn ứng dụng <br>&emsp; + Thêm tên hiển thị tiếng Việt `ActivityLevelLabels` cho tất cả các giá trị enum <br>&emsp; + Kiểm tra tính đồng nhất của nhãn tiếng Việt trên các tab điều hướng và tiêu đề | 28/03/2026 | 28/03/2026 | |
@@ -41,6 +40,7 @@ pre: " <b> 1.10. </b> "
   * Công thức BMI/BMR/TDEE đã được xác minh với các đầu vào ở trường hợp ngoại lệ (khoảng giới hạn min/max).
   * Health check trên service PostgreSQL đảm bảo container API đợi cho đến khi DB hoàn toàn sẵn sàng.
   * `GET /actuator/health` trả về `{status: UP}` với các sub-probe liveness/readiness.
+  * Deploy mượt mà: Image đẩy lên **Amazon ECR** và sẵn sàng cho các task **ECS Fargate** Serverless kéo về, điều hướng qua cỗ máy **ALB** an toàn dưới lớp khiên **AWS WAF**.
   * `.env.example` đã ghi chú đầy đủ hơn 10 biến môi trường bắt buộc kèm theo mô tả chi tiết.
 * **Frontend**:
   * `chatService.sendChatToBedrock` gọi trực tiếp AWS Bedrock Runtime bằng thông tin xác thực từ `.env`.

@@ -6,23 +6,23 @@ chapter : false
 pre : " <b> 5. </b> "
 ---
 
-## Running Apache Iceberg on AWS
+## Building a Modern Data Lake with Apache Iceberg on AWS
 
-This workshop is intended to provide an hands-on experience to build a Transactional Data Lake using [Apache Iceberg](https://iceberg.apache.org/) on Amazon EMR and Amazon Athena. Apache Iceberg is a new table format for storing large, slow-moving tabular data. It is designed to improve on the de-facto standard table layout built into Hive, Trino, and Spark. Apache Iceberg table formats are currently supported by two AWS services
+This hands-on workshop is designed to provide practical experience in building a Transactional Data Lake using [Apache Iceberg](https://iceberg.apache.org/) on Amazon EMR and Amazon Athena. Apache Iceberg is an open table format optimized for large-scale analytical datasets with low change frequency. It was built to overcome the limitations of the conventional table layouts found in systems such as Hive, Trino, and Spark. The Apache Iceberg table format is currently supported by the following two AWS services:
 
 1. Amazon Athena.  
 2. Amazon EMR.
 
-As part of this workshop, we will analyze Amazon S3 Data Lake using both Amazon Athena and Amazon EMR that supports the Iceberg table format. For this workshop you will need some knowledge of basic SQL commands for athena labs and pyspark for EMR labs.
+Throughout this workshop, we will perform analysis on an Amazon S3 Data Lake using both Amazon Athena and Amazon EMR, each of which supports the Iceberg table format. To complete this workshop, participants should have a basic understanding of SQL commands for the Athena labs, and some familiarity with PySpark for the EMR labs.
 
 ---
 
 **Target Audience:** Data Engineers, Data Analysts, Cloud Engineers, Big Data Developers
 
-**Use Cases:** Building transactional data lakes, querying S3 data with Athena, processing data with EMR & PySpark, managing large-scale tabular data with Apache Iceberg, and modernizing data lake architectures
+**Use Cases:** Building transactional data lakes, querying S3 data via Athena, processing data with EMR & PySpark, managing large-scale tabular data using Apache Iceberg, and modernizing data lake architectures
 
 ---
 
 ✅ **Estimated Duration:** 2-3 hours
 
-⚠️ **Cleanup:** When you're done with the workshop, reference the **Cleanup** section to delete resources and avoid incurring unnecessary costs.
+⚠️ **Resource Cleanup:** Once you have finished the workshop, refer to the **Cleanup** section to remove all resources you created and prevent unnecessary charges.

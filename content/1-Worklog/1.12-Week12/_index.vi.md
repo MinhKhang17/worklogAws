@@ -17,8 +17,8 @@ pre: " <b> 1.12. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 1 | - Chuẩn bị cho **bài thuyết trình cuối** <br>&emsp; + Tổng duyệt lần cuối cùng cùng với team <br>&emsp; + Chuẩn bị video demo dự phòng cho ứng dụng myFit <br>&emsp; + Kiểm tra lại thiết lập kỹ thuật của API và Bedrock | 30/03/2026 | 30/03/2026 | [Presentation] |
-| 2 | - **Thuyết trình cuối cùng** <br>&emsp; + Trình bày **myFit** trước ban lãnh đạo FCJ <br>&emsp; + Demo trực tiếp kèm phần hỏi đáp (Q&A) <br>&emsp; + Nhận được lời khen về kiến trúc Spring Boot và AWS vững chắc | 31/03/2026 | 31/03/2026 | [Presentation Recording] |
+| 1-6 | - Chuẩn bị **bài thuyết trình cuối** & Nộp dự án <br>&emsp; + Nộp project theo form hướng dẫn (Hạn chót: 04/04) <br>&emsp; + Chuẩn bị video demo dự phòng cho ứng dụng myFit <br>&emsp; + Kiểm tra lại thiết lập kỹ thuật của API và Bedrock | 30/03/2026 | 04/04/2026 | [Presentation] |
+| - | - **Thuyết trình cuối cùng** <br>&emsp; + Báo cáo cuối kỳ tại tầng 26 lúc 7h45 <br>&emsp; + Hình thức: 2 phút set up + 10 phút trình bày + 10 phút vấn đáp | 18/04/2026 | 18/04/2026 | [Presentation Recording] |
 | 3 | - **Tự đánh giá** <br>&emsp; + Hoàn thành biểu mẫu tự đánh giá <br>&emsp; + Nhìn lại hành trình 12 tuần <br>&emsp; + Xác định các điểm mạnh kỹ thuật và các lĩnh vực cần phát triển thêm | 01/04/2026 | 01/04/2026 | [Evaluation Form] |
 | 4 | - **Phản hồi về chương trình** <br>&emsp; + Viết phản hồi chi tiết cho chương trình FCJ <br>&emsp; + Nêu bật những trải nghiệm tích cực <br>&emsp; + Đề xuất cải thiện cho các thực tập sinh trong tương lai | 02/04/2026 | 02/04/2026 | [Feedback Form] |
 | 6-7 | - **Ăn mừng & tổng kết** <br>&emsp; + Tiệc ăn mừng cùng team <br>&emsp; + Chuyển giao kiến thức và bàn giao dự án <br>&emsp; + Đăng bài trên LinkedIn về trải nghiệm thực tập | 04/04/2026 | 05/04/2026 | [Photos] |

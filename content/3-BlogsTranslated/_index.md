@@ -1,7 +1,7 @@
 ---
 title: "Translated Blogs"
 date: 2026-03-15
-weight: 3
+weight: 6
 chapter: false
 pre: " <b> 3. </b> "
 ---

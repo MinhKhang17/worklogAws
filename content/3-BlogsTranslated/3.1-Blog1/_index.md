@@ -5,7 +5,7 @@ weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-# Introducing Amazon Nova Forge: Build Your Own Frontier Models Using Nova
+# AWS Unveils Frontier Agents: AI Agents for Security Testing and Cloud Operations
 
 Organizations are increasingly adopting generative AI in many parts of their operations, from internal productivity tools to advanced domain-specific applications. As this adoption grows, the limitations of general-purpose foundation models become more visible. Many enterprise scenarios require models that can understand private knowledge, internal terminology, specialized workflows, and business-specific requirements at a much deeper level than standard prompting can provide.
 

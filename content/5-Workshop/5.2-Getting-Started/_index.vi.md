@@ -6,4 +6,4 @@ chapter : false
 pre : " <b> 5.2. </b> "
 ---
 
-Hoàn thành các bước được liệt kê bên dưới để chuẩn bị môi trường và bắt đầu thực hành workshop này.
+Để bắt đầu workshop, hãy làm theo các bước bên dưới để thực hiện workshop này.

@@ -1,12 +1,12 @@
 ---
 title: "Blog 5"
-date: 2026-03-04
+date: 2025-12-02
 weight: 5
 chapter: false
 pre: " <b> 3.5. </b> "
 ---
 
-# Introducing Amazon GameLift Servers DDoS Protection
+# Building a FinOps Agent with Amazon Bedrock: Optimizing Cloud Costs with AI Agent
 
 As multiplayer games continue to grow in popularity, they also become increasingly attractive targets for malicious actors. One of the most common and damaging threats facing online games today is the **Distributed Denial of Service (DDoS)** attack. These attacks attempt to overwhelm servers or network resources with large volumes of traffic, disrupting gameplay, disconnecting players, and damaging the reputation of game publishers. The impact can be especially severe during high-visibility moments such as a game launch, a competitive esports event, or a livestream featuring a well-known creator. To address this challenge, AWS introduced **Amazon GameLift Servers DDoS Protection**, a new capability designed to protect multiplayer game servers hosted on Amazon GameLift Servers from malicious attacks targeting **UDP-based traffic**.
 

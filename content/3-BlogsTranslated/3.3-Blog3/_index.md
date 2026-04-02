@@ -1,12 +1,12 @@
 ---
 title: "Blog 3"
-date: 2026-03-13
+date: 2025-12-02
 weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# Twenty years of Amazon S3 and building what’s next
+# AWS Announces General Availability of AWS DevOps Agent: AI Agent for Autonomous Cloud Operations
 
 Amazon Simple Storage Service (Amazon S3) marks its 20th anniversary as one of the most foundational services in AWS. Originally launched on **March 14, 2006**, Amazon S3 began with a very simple value proposition: provide storage for the internet through a web service interface that allows developers to store and retrieve any amount of data, at any time, from anywhere on the web. At launch, the service was introduced with very little fanfare, but over time it became one of the most important building blocks in cloud computing.
 

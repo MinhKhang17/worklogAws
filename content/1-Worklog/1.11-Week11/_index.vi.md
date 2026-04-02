@@ -21,6 +21,7 @@ pre: " <b> 1.11. </b> "
 | 4   | - Cập nhật **Frontend** `guide.md` <br>&emsp; + Bảng tóm tắt tech stack <br>&emsp; + Sơ đồ cấu trúc navigation (AuthStack / OnboardingStack / MainTabs) <br>&emsp; + Hướng dẫn cài đặt: `npm install`, biến `.env`, `npx expo start` <br>&emsp; + Danh sách các screen kèm mô tả tính năng <br>&emsp; + Ghi chú cấu hình AWS Cognito PKCE + Bedrock | 03/25/2026 | 03/25/2026 | |
 | 5   | - **Dọn dẹp code** — Backend <br>&emsp; + Xóa tất cả `TODO`, `FIXME`, và các câu lệnh debug `System.out.println` <br>&emsp; + Đảm bảo các phương thức public phức tạp đều có comment Javadoc <br>&emsp; + Kiểm tra cấu hình bảo mật để tránh việc lộ các route public ngoài ý muốn <br>&emsp; + Build cuối: `mvn clean package -DskipTests` → xác nhận file JAR build thành công | 03/26/2026 | 03/26/2026 | |
 | 6   | - **Dọn dẹp code** — Frontend <br>&emsp; + Xóa tất cả các câu lệnh debug `console.log` <br>&emsp; + Chạy `eslint` và sửa các cảnh báo lint còn lại <br>&emsp; + Xóa các import không sử dụng <br>&emsp; + Export cuối: `npx expo export` → xác nhận không còn lỗi TypeScript <br> - **Đánh giá dự án (retrospective)**: ghi lại bài học rút ra, các quyết định công nghệ và các cải tiến có thể thực hiện trong tương lai | 03/27/2026 | 03/27/2026 | |
+| 7   | - Thiết lập **CI/CD** để deploy lên **ECS** khi merge code vào `main` <br>&emsp; + Sử dụng GitHub Actions (hoặc AWS CodePipeline) để build, chạy test, đóng gói container và push vào ECR <br>&emsp; + Tự động validate: unit tests + integration tests + smoke tests trước khi deploy; rollout chiến lược (rolling/blue-green) để đảm bảo zero-downtime | 03/28/2026 | 03/28/2026 | |
 
 ### Thành tựu Tuần 11:
 
@@ -35,11 +36,14 @@ pre: " <b> 1.11. </b> "
   * `guide.md` của frontend được cập nhật với sơ đồ navigation, danh sách screen và cấu hình dịch vụ AWS.
   * Tổng quan kiến trúc được tài liệu hóa: Spring Boot API ↔ PostgreSQL ↔ AWS Cognito ↔ AWS S3 ↔ React Native App ↔ AWS Bedrock.
 
-* **CI/CD & Chất lượng code**:
-  * Tích hợp quy trình GitHub Actions (`.github/workflows`) để tự động hóa linting, testing, build và tự động trigger rolling update lên cluster **Amazon ECS Fargate** khi có code mới.
+* **Chất lượng code**:
   * Không còn `console.log` hoặc `System.out.println` trong code production.
-  * Build TypeScript tự động (`npx expo export`) trên CI hoàn thành không có lỗi.
-  * Maven `mvn clean package` tự động build file JAR cuối cùng thành công trên CI.
+  * Build TypeScript (`npx expo export`) hoàn thành mà không có lỗi.
+  * Maven `mvn clean package` build file JAR cuối cùng thành công.
+
+* **CI/CD — Triển khai**:
+  * Thiết lập pipeline CI/CD (GitHub Actions) để build → test → push image lên ECR → deploy lên ECS khi merge vào `main`.
+  * Pipeline thực thi các bước validate (unit + integration + smoke) trước khi deploy; triển khai rolling/blue-green để giảm downtime.
 
 * **Đánh giá dự án — Bài học chính**:
   * **Phòng chống IDOR** thông qua việc trích xuất `sub` từ JWT là một mẫu bảo mật quan trọng và cần được áp dụng nhất quán trong toàn bộ REST API có phạm vi người dùng.

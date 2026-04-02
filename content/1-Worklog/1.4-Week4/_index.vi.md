@@ -21,6 +21,7 @@ pre: " <b> 1.4. </b> "
 | 4   | - Mở các **public workout endpoints** qua `WorkoutController` (`/api/workouts`) <br>&emsp; + `GET /muscle-groups`, `GET /muscle-groups/{id}` <br>&emsp; + `GET /exercises`, `GET /exercises/{id}`, `GET /exercises/by-muscle-group/{id}` <br>&emsp; + `GET /plans`, `GET /plans/{id}`, `GET /plans/by-goal-type/{id}` | 29/01/2026 | 29/01/2026 | |
 | 5   | - Xây dựng **SuggestedPlanScreen** (Frontend) — wizard 3 bước <br>&emsp; + Bước 1: Chọn loại mục tiêu (gọi `GET /api/goal-types`) <br>&emsp; + Bước 2: Duyệt kế hoạch mẫu với hình ảnh và độ khó <br>&emsp; + Bước 3: Xem chi tiết kế hoạch theo ngày → clone qua `cloneFromSystemPlan` | 30/01/2026 | 30/01/2026 | |
 | 6   | - Xây dựng **PlanExercisePicker** screen (Frontend) <br>&emsp; + Liệt kê tất cả bài tập hệ thống với hình ảnh và nhóm cơ <br>&emsp; + Tìm kiếm theo tên <br>&emsp; + Khi chọn: gọi `addExerciseToPlan(planId, dayOfWeek, exerciseId)` <br> - Seed dữ liệu bài tập và nhóm cơ ban đầu qua `DatabaseSeeder` | 31/01/2026 | 31/01/2026 | |
+| 7   | - Thiết kế cơ sở dữ liệu **quản lý food cho user** <br>&emsp; + Entities: `Food`, `FoodCategory`, `FoodNutrient`, `UserFoodLog`, `Meal`, `MealItem` <br>&emsp; + Endpoints: admin CRUD cho `Food`/`FoodCategory`, `POST /api/user/foods/log`, `GET /api/user/meals` | 31/01/2026 | 31/01/2026 | |
 
 ### Kết quả đạt được tuần 4:
 
@@ -32,7 +33,10 @@ pre: " <b> 1.4. </b> "
 * **Frontend — Duyệt bài tập**:
   * `SuggestedPlanScreen` hướng dẫn user qua mục tiêu → chọn kế hoạch trong 3 bước rõ ràng.
   * `PlanExercisePicker` liệt kê bài tập với context nhóm cơ; chọn bài tập thêm vào kế hoạch user.
-* `DatabaseSeeder` xử lý việc đọc file cấu hình JSON (`s3_images_upload.json`) để seed dữ liệu nhóm cơ + bài tập ban đầu, khắc phục triệt để lỗi mapping do ký tự đặc biệt, dấu nháy kép để bảo đảm 100% URL hình ảnh hiển thị khớp với CSDL.
+* `DatabaseSeeder` seed dữ liệu nhóm cơ + bài tập ban đầu khi khởi động ứng dụng.
+
+* **Database — Food Management**:
+  * Đã thiết kế schema cho catalogue thức ăn, meal log của user và tracking dinh dưỡng cơ bản.
 
 ### Kiến thức AWS đã học:
 

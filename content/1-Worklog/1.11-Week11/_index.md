@@ -21,6 +21,7 @@ pre: " <b> 1.11. </b> "
 | 4   | - Update **Frontend** `guide.md` <br>&emsp; + Tech stack summary table <br>&emsp; + Navigation structure diagram (AuthStack / OnboardingStack / MainTabs) <br>&emsp; + Setup guide: `npm install`, `.env` variables, `npx expo start` <br>&emsp; + Screen inventory with feature descriptions <br>&emsp; + AWS Cognito PKCE + Bedrock setup notes | 03/25/2026 | 03/25/2026 | |
 | 5   | - **Code cleanup** — Backend <br>&emsp; + Remove all `TODO`, `FIXME`, debug `System.out.println` statements <br>&emsp; + Ensure public non-trivial methods have Javadoc comments <br>&emsp; + Review security config for inadvertent public route exposure <br>&emsp; + Final build: `mvn clean package -DskipTests` → confirm JAR builds cleanly | 03/26/2026 | 03/26/2026 | |
 | 6   | - **Code cleanup** — Frontend <br>&emsp; + Remove all `console.log` debug statements <br>&emsp; + Run `eslint` and fix remaining lint warnings <br>&emsp; + Remove unused imports <br>&emsp; + Final export: `npx expo export` → confirm zero TypeScript errors <br> - **Project retrospective**: document lessons learned, tech decisions in hindsight, potential future improvements | 03/27/2026 | 03/27/2026 | |
+| 7   | - Set up **CI/CD** to deploy to **ECS** when code is merged into `main` <br>&emsp; + Use GitHub Actions (or AWS CodePipeline) to build, run tests, containerize and push to ECR <br>&emsp; + Auto-validate: run unit + integration + smoke tests before deploy; use rolling/blue-green strategy to ensure zero-downtime | 03/28/2026 | 03/28/2026 | |
 
 ### Week 11 Achievements:
 
@@ -33,11 +34,13 @@ pre: " <b> 1.11. </b> "
   * `myFit-api/README.md` covers full setup guide, environment variable reference, and all endpoint descriptions.
   * Frontend `guide.md` updated with navigation diagram, screen inventory, and AWS service configuration.
   * Architecture overview documented: Spring Boot API ↔ PostgreSQL ↔ AWS Cognito ↔ AWS S3 ↔ React Native App ↔ AWS Bedrock.
-* **CI/CD & Code Quality**:
-  * Implemented GitHub Actions workflows (`.github/workflows`) that automatically lint, test, build, and trigger rolling deployment updates to **Amazon ECS Fargate** upon merge.
+* **Code Quality**:
   * Zero `console.log` or `System.out.println` remaining in production paths.
-  * Automated TypeScript build (`npx expo export`) passes with zero errors in CI.
-  * Automated Maven `mvn clean package` builds final JAR cleanly in CI.
+  * TypeScript build (`npx expo export`) passes with zero errors.
+  * Maven `mvn clean package` builds final JAR cleanly.
+* **CI/CD — Deployment**:
+  * Implemented CI/CD pipeline (GitHub Actions) to build → test → push images to ECR → deploy to ECS on merges to `main`.
+  * Pipeline performs validation steps (unit + integration + smoke) before deploy; rolling/blue-green deployment used to minimize downtime.
 * **Project Retrospective — Key Lessons Learned**:
   * **IDOR prevention** via JWT `sub` extraction is a critical security pattern that must be applied consistently throughout a user-scoped REST API.
   * **Soft delete** with `@SQLRestriction` is more user-friendly than hard delete for user-owned data — allows potential recovery.

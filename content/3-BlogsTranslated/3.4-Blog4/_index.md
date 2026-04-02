@@ -1,12 +1,12 @@
 ---
 title: "Blog 4"
-date: 2026-03-12
+date: 2025-12-02
 weight: 4
 chapter: false
 pre: " <b> 3.4. </b> "
 ---
 
-# Secure AI agents with Policy in Amazon Bedrock AgentCore
+# AWS: Critical Security Controls to Prevent Unauthorized Account Removal in AWS Organizations
 
 Deploying AI agents safely in regulated industries is a major challenge because these systems can access sensitive data, call tools, and take actions with real-world impact. Unlike traditional software, an AI agent does not simply follow a fixed sequence of instructions. Instead, it can decide which tools to call, what data to retrieve, and how to respond based on user input and environmental context. This flexibility makes agents powerful, but it also introduces new security risks such as unauthorized data access, unintended transactions, prompt injection, and misuse of connected systems. In the AWS blog post *Secure AI agents with Policy in Amazon Bedrock AgentCore*, the authors explain how **Policy in Amazon Bedrock AgentCore** provides a deterministic enforcement layer that secures AI agents independently of the agent’s own reasoning. 
 

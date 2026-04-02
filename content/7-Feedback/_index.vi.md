@@ -1,44 +1,52 @@
 ---
-title: "Chia sẻ, đóng góp ý kiến"
+title: "Chia sẻ và phản hồi"
 date: 2024-01-01
 weight: 7
 chapter: false
 pre: " <b> 7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
->Tại đây bạn có thể tự do đóng góp ý kiến cá nhân về những trải nghiệm khi tham gia chương trình First Cloud Journey, giúp team FCJ cải thiện những vấn đề còn thiếu sót dựa trên các hạng mục sau:
 
-### Đánh giá chung
+### Đánh giá tổng thể
 
 **1. Môi trường làm việc**  
-Môi trường làm việc rất thân thiện và cởi mở. Các thành viên trong FCJ luôn sẵn sàng hỗ trợ khi mình gặp khó khăn, kể cả ngoài giờ làm việc. Không gian làm việc gọn gàng, thoải mái, giúp mình tập trung tốt hơn. Tuy nhiên, mình nghĩ có thể bổ sung thêm một số buổi giao lưu hoặc team bonding để mọi người hiểu nhau hơn.
+Môi trường làm việc trong chương trình AWS First Cloud Journey rất cởi mở và thân thiện. Các thành viên trong nhóm luôn sẵn sàng hỗ trợ khi tôi gặp khó khăn, tạo điều kiện thuận lợi để tôi tập trung vào công việc. Tuy nhiên, chương trình có thể cải thiện hơn bằng cách tổ chức thêm các hoạt động gắn kết đội nhóm.
 
-**2. Sự hỗ trợ của mentor / team admin**  
-Mentor hướng dẫn rất chi tiết, giải thích rõ ràng khi mình chưa hiểu và luôn khuyến khích mình đặt câu hỏi. Team admin hỗ trợ các thủ tục, tài liệu và tạo điều kiện để mình làm việc thuận lợi. Mình đánh giá cao việc mentor cho phép mình thử và tự xử lý vấn đề thay vì chỉ đưa đáp án.
+**2. Sự hỗ trợ từ Mentor / Admin**  
+Mentor hướng dẫn chi tiết, giải thích rõ ràng và đặc biệt khuyến khích tôi tự tìm cách giải quyết vấn đề thay vì đưa ra đáp án ngay. Điều này giúp tôi cải thiện khả năng tư duy và học hỏi. Đội ngũ admin cũng hỗ trợ tốt về tài liệu và các vấn đề liên quan trong suốt quá trình thực tập.
 
-**3. Sự phù hợp giữa công việc và chuyên ngành học**  
-Công việc mình được giao phù hợp với kiến thức mình đã học ở trường, đồng thời mở rộng thêm những mảng mới mà mình chưa từng được tiếp cận. Nhờ vậy, mình vừa củng cố kiến thức nền tảng, vừa học thêm kỹ năng thực tế.
+**3. Mức độ phù hợp với chuyên ngành**  
+Công việc được giao phù hợp với chuyên ngành học của tôi, đặc biệt trong lĩnh vực lập trình và thiết kế hệ thống. Đồng thời, việc tiếp cận với các dịch vụ AWS giúp tôi mở rộng kiến thức về công nghệ cloud.
 
-**4. Cơ hội học hỏi & phát triển kỹ năng**  
-Trong quá trình thực tập, mình học được nhiều kỹ năng mới như sử dụng công cụ quản lý dự án, kỹ năng làm việc nhóm, và cả cách giao tiếp chuyên nghiệp trong môi trường công ty. Mentor cũng chia sẻ nhiều kinh nghiệm thực tế giúp mình định hướng tốt hơn cho sự nghiệp.
+**4. Cơ hội học tập và phát triển kỹ năng**  
+Trong quá trình thực tập, tôi đã nâng cao được nhiều kỹ năng như lập trình, thiết kế hệ thống, sử dụng dịch vụ cloud, cũng như kỹ năng mềm như làm việc nhóm và giao tiếp. Dự án MyFit giúp tôi có cơ hội áp dụng kiến thức vào thực tế, đặc biệt là trong việc xây dựng hệ thống quản lý rủi ro trên nền tảng cloud.
 
-**5. Văn hóa & tinh thần đồng đội**  
-Văn hóa công ty rất tích cực: mọi người tôn trọng lẫn nhau, làm việc nghiêm túc nhưng vẫn vui vẻ. Khi có dự án gấp, mọi người cùng nhau cố gắng, hỗ trợ không phân biệt vị trí. Điều này giúp mình cảm thấy mình là một phần của tập thể, dù chỉ là thực tập sinh.
+**5. Văn hóa và tinh thần làm việc**  
+Môi trường làm việc chuyên nghiệp nhưng vẫn thân thiện. Mọi người luôn tôn trọng nhau và hỗ trợ nhau trong công việc. Tôi cảm thấy mình là một phần của team dù chỉ là thực tập sinh.
 
-**6. Chính sách / phúc lợi cho thực tập sinh**  
-Công ty có hỗ trợ phụ cấp thực tập và tạo điều kiện về thời gian linh hoạt khi cần thiết. Ngoài ra, việc được tham gia các buổi đào tạo nội bộ là một điểm cộng lớn.
+**6. Chính sách / quyền lợi thực tập**  
+Chương trình mang lại môi trường học tập tốt, có các buổi training hữu ích và hỗ trợ linh hoạt trong quá trình làm việc.
 
+---
 
-### Một số câu hỏi khác
-- Điều bạn **hài lòng nhất** trong thời gian thực tập?  
-- Điều bạn nghĩ công ty **cần cải thiện** cho các thực tập sinh sau?  
-- Nếu giới thiệu cho bạn bè, bạn có **khuyên họ thực tập ở đây không**? Vì sao?  
+### Câu hỏi bổ sung
 
+**• Điều bạn hài lòng nhất trong kỳ thực tập là gì?**  
+Được tham gia vào dự án thực tế (MyFit) và áp dụng các dịch vụ AWS để xây dựng hệ thống là trải nghiệm đáng giá nhất.
+
+**• Bạn nghĩ chương trình cần cải thiện điều gì?**  
+Nên có lộ trình onboarding rõ ràng hơn và tăng thêm các hoạt động kết nối giữa các thực tập sinh.
+
+**• Bạn có sẵn sàng giới thiệu chương trình này cho bạn bè không? Vì sao?**  
+Có, vì chương trình mang lại nhiều kinh nghiệm thực tế, được mentor hỗ trợ tốt và có cơ hội tiếp cận công nghệ cloud hiện đại.
+
+---
 
 ### Đề xuất & mong muốn
-- Bạn có đề xuất gì để cải thiện trải nghiệm trong kỳ thực tập?  
-- Bạn có muốn tiếp tục chương trình này trong tương lai?
-- Góp ý khác (tự do chia sẻ):
+
+- Tổ chức thêm các buổi thực hành chuyên sâu về AWS.  
+- Cung cấp roadmap rõ ràng cho dự án ngay từ đầu.  
+- Mong muốn có cơ hội tiếp tục tham gia các chương trình tương tự trong tương lai.  
+
+**Ý kiến khác:**  
+Đây là một trải nghiệm thực tập rất hữu ích, giúp tôi phát triển cả về kỹ năng chuyên môn và kỹ năng mềm.

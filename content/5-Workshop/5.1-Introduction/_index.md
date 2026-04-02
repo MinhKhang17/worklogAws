@@ -1,59 +1,61 @@
 ---
-title : "Introduction to Apache Iceberg on AWS"
+title : "Introduction to Electric Vehicle Data Marketplace"
 date : 2026-03-25 
 weight : 1 
 chapter : false
 pre : " <b> 5.1. </b> "
 ---
 
+## Project Overview
 
-[Apache Iceberg](https://iceberg.apache.org/) is an open table format purpose-built for very large analytical datasets. It supports a wide range of modern data lake operations including record-level insert, update, delete, and time travel queries. Iceberg treats large collections of files as structured tables, enabling seamless schema and partition evolution without data rewrites. Its architecture is specifically optimized for use with Amazon S3 and provides strong guarantees of data correctness even under concurrent write workloads.
-
----
-
-Key terminology used in Apache Iceberg tables includes:
-
--   Schema – The names and data types of all fields in a table.
--   Partition spec – A definition that specifies how partition values are computed from data fields.
--   Snapshot – A point-in-time view of the table, capturing the full set of data files at that moment.
--   Manifest list – A file that enumerates all manifest files associated with a given snapshot.
--   Manifest – A file listing data or delete files that together form a portion of a snapshot.
--   Data file – A file containing actual row data for the table.
--   Delete file – A file that encodes which rows have been removed, either by position or by value.
+**EV Data Marketplace** is an e-commerce platform specializing in electric vehicle (EV) data. The project enables data providers (such as manufacturers, charging network operators, insurance companies, and research organizations) to register, authenticate, manage access rights, and sell datasets about electric vehicles to data consumers.
 
 ---
 
-Iceberg tracks individual data files rather than directories. Writers can produce files independently and add them to the table in a single, explicit commit. Table state is maintained through metadata files, and every change to the table creates a new metadata file that atomically replaces the previous one. This metadata file records the table's schema, partitioning configuration, and all snapshots of the table. Each snapshot represents the full state of the table at a specific point in time and serves as an access point for querying the complete set of data files.
+## Core Components
 
-Each snapshot is a self-contained view of the data at a particular moment. Snapshots are listed in the metadata file, but the actual file references are distributed across separate manifest files. This atomic transition between metadata versions provides snapshot isolation, allowing readers to work from a consistent version without being affected by ongoing changes. Data file paths are stored in manifests, each of which contains metadata about every file in the table, including partition data and statistics. Manifests can be shared across snapshots to minimize rewriting of unchanged metadata.
+The project leverages key AWS services to build a secure, robust, and scalable system:
 
----
-
-**Apache Iceberg on Amazon Athena**
-
-Iceberg tables registered in the AWS Glue catalog are fully supported by Athena, following the specifications of the open-source [Glue Catalog implementation](https://iceberg.apache.org/docs/latest/aws/#glue-catalog). Athena supports Iceberg v2 tables using the Parquet file format. To define an Iceberg table via Athena, set the `table_type` property to `ICEBERG` in the `TBLPROPERTIES` clause, as shown in the syntax below.
-
-```sql
-CREATE TABLE
-  [db_name.]table_name (col_name data_type [COMMENT col_comment] [, ...] )
-  [PARTITIONED BY (col_name | transform, ... )]
-  LOCATION 's3://DOC-EXAMPLE-BUCKET/your-folder/'
-  TBLPROPERTIES ( 'table_type' ='ICEBERG' [, property_name=property_value] )
-```
+- **Amazon S3 (Simple Storage Service)** – Stores all datasets, metadata files, and related documents
+- **AWS IAM (Identity and Access Management)** – Manages per-user access, defines bucket policies, and controls who can access which data
+- **Amazon Cognito** – Authenticates users, manages user profiles, and enforces role-based access control (RBAC)
 
 ---
 
-**Apache Iceberg on Amazon EMR**
+## Key Concepts
 
-Beginning with Amazon EMR release 7.5.0, you can run Apache Spark 3 on EMR clusters with native Iceberg table format support. EMR 7.5.0 ships with Iceberg version 1.6.0. You can provision a cluster via the AWS Management Console, the AWS CLI, or the Amazon EMR API. To activate Iceberg support, include the following classification in your cluster configuration:
+### User Roles
 
-```java
-[{ "Classification":"iceberg-defaults",
-    "Properties":{"iceberg.enabled":"true"}
-}]
-```
+- **Data Provider** – Creates, uploads, and manages datasets about electric vehicles (e.g., charging data, battery performance metrics, location information)
+- **Data Consumer** – Searches, purchases, and downloads datasets for analytics, research, or product development
+- **Admin** – Manages users, approves/rejects datasets, handles disputes, and maintains system health
 
-Alternatively, you can create an EMR cluster with the Spark application and include the file `/usr/share/aws/iceberg/lib/iceberg-spark3-runtime.jar` as a JAR dependency in your Spark jobs.
+### Basic Workflow
 
-This workshop is expected to take up to 2 hours. Please use the **us-east-1** region throughout, as the dataset used in this workshop resides there.
+1. **Sign-up & Authentication** – Users register via Cognito, create a profile, and specify their role (provider or consumer)
+2. **Data Upload** – Data providers upload datasets to S3 with metadata (title, description, price, version)
+3. **Access Management** – IAM manages data access based on roles, users, and datasets
+4. **Purchase & Download** – Data consumers browse the catalog, purchase datasets, and download from S3 with temporary permissions
 
+### Data Types
+
+The marketplace supports various electric vehicle data types including:
+
+- **Battery Performance Data** – Capacity, lifespan, discharge rate, temperature metrics
+- **Charging Data** – Charging duration, charging locations, energy levels
+- **Economic Data** – Power consumption, operating costs, fuel cost comparisons
+- **Map Data** – Location, routes, distance from charging stations
+
+---
+
+## Workshop Objectives
+
+In this workshop, you will:
+
+1. Set up an AWS environment with S3, IAM, and Cognito
+2. Build a backend application to manage users, datasets, and transactions
+3. Configure Cognito authentication with role-based access control
+4. Deploy APIs to manage S3 files and access permissions
+5. Test provider/consumer workflows from upload to download
+
+**Estimated Time:** 3-4 hours | **Region:** `us-east-1`

@@ -6,5 +6,5 @@ chapter : false
 pre : " <b> 5.2. </b> "
 ---
 
-Complete the steps outlined below to prepare your environment and get started with this workshop.
+To start the workshop, following the steps below to run this workshop.
 

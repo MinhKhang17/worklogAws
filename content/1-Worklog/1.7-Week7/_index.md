@@ -8,9 +8,9 @@ pre: " <b> 1.7. </b> "
 
 ### Week 7 Objectives:
 
-* **Backend**: Build the Media module — `Image` entity with polymorphic association, AWS S3 integration, and **Amazon CloudFront** distribution.
-* **Frontend**: Build `SessionDetailScreen`, `SessionCalendarScreen`, and the `mediaService` mapped to CloudFront URLs for lightning-fast image caching.
-* Enable media to be delivered globally through an optimized CDN architecture.
+* **Backend**: Build the Media module — `Image` entity with polymorphic association (food / exercise / workout plan), AWS S3 integration.
+* **Frontend**: Build `SessionDetailScreen` (past workout recap) and `SessionCalendarScreen` (monthly calendar view), plus the `mediaService` with image caching.
+* Enable images to be displayed for exercises and workout plans throughout the app.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
@@ -21,14 +21,15 @@ pre: " <b> 1.7. </b> "
 | 4   | - Build **mediaService** (Frontend) <br>&emsp; + `getImageUrl(owner, id)` — fetch image URL from `GET /api/images/{owner}/{id}` <br>&emsp; + In-memory URL cache + in-flight deduplication (prevents duplicate API calls for the same image) <br>&emsp; + Bulk helpers: `getFoodImageUrlMap(ids[])`, `getWorkoutPlanImageUrlMap(ids[])`, `getExerciseImageUrlMap(ids[])` | 02/26/2026 | 02/26/2026 | |
 | 5   | - Build **SessionDetailScreen** (Frontend) <br>&emsp; + Past workout recap: exercises grouped by `exerciseId` <br>&emsp; + Shows sets × reps × weight per exercise <br>&emsp; + Formatted date/time display with `utils/date.ts` | 02/27/2026 | 02/27/2026 | |
 | 6   | - Build **SessionCalendarScreen** (Frontend) <br>&emsp; + Monthly calendar view with dot indicators on days that have sessions <br>&emsp; + Month navigation (prev/next chevrons) <br>&emsp; + Click a date to show session logs below the calendar <br>&emsp; + Vietnamese day/month labels (Thứ 2–CN, Tháng 1–12) | 02/28/2026 | 02/28/2026 | |
+| 7   | - Create an **IAM user** for personal access to Amazon Bedrock within the group project <br>&emsp; + Implement least-privilege `Role` and `Policy` to allow Bedrock API access only <br>&emsp; + Document steps for role & policy management and how to attach policies to roles/users | 02/28/2026 | 02/28/2026 | |
 
 ### Week 7 Achievements:
 
-* **Backend & Cloud Architecture — Media module**:
-  * Flyway V3 migration applied with exclusive FK constraint.
-  * AWS S3 bucket configured securely (private, no public ACLs).
-  * **Amazon CloudFront** distribution implemented with **Origin Access Control (OAC)** to serve S3 media globally with low latency.
-  * JSON configuration files (`s3_images_upload.json`) migrated to use CloudFront domains instead of direct S3 URLs, dramatically reducing data transfer costs.
+* **Backend — Media module**:
+  * Flyway V3 migration applied with exclusive FK constraint on `image` table — DB-level data integrity for polymorphic images.
+  * `POST /api/images` registers image URL records linked to food/exercise/plan.
+  * `GET /api/images/exercise/{id}` and similar endpoints return all images for a given entity.
+  * AWS S3 `AmazonS3` bean configured locally (uses environment variables; real uploads tested with `generate_s3_json.py` tooling).
 * **Frontend — Session History**:
   * `SessionDetailScreen` correctly groups workout logs by exercise and renders sets/reps/weight clearly.
   * `SessionCalendarScreen` marks training days with dots; tap to reveal session details inline.
@@ -37,6 +38,10 @@ pre: " <b> 1.7. </b> "
   * `mediaService` caches fetched image URLs in memory — no duplicate API calls for images already loaded.
   * In-flight deduplication ensures concurrent requests for the same image share a single promise.
   * Workout plan tiles and exercise list items now display associated images from S3.
+
+* **Security — IAM / Access**:
+  * Created an IAM user scoped for Bedrock access using a least-privilege role and custom policy; practiced creating roles, policies, and attaching policies to roles/users.
+  * Added documentation notes on role & policy management for team members to follow when granting Bedrock access.
 
 ### AWS Knowledge Learned:
 

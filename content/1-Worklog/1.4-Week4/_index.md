@@ -21,6 +21,7 @@ pre: " <b> 1.4. </b> "
 | 4   | - Expose **public workout endpoints** via `WorkoutController` (`/api/workouts`) <br>&emsp; + `GET /muscle-groups`, `GET /muscle-groups/{id}` <br>&emsp; + `GET /exercises`, `GET /exercises/{id}`, `GET /exercises/by-muscle-group/{id}` <br>&emsp; + `GET /plans`, `GET /plans/{id}`, `GET /plans/by-goal-type/{id}` | 01/29/2026 | 01/29/2026 | |
 | 5   | - Build **SuggestedPlanScreen** (Frontend) — 3-step wizard <br>&emsp; + Step 1: Select fitness goal type (fetches from `GET /api/goal-types`) <br>&emsp; + Step 2: Browse system workout plan tiles with images and difficulty level <br>&emsp; + Step 3: View full plan detail with exercises grouped by day → clone via `cloneFromSystemPlan` | 01/30/2026 | 01/30/2026 | |
 | 6   | - Build **PlanExercisePicker** screen (Frontend) <br>&emsp; + List all system exercises with images and muscle group labels <br>&emsp; + Search/filter by name <br>&emsp; + On select: call `addExerciseToPlan(planId, dayOfWeek, exerciseId)` <br> - Seed initial exercise and muscle group data into the local database via `DatabaseSeeder` | 01/31/2026 | 01/31/2026 | |
+| 7   | - Design the **user food management** database <br>&emsp; + Entities: `Food`, `FoodCategory`, `FoodNutrient`, `UserFoodLog`, `Meal`, `MealItem` <br>&emsp; + Endpoints: admin CRUD for `Food`/`FoodCategory`, `POST /api/user/foods/log`, `GET /api/user/meals` | 01/31/2026 | 01/31/2026 | |
 
 ### Week 4 Achievements:
 
@@ -34,7 +35,10 @@ pre: " <b> 1.4. </b> "
   * `SuggestedPlanScreen` guides users through goal → plan selection in 3 clear steps.
   * Plan tiles display name, difficulty level, estimated duration, and goal type.
   * `PlanExercisePicker` lists all exercises with muscle group context; exercise selection adds to user plan.
-* `DatabaseSeeder` robustly parses `s3_images_upload.json` to seed muscle groups + exercise data on app start, solving mapping issues with special characters and whitespace to ensure 100% S3/CloudFront image URL alignment.
+* `DatabaseSeeder` populates initial muscle group + exercise data on app start for local dev.
+
+* **Database — Food Management**:
+  * Designed schema for food catalog, user meal logs, and basic nutrient tracking.
 
 ### AWS Knowledge Learned:
 

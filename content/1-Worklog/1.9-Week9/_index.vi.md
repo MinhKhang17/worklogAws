@@ -25,14 +25,12 @@ pre: " <b> 1.9. </b> "
 
 * **Backend — Module User Metric**:
   * `BodyMetric` lưu thành công với validation đầy đủ.
-  * Tích hợp AWS Secrets Manager để tải an toàn credentials của Database và JWT string từ môi trường phân tán khi runtime, mã hóa qua AWS KMS.
   * BMR tính đúng theo Mifflin-St Jeor; TDEE áp dụng đúng hệ số hoạt động.
   * `POST /api/metrics/calculate` trả về BMI, BMR, TDEE và macro gợi ý theo goal.
 * **Frontend — Sức khỏe**:
-  * `HealthDashboardScreen` wheel picker UX mượt mà; kết quả hiển thị ngay sau API với cơ chế chống tải lại trang (re-render) nhiều lần khi tính toán BMI/BMR.
-  * Tích hợp thành công thư viện `react-native-gifted-charts` mang lại hiệu năng vẽ biểu đồ cao.
+  * `HealthDashboardScreen` wheel picker UX mượt mà; kết quả hiển ngay sau API.
   * `BMITrendChart` màu sắc phân vùng BMI rõ ràng.
-  * `WeightChart` hiển thị moving average (trung bình động) khi có ≥7 điểm dữ liệu.
+  * `WeightChart` hiển moving average khi có ≥7 điểm dữ liệu.
   * `BodyMetricListScreen` lưu lịch sử đo lường đầy đủ.
 
 ### Kiến thức AWS đã học:

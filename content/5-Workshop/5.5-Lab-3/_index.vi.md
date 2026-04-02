@@ -1,14 +1,40 @@
 ---
-title : "Lab 3: Làm việc với bảng Iceberg trên EMR"
+title : "Lab 3: Tạo Cognito User Pool"
 date : 2026-03-16 
 weight : 5 
 chapter : false
 pre : " <b> 5.5. </b> "
 ---
 
+## Tổng Quan
 
-Với self-paced labs, chúng ta sẽ tạo một EMR cluster sử dụng Release 7.5 với Iceberg được cài đặt sẵn. Với AWS Events, EMR cluster đã được tạo sẵn cho bạn. Bài lab này đã được kiểm chứng với `EMR 7.5.0`, vì vậy chúng tôi khuyến nghị sử dụng cùng phiên bản để đảm bảo tính tương thích.
+Trong bài lab này, bạn sẽ thiết lập Amazon Cognito User Pool cho xác thực và phân quyền của các người dùng EV Data Marketplace. Cognito cung cấp một cách an toàn, có khả năng mở rộng để quản lý nhận dạng người dùng và triển khai đăng nhập duy nhất (SSO).
 
-Chúng ta sẽ sử dụng PySpark Jupyter Notebook trong EMR Studio để làm việc tương tác với các bảng Iceberg.
+## Mục Tiêu
 
-Nếu bạn đang theo lộ trình self-paced, hãy đảm bảo đã hoàn thành bài lab **Tạo S3 bucket** trước khi bắt đầu. Với AWS Events, S3 bucket đã được tạo sẵn.
+1. Tạo User Pool Cognito cho xác thực
+2. Cấu hình các luồng đăng ký và đăng nhập
+3. Thiết lập chính sách mật khẩu và MFA (tùy chọn)
+4. Tạo các nhóm người dùng cho điều khiển truy cập dựa trên vai trò
+5. Cấu hình Cognito app client cho tích hợp backend
+6. Thiết lập các thuộc tính người dùng cho hồ sơ provider/consumer
+
+## Yêu Cầu Tiên Quyết
+
+- Hoàn thành Lab 1 (S3 bucket đã được tạo)
+- Hoàn thành Lab 2 (IAM users và roles đã được tạo)
+- Hiểu biết về các khái niệm xác thực
+
+## Các Nhiệm Vụ Chính
+
+- Tạo User Pool: `ev-marketplace-user-pool`
+- Cấu hình chính sách mật khẩu (độ dài, độ phức tạp)
+- Kích hoạt xác minh email
+- Tạo các nhóm người dùng: `DataProviders` và `DataConsumers`
+- Tạo app client cho ứng dụng backend
+- Cấu hình các thuộc tính tùy chỉnh (tên công ty, giấy phép kinh doanh, v.v.)
+- Kiểm tra các luồng đăng ký và đăng nhập
+
+## Kết Quả Mong Đợi
+
+Một User Pool Cognito đầy đủ chức năng với các nhóm người dùng được cấu hình, các thuộc tính tùy chỉnh, và app client sẵn sàng để tích hợp backend.

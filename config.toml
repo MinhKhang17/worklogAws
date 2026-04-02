@@ -1,4 +1,4 @@
-baseURL = "https://ChrisLee1901.github.io/fcj-workshop-template/"
+baseURL = "https://github.com/MinhKhang17/worklogAws.git"
 relativeURLs = false
 canonifyURLs = true
 defaultContentLanguage = "en"
@@ -14,7 +14,7 @@ home = [ "HTML", "RSS", "JSON"]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "workshop"
   # Git hub repo link
-  editURL = "https://github.com/ChrisLee1901/fcj-workshop-template/edit/main/content/"
+  editURL = "https://github.com/MinhKhang17/worklogAws.git/edit/main/content/"
   description = """AWS Workshop Template
 Learn about AWS VPC Endpoints, S3 Access, and Security Best Practices"""
   author = "ChrisLee1901"

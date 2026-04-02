@@ -6,16 +6,39 @@ chapter : false
 pre : " <b> 5.6. </b> "
 ---
 
-Hãy thực hiện các bước dưới đây để xóa toàn bộ tài nguyên đã tạo trong quá trình thực hành, tránh phát sinh chi phí cho các dịch vụ không còn sử dụng.
+Thực hiện các bước sau để dọn dẹp toàn bộ tài nguyên đã tạo trong bài lab nhằm tránh phát sinh chi phí không cần thiết.
 
-1.  Truy cập [AWS S3 console](https://s3.console.aws.amazon.com/s3/home) và xóa S3 bucket mà bạn đã tạo trong workshop này. Bạn phải làm trống nội dung bucket trước khi có thể xóa chính bucket đó.
-    
-2.  Truy cập [EMR Console](https://console.aws.amazon.com/elasticmapreduce/home). Tích chọn hộp kiểm bên cạnh **EMR Cluster** đã tạo trong workshop và nhấn **Terminate** để dừng cluster.
-    
-3.  Từ menu bên phải trong EMR Console, nhấn **Notebooks**. Chọn hộp kiểm của **Notebook** mà bạn đã tạo trong workshop. Nhấn **Delete** để xóa môi trường notebook.
-    
+1.  Truy cập [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home) và xóa S3 bucket đã tạo trong lab (`ev-data-marketplace-datasets-xxxxx`).  
+    Bạn cần xóa toàn bộ dữ liệu bên trong bucket (datasets, metadata, logs, backups) trước khi xóa bucket.
 
-# Xin cảm ơn!
+2.  Truy cập [IAM Console](https://console.aws.amazon.com/iam/) và xóa các IAM Users đã tạo:
+    - `provider-test-user`
+    - `consumer-test-user`  
+    Lưu ý: cần xóa access keys trước khi xóa user.
 
+3.  Trong IAM Console, vào **Roles** và xóa các role:
+    - `EvDataProviderRole`
+    - `EvDataConsumerRole`
+    - `EvDataMarketplaceServiceRole`
 
-Chúng tôi hy vọng bạn đã tích lũy được kinh nghiệm thực tế quý giá và có thêm nhiều ý tưởng mới để khám phá.
+4.  Trong IAM Console, vào **Policies** và xóa các policy:
+    - `EvDataProviderPolicy`
+    - `EvDataConsumerPolicy`  
+    (Nếu cần, hãy detach policy khỏi role trước khi xóa)
+
+5.  Truy cập [Amazon Cognito Console](https://console.aws.amazon.com/cognito/) và xóa User Pool:
+    - `ev-marketplace-user-pool`
+
+6.  Trong Cognito (nếu vẫn còn), xóa:
+    - User groups: `Admins`, `DataProviders`, `DataConsumers`
+    - App client: `ev-marketplace-app-client`
+    - Domain (nếu đã cấu hình)
+
+7.  Kiểm tra lại toàn bộ tài nguyên:
+    - Không còn S3 bucket
+    - Không còn IAM users / roles / policies
+    - Không còn Cognito User Pool
+
+# Cảm ơn bạn!
+
+Hy vọng bạn đã học được điều gì đó mới và có thêm cảm hứng từ workshop này 🚀

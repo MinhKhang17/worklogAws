@@ -6,19 +6,19 @@ chapter : false
 pre : " <b> 5.2.1 </b> "
 ---
 
-## Tạo tài khoản AWS
+## Đăng ký tài khoản AWS
 
 
-Khi bạn đăng ký Amazon Web Services (AWS), tài khoản của bạn sẽ được tự động cấp quyền truy cập vào tất cả các dịch vụ AWS, bao gồm cả Athena. Bạn chỉ bị tính phí cho những dịch vụ mà bạn thực sự sử dụng.
+Khi bạn đăng ký Amazon Web Services (AWS), tài khoản AWS của bạn sẽ tự động được đăng ký cho tất cả các dịch vụ trong AWS, bao gồm cả Athena. Bạn chỉ bị tính phí cho các dịch vụ mà mình sử dụng.
 
-Nếu bạn đã có tài khoản AWS, hãy bỏ qua bước này và chuyển sang bước tiếp theo. Nếu chưa có, hãy làm theo hướng dẫn dưới đây để tạo một tài khoản mới.
+Nếu bạn đã có tài khoản AWS, hãy chuyển sang tác vụ tiếp theo. Nếu bạn chưa có tài khoản AWS, hãy sử dụng quy trình sau để tạo một tài khoản.
 
-**Các bước tạo tài khoản AWS**
+**Để tạo tài khoản AWS**
 
-1.  Truy cập [https://aws.amazon.com/](https://aws.amazon.com/) và nhấn chọn **Create an AWS Account**. Lưu ý: Nếu trước đây bạn đã đăng nhập vào AWS Management Console bằng thông tin xác thực của root user, hãy chọn **Sign in to a different account**. Nếu bạn đã đăng nhập bằng thông tin IAM, hãy chọn **Sign-in using root account credentials**, rồi chọn **Create a new AWS account**.
+1.  Mở [https://aws.amazon.com/](https://aws.amazon.com/) và chọn "Create an AWS Account" (Tạo một tài khoản AWS). Lưu ý: Nếu trước đó bạn đã đăng nhập vào AWS Management Console bằng thông tin xác thực gốc (root user) của tài khoản AWS, hãy chọn Đăng nhập vào một tài khoản khác. Nếu trước đó bạn đã đăng nhập vào console bằng thông tin xác thực IAM, hãy chọn Đăng nhập bằng thông tin tài khoản gốc. Sau đó chọn Tạo một tài khoản AWS mới.
 
 ---
 
-2.  Hoàn thành các hướng dẫn trên màn hình để kết thúc quá trình đăng ký. Một phần của quy trình yêu cầu xác minh qua cuộc gọi điện thoại và nhập mã xác nhận bằng bàn phím điện thoại.
+2.  Làm theo các hướng dẫn trực tuyến. Một phần của quy trình đăng ký bao gồm nhận một cuộc gọi điện thoại và nhập mã xác minh bằng bàn phím điện thoại.
 
-Ghi lại mã số tài khoản AWS của bạn, vì bạn sẽ cần dùng nó ở bước tiếp theo.
+Hãy ghi lại mã số tài khoản AWS của bạn (AWS account number), vì bạn sẽ cần nó cho các tác vụ tiếp theo.

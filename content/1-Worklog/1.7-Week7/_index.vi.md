@@ -8,9 +8,9 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu tuần 7:
 
-* **Backend**: Xây dựng module Media — phối hợp **Amazon S3** và **Amazon CloudFront** để tối ưu hóa lưu trữ và phân phối hình ảnh.
-* **Frontend**: Xây dựng `SessionDetailScreen`, `SessionCalendarScreen`, và `mediaService` map URL với CloudFront để tăng tốc độ tải ảnh.
-* Tối ưu hóa hệ thống CDN toàn cầu thay vì gọi trực tiếp từ S3 bucket.
+* **Backend**: Xây dựng module Media — entity `Image` với polymorphic association, tích hợp AWS S3.
+* **Frontend**: Xây dựng `SessionDetailScreen`, `SessionCalendarScreen`, và `mediaService` với image caching.
+* Hiển thị hình ảnh cho bài tập và kế hoạch tập luyện trong toàn ứng dụng.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
@@ -20,19 +20,24 @@ pre: " <b> 1.7. </b> "
 | 4   | - Xây dựng **mediaService** (Frontend) <br>&emsp; + `getImageUrl(owner, id)` — gọi `GET /api/images/{owner}/{id}` <br>&emsp; + Cache URL trong bộ nhớ + deduplication in-flight <br>&emsp; + Bulk helpers: `getFoodImageUrlMap`, `getWorkoutPlanImageUrlMap`, `getExerciseImageUrlMap` | 26/02/2026 | 26/02/2026 | |
 | 5   | - Xây dựng **SessionDetailScreen** (Frontend) <br>&emsp; + Tóm tắt buổi tập: nhóm bài tập theo `exerciseId` <br>&emsp; + Hiển thị set × rep × cân nặng cho từng bài <br>&emsp; + Format ngày giờ qua `utils/date.ts` | 27/02/2026 | 27/02/2026 | |
 | 6   | - Xây dựng **SessionCalendarScreen** (Frontend) <br>&emsp; + Lịch tháng với chấm trên ngày có buổi tập <br>&emsp; + Di chuyển tháng (mũi tên trái/phải) <br>&emsp; + Nhấn ngày để hiển thị log buổi tập bên dưới <br>&emsp; + Nhãn tiếng Việt (Thứ 2–CN, Tháng 1–12) | 28/02/2026 | 28/02/2026 | |
+| 7   | - Tạo **IAM user** cho người dùng cá nhân để truy cập Amazon Bedrock trong project nhóm <br>&emsp; + Tạo role và policy ít quyền nhất (least-privilege) để truy cập Bedrock APIs <br>&emsp; + Ghi lại các bước quản lý role, policy và attach policy cho role/user | 28/02/2026 | 28/02/2026 | |
 
 ### Kết quả đạt được tuần 7:
 
-* **Kiến trúc Cloud & Media Module**:
-  * Thiết lập Private S3 Bucket an toàn tuyệt đối (chặn toàn bộ Public Access).
-  * Xây dựng mạng phân phối **Amazon CloudFront** sử dụng cấu hình **Origin Access Control (OAC)** để truy cập an toàn vào S3.
-  * Cập nhật file định tuyến (`s3_images_upload.json`) trỏ toàn bộ ảnh tĩnh sang domain CloudFront, giảm thiểu chi phí data transfer vòng ngoài.
+* **Backend — Module Media**:
+  * Flyway V3 được apply với exclusive FK constraint — toàn vẹn dữ liệu polymorphic ở cấp DB.
+  * `ImageController` đăng ký URL hình ảnh và trả về đúng theo entity sở hữu.
+  * AWS S3 bean cấu hình local qua biến môi trường.
 * **Frontend — Lịch sử buổi tập**:
   * `SessionDetailScreen` nhóm log bài tập đúng và hiển thị rõ ràng.
   * `SessionCalendarScreen` đánh dấu ngày tập; nhấn ngày hiển log chi tiết.
 * **Frontend — Media Service**:
   * URL hình ảnh được cache trong bộ nhớ — không gọi API trung lặp.
   * Tile kế hoạch và danh sách bài tập hiển thị hình ảnh từ S3.
+
+* **Security — IAM**:
+  * Đã tạo IAM user riêng cho truy cập Bedrock theo mô hình least-privilege; đã thực hành tạo `Role` và `Policy`, attach policy cho role và user.
+  * Ghi chú về quản lý role & policy được thêm vào tài liệu nội bộ để hướng dẫn thành viên nhóm khi cần cấp/quản lý quyền truy cập Bedrock.
 
 ### Kiến thức AWS đã học:
 

@@ -11,19 +11,19 @@ chapter: false
 
 
 ### Student Information:
-&emsp; **Full Name:** Le Nguyen Thien Danh
+&emsp; **Full Name:** Nguyen Minh Khang
 
-&emsp; **Phone Number:** 0919135375
+&emsp; **Phone Number:** 0933268918
 
-&emsp; **Email:** thiendanh190105@gmail.com
+&emsp; **Email:** nguyenmkhang1712@gmail.com
 
 &emsp; **University:** FPT University 
 
-&emsp; **Major:** Artificial Intelligence
+&emsp; **Major:** Software Engineer
 
 &emsp; **Class:** FCAJ - FPT - Season 2
 
-&emsp; **Internship Company:** Bootcamp - First Cloud AI Journey @ AWS Study Group
+&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 

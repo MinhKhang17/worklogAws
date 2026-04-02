@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-Chào mừng bạn đến với **Nhật ký Công việc (Worklog) của dự án myFit**, một hành trình 12 tuần ghi lại chi tiết quá trình phát triển ứng dụng quản lý dinh dưỡng và thể hình toàn diện. Dự án được triển khai bằng **Spring Boot** (Backend) và **React Native** (Frontend), tích hợp chặt chẽ với **Hệ sinh thái AWS** (Cognito, S3, CloudFront, Bedrock, ...). 
-
-Trong suốt 3 tháng thực tập, chúng tôi đã hoàn thiện dự án theo từng giai đoạn hàng tuần như sau:
-
 **Tuần 1:** [Khởi động dự án và thiết lập nền tảng full-stack](1.1-Week1/)
 
 **Tuần 2:** [Tích hợp AWS Cognito và luồng token bảo mật](1.2-Week2/)
@@ -22,7 +18,7 @@ Trong suốt 3 tháng thực tập, chúng tôi đã hoàn thiện dự án theo
 
 **Tuần 6:** [Theo dõi buổi tập realtime với Session và WorkoutLog](1.6-Week6/)
 
-**Tuần 7:** [Tích hợp Media với AWS S3, CloudFront CDN và màn lịch sử buổi tập](1.7-Week7/)
+**Tuần 7:** [Tích hợp Media với AWS S3 và màn lịch sử buổi tập](1.7-Week7/)
 
 **Tuần 8:** [Theo dõi dinh dưỡng: bữa ăn, calories và macro mỗi ngày](1.8-Week8/)
 
@@ -30,6 +26,6 @@ Trong suốt 3 tháng thực tập, chúng tôi đã hoàn thiện dự án theo
 
 **Tuần 10:** [Chat AI Bedrock, màn Profile và nâng chất lượng API](1.10-Week10/)
 
-**Tuần 11:** [Kiểm thử E2E, quy trình CI/CD GitHub Actions và Docker Compose](1.11-Week11/)
+**Tuần 11:** [Hoàn thiện UI, kiểm thử E2E, sẵn sàng Docker Compose](1.11-Week11/)
 
 **Tuần 12:** [Tài liệu, thuyết trình cuối, nộp báo cáo](1.12-Week12/)

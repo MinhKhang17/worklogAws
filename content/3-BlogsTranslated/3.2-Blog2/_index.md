@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-# Deploy AWS Applications and Access AWS Accounts Across Multiple Regions with IAM Identity Center
+# AWS Application Deployment and Multi-Region AWS Account Access with IAM Identity Center
  
 
 AWS IAM Identity Center is commonly used to centrally manage workforce access to AWS accounts and AWS managed applications. As organizations grow across countries and business units, they often need identity services that remain available even when one Region is disrupted, while also meeting requirements such as local deployment, lower latency, and data residency. To address these needs, AWS introduced **multi-Region replication** for IAM Identity Center. This capability allows customers to replicate their IAM Identity Center configuration from the primary Region to one or more additional Regions, improving resiliency for AWS account access and enabling application deployment closer to users.

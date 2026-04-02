@@ -1,6 +1,6 @@
-baseURL = "https://github.com/MinhKhang17/worklogAws.git"
-relativeURLs = false
-canonifyURLs = true
+baseURL = "https://minhkhang17.github.io/worklogAws/"
+relativeURLs = true
+canonifyURLs = false
 defaultContentLanguage = "en"
 
 # Change the default theme to be use when building the site with Hugo

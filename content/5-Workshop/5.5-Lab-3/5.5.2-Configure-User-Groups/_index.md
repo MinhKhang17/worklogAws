@@ -30,7 +30,7 @@ User groups allow you to:
 3. You'll see an empty groups list
 4. Click **Create group** button
 
-![](/images/5-Workshops/lab3/task2/step1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step1.png)
 
 ---
 
@@ -44,7 +44,7 @@ User groups allow you to:
 4. In **Priority**, enter: `1` (lower number = higher priority)
 5. Click **Create group** button
 
-![](/images/5-Workshops/lab3/task2/step2.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step2.1.png)
 
 ---
 
@@ -67,7 +67,7 @@ User groups allow you to:
 5. In **Priority**, enter: `2`
 6. Click **Create group** button
 
-![](/images/5-Workshops/lab3/task2/step3.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step3.1.png)
 
 ---
 
@@ -91,7 +91,7 @@ User groups allow you to:
 5. In **Priority**, enter: `0` (highest priority)
 6. Click **Create group** button
 
-![](/images/5-Workshops/lab3/task2/step4.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step4.1.png)
 
 ---
 

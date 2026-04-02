@@ -19,7 +19,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 2. Sign in with your AWS account credentials
 3. Ensure you are in the **us-east-1** region (shown in top-right corner)
 
-![AWS Management Console home page](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113457.png)
+![AWS Management Console home page](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113457.png)
 
 ---
 
@@ -29,7 +29,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 2. Click on **S3** from the dropdown results
 3. The S3 Dashboard will load (showing buckets list)
 
-![S3 Dashboard showing buckets list](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113617.png)
+![S3 Dashboard showing buckets list](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113617.png)
 
 ---
 
@@ -38,7 +38,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 1. Click the **Create bucket** button (orange button)
 2. You will be redirected to the bucket creation form
 
-![Create bucket button highlighted](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113723.png)
+![Create bucket button highlighted](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113723.png)
 
 ---
 
@@ -58,7 +58,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 
 2. **Region:** Verify it's set to **us-east-1**
 
-![Bucket name configuration form](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113750.png)
+![Bucket name configuration form](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113750.png)
 
 ---
 
@@ -70,7 +70,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 
 2. Leave other options as default for now
 
-![Bucket settings with defaults](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113823.png)
+![Bucket settings with defaults](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113823.png)
 
 ---
 
@@ -80,7 +80,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 2. Click the **Create bucket** button
 3. You should see a success message: "Successfully created bucket 'ev-data-marketplace-datasets-xxxxx'"
 
-![Success message after bucket creation](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113848.png)
+![Success message after bucket creation](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113848.png)
 
 ---
 
@@ -91,7 +91,7 @@ Create an S3 bucket that will serve as the central storage for all EV Data Marke
 3. Click on the bucket name to open it
 4. The bucket is now ready for configuration
 
-![Newly created bucket visible in S3 list](/images/5-Workshops/lab1/Screenshot%202026-04-02%20113907.png)
+![Newly created bucket visible in S3 list](/worklogAws/images/5-Workshops/lab1/Screenshot%202026-04-02%20113907.png)
 
 ---
 

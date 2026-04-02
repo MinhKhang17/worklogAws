@@ -19,7 +19,7 @@ Tạo các IAM users riêng lẻ để kiểm tra marketplace với các roles k
 2. Bạn sẽ thấy dashboard users
 3. Nhấp vào nút **Create user**
 
-![](/images/5-Workshops/lab2/task3/step1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step1.png)
 
 ---
 
@@ -34,7 +34,7 @@ Tạo các IAM users riêng lẻ để kiểm tra marketplace với các roles k
 5. Bỏ đánh dấu ✓ **Users must create a new password at next sign-in** (cho kiểm tra)
 6. Nhấp vào nút **Next**
 
-![](/images/5-Workshops/lab2/task3/step2.1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step2.1.png)
 
 ---
 
@@ -49,7 +49,7 @@ Tạo các IAM users riêng lẻ để kiểm tra marketplace với các roles k
 7. Đánh dấu ✓ policy
 8. Nhấp vào nút **Next**
 
-![](/images/5-Workshops/lab2/task3/step2.2.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step2.2.png)
 
 ---
 
@@ -128,7 +128,7 @@ Chúng ta cần tạo access keys cho các users này để ứng dụng của c
 3. Cuộn đến phần **Access keys**
 4. Nhấp vào nút **Create access key**
 
-![](/images/5-Workshops/lab2/task3/step4.1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step4.1.png)
 
 ---
 

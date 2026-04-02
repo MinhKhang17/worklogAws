@@ -29,7 +29,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From 05/01/2026
 
-![Avatar](/images/profile.jpg)
+![Avatar](images/profile.jpg)
 ### Report Content
 
 1.  [Worklog](1-Worklog/)

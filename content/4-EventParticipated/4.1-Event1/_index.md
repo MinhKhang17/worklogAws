@@ -89,7 +89,7 @@ These features highlight AWS’s focus on providing scalable infrastructure for 
 
 #### Some event photos
 
-![Event Check-in](/images/4-Event/event2a.jpg "Check-in")
-![Networking with attendees](/images/4-Event/event2b.jpg "Networking")
+![Event Check-in](/worklogAws/images/4-Event/event2a.jpg "Check-in")
+![Networking with attendees](/worklogAws/images/4-Event/event2b.jpg "Networking")
 
 > Overall, the event provided a comprehensive overview of the major announcements from AWS re:Invent 2025, particularly in the areas of Generative AI, agent-based architectures, and modern data platforms. The sessions also offered practical insights into AWS services that could be applied to real-world systems such as the NutriTrack architecture, while giving participants the opportunity to connect directly with AWS Solution Architects and members of the local cloud community.

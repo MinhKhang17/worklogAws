@@ -31,7 +31,7 @@ Cognito User Pools cung cấp:
 3. Bạn sẽ thấy dashboard Cognito
 4. Nhấp vào nút **Create user pool**
 
-![](/images/5-Workshops/lab3/task1/step1.png)
+![](/worklogAws/images/5-Workshops/lab3/task1/step1.png)
 
 ---
 
@@ -45,7 +45,7 @@ Cognito User Pools cung cấp:
    - (Cho phép người dùng đăng nhập bằng email hoặc username)
 4. Nhấp vào nút **Next**
 
-![](/images/5-Workshops/lab3/task1/step2.png)
+![](/worklogAws/images/5-Workshops/lab3/task1/step2.png)
 
 ---
 

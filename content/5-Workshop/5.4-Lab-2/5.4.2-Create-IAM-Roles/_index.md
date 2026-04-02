@@ -26,7 +26,7 @@ Create IAM roles that will be attached to users and used for service-to-service 
 2. You'll see the roles dashboard with existing roles (if any)
 3. Click **Create role** button
 
-![](/images/5-Workshops/lab2/task2/step1.png)
+![](/worklogAws/images/5-Workshops/lab2/task2/step1.png)
 
 ---
 
@@ -41,7 +41,7 @@ Create IAM roles that will be attached to users and used for service-to-service 
 
 4. Click **Next** button
 
-![](/images/5-Workshops/lab2/task2/step2.png)
+![](/worklogAws/images/5-Workshops/lab2/task2/step2.png)
 
 ---
 
@@ -52,7 +52,7 @@ Create IAM roles that will be attached to users and used for service-to-service 
 3. Check the box ✓ next to **EvDataProviderPolicy**
 4. Click **Next** button
 
-![](/images/5-Workshops/lab2/task2/step2.2.png)
+![](/worklogAws/images/5-Workshops/lab2/task2/step2.2.png)
 
 ---
 
@@ -196,7 +196,7 @@ After creating the role, we need to allow users to assume this role:
 2. Select **AWS service** → **Lambda** (or **EC2** if deploying on EC2)
 3. Click **Next**
 
-![](/images/5-Workshops/lab2/task2/step4.1.png)
+![](/worklogAws/images/5-Workshops/lab2/task2/step4.1.png)
 
 ---
 

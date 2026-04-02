@@ -30,7 +30,7 @@ User groups cho phép bạn:
 3. Bạn sẽ thấy danh sách groups trống
 4. Nhấp vào nút **Create group**
 
-![](/images/5-Workshops/lab3/task2/step1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step1.png)
 
 ---
 
@@ -44,7 +44,7 @@ User groups cho phép bạn:
 4. Trong **Priority**, nhập: `1` (số thấp hơn = ưu tiên cao hơn)
 5. Nhấp vào nút **Create group**
 
-![](/images/5-Workshops/lab3/task2/step2.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step2.1.png)
 
 ---
 
@@ -67,7 +67,7 @@ User groups cho phép bạn:
 5. Trong **Priority**, nhập: `2`
 6. Nhấp vào nút **Create group**
 
-![](/images/5-Workshops/lab3/task2/step3.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step3.1.png)
 
 ---
 
@@ -91,7 +91,7 @@ User groups cho phép bạn:
 5. Trong **Priority**, nhập: `0` (ưu tiên cao nhất)
 6. Nhấp vào nút **Create group**
 
-![](/images/5-Workshops/lab3/task2/step4.1.png)
+![](/worklogAws/images/5-Workshops/lab3/task2/step4.1.png)
 
 ---
 

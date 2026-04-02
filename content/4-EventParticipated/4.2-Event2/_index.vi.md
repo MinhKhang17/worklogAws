@@ -30,7 +30,7 @@ Mô hình ngôn ngữ lớn (LLM) độc lập thường gặp hạn chế do kh
 - **Tích hợp công cụ (Tool integration):** Truy cập API, cơ sở dữ liệu và các dịch vụ bên ngoài.
 - Ứng dụng framework **Strands Agents** với cơ chế **Agentic Loop** (vòng lặp gọi công cụ), kết hợp System Prompts và Knowledge Base để tự động đưa ra quyết định và phản hồi theo ngữ cảnh thay đổi.
 
-![Mô hình hoạt động của AI Agent](/images/4-Event/Agent.png "AI Agent Architecture")
+![Mô hình hoạt động của AI Agent](/worklogAws/images/4-Event/Agent.png "AI Agent Architecture")
 
 #### Kỹ thuật Prompt Engineering Tự động
 
@@ -46,7 +46,7 @@ Một Prompt tiêu chuẩn cần có đủ 7 thành phần:
 
 Kiến trúc hệ thống quản lý Prompt tối ưu trên AWS được thiết kế bao gồm: **Amazon DynamoDB** (lưu trữ với tốc độ phản hồi mili-giây), **Amazon CloudWatch** (giám sát log, độ trễ và tỷ lệ lỗi), và nền tảng **Amazon Bedrock**.
 
-![Cấu trúc Prompt và Kiến trúc AWS](/images/4-Event/prompt.png "Prompt Engineering & AWS")
+![Cấu trúc Prompt và Kiến trúc AWS](/worklogAws/images/4-Event/prompt.png "Prompt Engineering & AWS")
 
 #### Dự án AIoT: Quản lý Tủ đồ Thông minh (Smart Locker)
 
@@ -55,11 +55,11 @@ Giải quyết bài toán mượn đồ thủ công tại các câu lạc bộ b
 - **Tích hợp AWS Cloud:** - **AWS IoT Core:** Đóng vai trò trung tâm định tuyến các sự kiện cảm biến (quét RFID, mở cửa) đến Lambda và DynamoDB, giúp mở rộng mà không phụ thuộc server cục bộ.
   - **AWS Rekognition:** Phân tích hình ảnh, so sánh khuôn mặt người mượn với cơ sở dữ liệu thành viên để cấp quyền truy cập.
 
-![Sơ đồ kiến trúc phần cứng và AWS cho dự án AIoT](/images/4-Event/AIot.png "AIoT Smart Locker Architecture")
+![Sơ đồ kiến trúc phần cứng và AWS cho dự án AIoT](/worklogAws/images/4-Event/AIot.png "AIoT Smart Locker Architecture")
 
 #### Một số hình ảnh khi tham gia sự kiện
 
-![Ảnh check-in sự kiện](/images/4-Event/event1a.jpg "Check-in")
-![Ảnh chụp cùng diễn giả](/images/4-Event/event1b.jpg "Chụp cùng diễn giả")
+![Ảnh check-in sự kiện](/worklogAws/images/4-Event/event1a.jpg "Check-in")
+![Ảnh chụp cùng diễn giả](/worklogAws/images/4-Event/event1b.jpg "Chụp cùng diễn giả")
 
 > Tổng thể, sự kiện không chỉ mang lại cái nhìn sâu sắc về các xu hướng công nghệ AI hiện đại như Agent và Prompt Engineering, mà còn cung cấp kiến thức thực tiễn về cách kết hợp phần cứng IoT với hạ tầng linh hoạt của AWS để giải quyết các bài toán thực tế.

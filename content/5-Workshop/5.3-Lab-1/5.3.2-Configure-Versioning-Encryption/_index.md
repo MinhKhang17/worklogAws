@@ -21,7 +21,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Click on the bucket name to open it
 3. Click on the **Properties** tab at the top
 
-![S3 bucket properties tab](/images/5-Workshops/lab1/step1.png)
+![S3 bucket properties tab](/worklogAws/images/5-Workshops/lab1/step1.png)
 
 ---
 
@@ -31,7 +31,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Find the **Bucket Versioning** section
 3. Click **Edit** button
 
-![Bucket Versioning section](/images/5-Workshops/lab1/step2.png)
+![Bucket Versioning section](/worklogAws/images/5-Workshops/lab1/step2.png)
 
 ---
 
@@ -41,7 +41,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Click **Save changes** button
 3. You will see: "Bucket versioning status has been updated"
 
-![Enable versioning confirmation](/images/5-Workshops/lab1/step3.png)
+![Enable versioning confirmation](/worklogAws/images/5-Workshops/lab1/step3.png)
 
 ---
 
@@ -51,7 +51,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Confirm **Versioning** status shows: **Enabled**
 3. This allows you to recover previous versions of dataset files
 
-![Versioning status enabled](/images/5-Workshops/lab1/step4.png)
+![Versioning status enabled](/worklogAws/images/5-Workshops/lab1/step4.png)
 
 ---
 
@@ -62,7 +62,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 1. In the **Properties** tab, scroll to find **Encryption** section
 2. Click **Edit** button in the Encryption section
 
-![Encryption section](/images/5-Workshops/lab1/step5.png)
+![Encryption section](/worklogAws/images/5-Workshops/lab1/step5.png)
 
 ---
 
@@ -75,7 +75,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 
 2. Do NOT select **SSE-KMS** (requires additional KMS setup)
 
-![Encryption type selection](/images/5-Workshops/lab1/step6.png)
+![Encryption type selection](/worklogAws/images/5-Workshops/lab1/step6.png)
 
 ---
 
@@ -85,7 +85,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Encryption type: Ensure **SSE-S3** is selected
 3. Click **Save changes** button
 
-![Default encryption enabled](/images/5-Workshops/lab1/step7.png)
+![Default encryption enabled](/worklogAws/images/5-Workshops/lab1/step7.png)
 
 ---
 
@@ -95,7 +95,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Confirm **Encryption** shows: **Enabled (SSE-S3)**
 3. All objects uploaded will be encrypted by default
 
-![Encryption status confirmed](/images/5-Workshops/lab1/step8.png)
+![Encryption status confirmed](/worklogAws/images/5-Workshops/lab1/step8.png)
 
 ---
 
@@ -107,7 +107,7 @@ Enable versioning to track dataset changes and configure server-side encryption 
 2. Scroll to find **Block Public Access** section
 3. Click **Edit** button
 
-![Block Public Access section](/images/5-Workshops/lab1/step9.png)
+![Block Public Access section](/worklogAws/images/5-Workshops/lab1/step9.png)
 
 ---
 

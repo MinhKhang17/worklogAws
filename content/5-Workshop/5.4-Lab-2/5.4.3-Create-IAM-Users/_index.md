@@ -19,7 +19,7 @@ Create individual IAM users for testing the marketplace with different roles: on
 2. You'll see the users dashboard
 3. Click **Create user** button
 
-![](/images/5-Workshops/lab2/task3/step1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step1.png)
 
 ---
 
@@ -34,7 +34,7 @@ Create individual IAM users for testing the marketplace with different roles: on
 5. Uncheck ✓ **Users must create a new password at next sign-in** (for testing)
 6. Click **Next** button
 
-![](/images/5-Workshops/lab2/task3/step2.1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step2.1.png)
 
 ---
 
@@ -49,7 +49,7 @@ Create individual IAM users for testing the marketplace with different roles: on
 7. Check ✓ the policy
 8. Click **Next** button
 
-![](/images/5-Workshops/lab2/task3/step2.2.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step2.2.png)
 
 ---
 
@@ -128,7 +128,7 @@ We need to create access keys for these users so our application can access AWS 
 3. Scroll to **Access keys** section
 4. Click **Create access key** button
 
-![](/images/5-Workshops/lab2/task3/step4.1.png)
+![](/worklogAws/images/5-Workshops/lab2/task3/step4.1.png)
 
 ---
 

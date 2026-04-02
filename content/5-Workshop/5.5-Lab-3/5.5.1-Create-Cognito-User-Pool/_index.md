@@ -31,7 +31,7 @@ Cognito User Pools provide:
 3. You'll see the Cognito dashboard
 4. Click **Create user pool** button
 
-![](/images/5-Workshops/lab3/task1/step1.png)
+![](/worklogAws/images/5-Workshops/lab3/task1/step1.png)
 
 ---
 
@@ -45,7 +45,7 @@ Cognito User Pools provide:
    - (Allow users to sign in with email or username)
 4. Click **Next** button
 
-![](/images/5-Workshops/lab3/task1/step2.png)
+![](/worklogAws/images/5-Workshops/lab3/task1/step2.png)
 
 ---
 

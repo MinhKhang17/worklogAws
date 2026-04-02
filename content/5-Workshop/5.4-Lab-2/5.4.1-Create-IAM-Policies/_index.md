@@ -27,7 +27,7 @@ IAM policies are JSON documents that define what actions users/roles can perform
 2. Click on **IAM** from results
 3. On the left menu, click **Policies** under "Access management"
 
-![](/images/5-Workshops/lab2/task1/step1.png)
+![](/worklogAws/images/5-Workshops/lab2/task1/step1.png)
 
 ---
 
@@ -39,7 +39,7 @@ IAM policies are JSON documents that define what actions users/roles can perform
 2. Choose **JSON** tab (to enter raw policy document)
 3. You'll see a text editor for the policy JSON
 
-![](/images/5-Workshops/lab2/task1/step2.png)
+![](/worklogAws/images/5-Workshops/lab2/task1/step2.png)
 
 ---
 
@@ -123,7 +123,7 @@ Delete the default content and paste this policy:
 2. Choose **JSON** tab
 3. Delete default content
 
-![](/images/5-Workshops/lab2/task1/step3.png)
+![](/worklogAws/images/5-Workshops/lab2/task1/step3.png)
 
 ---
 

@@ -89,7 +89,7 @@ Những tính năng này cho thấy AWS đang tập trung vào việc cung cấp
 
 #### Một số hình ảnh tại sự kiện
 
-![Check-in sự kiện](/images/4-Event/event2a.jpg "Check-in")
-![Giao lưu với người tham dự](/images/4-Event/event2b.jpg "Networking")
+![Check-in sự kiện](/worklogAws/images/4-Event/event2a.jpg "Check-in")
+![Giao lưu với người tham dự](/worklogAws/images/4-Event/event2b.jpg "Networking")
 
 > Nhìn chung, sự kiện đã mang lại cái nhìn tổng quan toàn diện về những thông báo quan trọng tại AWS re:Invent 2025, đặc biệt trong các lĩnh vực Generative AI, kiến trúc agent-based và nền tảng dữ liệu hiện đại. Các phiên chia sẻ cũng cung cấp nhiều insight thực tế về cách áp dụng các dịch vụ AWS vào các hệ thống thực tế như kiến trúc NutriTrack, đồng thời mang đến cơ hội để người tham dự kết nối trực tiếp với các AWS Solution Architect và cộng đồng cloud địa phương.

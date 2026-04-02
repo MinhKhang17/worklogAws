@@ -1,5 +1,5 @@
 baseURL = "https://minhkhang17.github.io/worklogAws/"
-relativeURLs = true
+relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"
 

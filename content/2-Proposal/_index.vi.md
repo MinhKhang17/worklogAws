@@ -1,12 +1,12 @@
 ---
-title: "MyFit - Kiến trúc hệ thống Fitness App trên AWS"
+title: "Proposal"
 date:  2026-04-03
 weight: 2
 slug: "myfit-aws-architecture"
 chapter: false
 pre: " <b> 2. </b> "
 ---
-
+# MyFit- Kiến trúc hệ thống Fitness trên APP trên AWS
 ## 1. Tổng quan dự án
 
 MyFit là nền tảng công nghệ toàn diện được thiết kế để đồng hành cùng người dùng trong hành trình chăm sóc sức khỏe và quản lý tập luyện. Để mang lại trải nghiệm mượt mà và đáng tin cậy nhất, hệ thống được xây dựng dựa trên 3 nền tảng cốt lõi:

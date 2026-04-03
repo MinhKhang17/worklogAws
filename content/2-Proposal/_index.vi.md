@@ -261,3 +261,4 @@ Hệ thống được xây dựng cho nhu cầu quản lý sức khỏe cá nhâ
 | OAuth mismatch  | Cao       | P0          | Sync env        |
 | Health check    | Trung     | P1          | Chuẩn hóa       |
 | Chi phí tăng    | Trung     | P1          | Budget alarm    |
+---

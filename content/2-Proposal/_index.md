@@ -3,7 +3,6 @@
 title: "MyFit - Fitness App System Architecture on AWS"
 date: 2026-04-03
 weight: 2
-slug: "myfit-aws-architecture"
 chapter: false
 pre: " <b> 2. </b> "
 --------------------
@@ -104,7 +103,7 @@ The system is designed to manage personal health and workout planning.
 
 ### 4.2 System Architecture:
 
-![System Architecture](images/2-Proposal/image11.png)
+![System Architecture](/images/2-Proposal/image11.png)
 
 ---
 
@@ -191,35 +190,35 @@ To optimize operations and reduce manual errors:
 
 ### 5.1 Dockerfile Backend
 
-![Dockerfile](images/2-Proposal/image5.png)
+![Dockerfile](/images/2-Proposal/image5.png)
 
 ---
 
 ### 5.2 CDK Route API via CloudFront
 
-![CDK Config](images/2-Proposal/image4.png)
+![CDK Config](/images/2-Proposal/image4.png)
 
 ---
 
 ### 5.3 Deploy Script
 
-![Deploy Script](images/2-Proposal/image2.png)
-![Deploy Script](images/2-Proposal/image10.png)
+![Deploy Script](/images/2-Proposal/image2.png)
+![Deploy Script](/images/2-Proposal/image10.png)
 
 ---
 
 ### 5.4 Stack Initialization
 
-![Stack Init](images/2-Proposal/image6.png)
+![Stack Init](/images/2-Proposal/image6.png)
 
 ---
 
 ### 5.5 Application Screens
 
-![App](images/2-Proposal/image1.png)
-![App](images/2-Proposal/image8.png)
-![App](images/2-Proposal/image7.png)
-![App](images/2-Proposal/image3.png)
+![App](/images/2-Proposal/image1.png)
+![App](/images/2-Proposal/image8.png)
+![App](/images/2-Proposal/image7.png)
+![App](/images/2-Proposal/image3.png)
 
 ---
 

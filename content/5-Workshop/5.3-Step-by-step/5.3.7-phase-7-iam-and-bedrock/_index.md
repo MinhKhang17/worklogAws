@@ -11,23 +11,23 @@ pre: " <b> 5.3.7. </b> "
 - Open `Amazon Bedrock` in region `us-west-2` (Oregon).
 - In left navigation, open `API keys`.
 - In tab `Long-term API keys`, click `Generate long-term API keys`.
-![Navigate to Bedrock API key screen](/worklogAws/images/s/workshop/Phase%207%20-%20bedrock/1_Navigate_to_Generate_Api_key.jpg)
+![Navigate to Bedrock API key screen](/worklogAws/images/workshop/Phase%207%20-%20bedrock/1_Navigate_to_Generate_Api_key.jpg)
 
 - In `Generate long-term API key`, set key name.
 - Set key expiry days in `Specify API key expiry in days`.
 - Click `Generate`.
 - Copy the generated key immediately (value is shown once).
-![Configure and generate API key](/worklogAws/images/s/workshop/Phase%207%20-%20bedrock/2_configure_and_Generate_Api_key.jpg)
+![Configure and generate API key](/worklogAws/images/workshop/Phase%207%20-%20bedrock/2_configure_and_Generate_Api_key.jpg)
 
 ## 2. Select model and copy model ID
 
 - Open `Model catalog`.
 - Select `Claude 3.5 Haiku` from Anthropic.
-![Select Bedrock model from catalog](/worklogAws/images/s/workshop/Phase%207%20-%20bedrock/3_Select_Model_From_Catalog.jpg)
+![Select Bedrock model from catalog](/worklogAws/images/workshop/Phase%207%20-%20bedrock/3_Select_Model_From_Catalog.jpg)
 
 - Open model details and copy `Model ID`.
 - Use model ID `anthropic.claude-3-5-haiku-20241022-v1:0`.
-![Copy model ID](/worklogAws/images/s/workshop/Phase%207%20-%20bedrock/4_Copy_Model_ID.jpg)
+![Copy model ID](/worklogAws/images/workshop/Phase%207%20-%20bedrock/4_Copy_Model_ID.jpg)
 
 ## 3. Configure backend Bedrock settings
 
@@ -43,7 +43,7 @@ BEDROCK_MAX_TOKENS=1024
 ```
 
 - Redeploy ECS service after updating secret or environment settings.
-![Set up Bedrock variables in backend](/worklogAws/images/s/workshop/Phase%207%20-%20bedrock/5_Set_up_Bedrock.jpg)
+![Set up Bedrock variables in backend](/worklogAws/images/workshop/Phase%207%20-%20bedrock/5_Set_up_Bedrock.jpg)
 
 ## 4. Validate Bedrock wiring with AWS CLI
 

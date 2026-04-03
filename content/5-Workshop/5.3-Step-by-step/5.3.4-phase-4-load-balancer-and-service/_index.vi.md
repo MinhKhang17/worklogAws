@@ -23,54 +23,54 @@ pre: " <b> 5.3.4. </b> "
 - Nhập Interval: `30`.
 - Nhập Success codes: `200-399`.
 - Bấm `Create target group`.
-![Create target group screen](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/target%20group/target%20group.png)
+![Create target group screen](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/target%20group/target%20group.png)
 
 ## 2. Tạo application load balancer
 
 - Mở EC2 Console - `Load balancers` - `Create load balancer`.
 - Chọn `Application Load Balancer`.
-![Create ALB screen 1](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%201.png)
+![Create ALB screen 1](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%201.png)
 
 - Nhập Load balancer name: `<your-alb-name>`.
 - Chọn Scheme: `internet-facing`.
 - Chọn IP address type: `ipv4`.
-![Create ALB screen 2](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%202.png)
+![Create ALB screen 2](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%202.png)
 
 - Chọn VPC: `vpc-0c93d1f17635865a7`.
 - Chọn subnet `subnet-08b30664885ff91ec` (`us-east-1a`).
 - Chọn subnet `subnet-06ba3f4e55b68d1f8` (`us-east-1b`).
-![Create ALB screen 3](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%203.png)
+![Create ALB screen 3](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%203.png)
 
 - Xóa default security group.
 - Chọn security group: `sg-08002e12b1aa827d0`.
-![Create ALB screen 4](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%204.png)
+![Create ALB screen 4](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%204.png)
 
 - Nhập Listener protocol/port: `HTTP:80`.
 - Chọn Default action: `Forward to <your-target-group-name>`.
-![Create ALB screen 5](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%205.png)
+![Create ALB screen 5](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%205.png)
 
 - Kiểm tra toàn bộ trường.
 - Bấm `Create load balancer`.
-![Create ALB screen 6](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%206.png)
+![Create ALB screen 6](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%206.png)
 
 - Chờ ALB status là `active`.
 - Sao chép ALB DNS name: `<your-alb-dns-name>`.
-![Create ALB screen 7](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%207.png)
+![Create ALB screen 7](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%207.png)
 
 ## 3. Tạo ECS service
 
 - Mở ECS Console - `Clusters` - `<your-ecs-cluster-name>` - `Create service`.
-![Create ECS service screen 1](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service1.png)
+![Create ECS service screen 1](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service1.png)
 
 - Chọn Launch type: `FARGATE`.
 - Chọn Task definition family: `<your-task-definition-family>`.
 - Chọn Task definition revision: `LATEST`.
-![Create ECS service screen 2](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service2.png)
+![Create ECS service screen 2](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service2.png)
 
 - Nhập Service name: `<your-ecs-service-name>`.
 - Chọn Service type: `REPLICA`.
 - Nhập Desired tasks: `2`.
-![Create ECS service screen 3](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service3.png)
+![Create ECS service screen 3](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service3.png)
 
 - Chọn Load balancer type: `Application Load Balancer`.
 - Chọn Use existing load balancer: `Yes`.
@@ -80,7 +80,7 @@ pre: " <b> 5.3.4. </b> "
 - Nhập Health check grace period: `180`.
 - Chọn Container name: `web`.
 - Chọn Container port: `8080`.
-![Create ECS service screen 4](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service4.png)
+![Create ECS service screen 4](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service4.png)
 
 - Chọn VPC: `vpc-0c93d1f17635865a7`.
 - Chọn subnet `subnet-08b30664885ff91ec`.
@@ -88,25 +88,25 @@ pre: " <b> 5.3.4. </b> "
 - Xóa default security group.
 - Chọn security group: `sg-04c05a2f2abab96cc`.
 - Chọn Public IP: `ENABLED`.
-![Create ECS service screen 5](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service5.png)
+![Create ECS service screen 5](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service5.png)
 
 - Chọn Deployment controller type: `ECS`.
 - Bấm `Next`.
-![Create ECS service screen 6](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service6.png)
+![Create ECS service screen 6](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service6.png)
 
 ## 4. Cấu hình auto scaling cho ECS service
 
 - Bật Service auto scaling.
 - Nhập Minimum task count: `2`.
 - Nhập Maximum task count: `4`.
-![Create ECS service screen 7](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service7.png)
+![Create ECS service screen 7](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service7.png)
 
 - Tạo Target tracking policy.
 - Nhập Policy metric: `ECSServiceAverageCPUUtilization`.
 - Nhập Target value: `70`.
 - Nhập Scale-out cooldown: `60`.
 - Nhập Scale-in cooldown: `60`.
-![Create ECS service screen 8](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service8.png)
+![Create ECS service screen 8](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service8.png)
 
 ## 5. Tạo service và xác nhận
 
@@ -114,7 +114,7 @@ pre: " <b> 5.3.4. </b> "
 - Bấm `Create`.
 - Xác nhận ECS service status: `ACTIVE`.
 - Xác nhận Desired count: `2`.
-![Create ECS service screen 9](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service9.png)
+![Create ECS service screen 9](/worklogAws/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service9.png)
 
 ## 6. Checklist hoàn tất phase
 

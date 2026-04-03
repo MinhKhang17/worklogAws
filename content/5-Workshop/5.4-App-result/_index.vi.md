@@ -13,24 +13,24 @@ Mục này ghi lại các màn hình kết quả sau khi triển khai và cấu 
 ## Ảnh kết quả
 
 ### 1. Màn hình trợ lý AI chat
-![App result 2 - Home dashboard](/worklogAws/worklogAws/images/s/s/workshop/app%20image%20result/web%20app2.png)
+![App result 2 - Home dashboard](/worklogAws/worklogAws/images/s/workshop/app%20image%20result/web%20app2.png)
 
 
 ### 2. Màn hình trang chủ và tổng quan dinh dưỡng
 
-![App result 1 - AI chat](/worklogAws/worklogAws/images/s/s/workshop/app%20image%20result/web%20app1.png)
+![App result 1 - AI chat](/worklogAws/worklogAws/images/s/workshop/app%20image%20result/web%20app1.png)
 
 ### 3. Màn hình kế hoạch tập luyện
 
-![App result 3 - Workout page](/worklogAws/worklogAws/images/s/s/workshop/app%20image%20result/web%20app3.png)
+![App result 3 - Workout page](/worklogAws/worklogAws/images/s/workshop/app%20image%20result/web%20app3.png)
 
 ### 4. Màn hình quản lý calo và chọn món ăn
 
-![App result 4 - Calorie page](/worklogAws/worklogAws/images/s/s/workshop/app%20image%20result/web%20app4.png)
+![App result 4 - Calorie page](/worklogAws/worklogAws/images/s/workshop/app%20image%20result/web%20app4.png)
 
 ### 5. Màn hình sức khỏe và macro breakdown
 
-![App result 5 - Health dashboard](/worklogAws/worklogAws/images/s/s/workshop/app%20image%20result/web%20app5.png)
+![App result 5 - Health dashboard](/worklogAws/worklogAws/images/s/workshop/app%20image%20result/web%20app5.png)
 
 ## Checklist xác nhận
 

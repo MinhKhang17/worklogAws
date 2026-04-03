@@ -11,25 +11,25 @@ pre: " <b> 5.3.6. </b> "
 - Mở Amazon Cognito Console ở region `us-east-1`.
 - Mở `User pools`.
 - Bấm `Create user pool`.
-![Cognito user pools entry](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%201.png)
+![Cognito user pools entry](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%201.png)
 
 - Chọn application type `Single-page application (SPA)`.
 - Nhập application name: `myfit cognito app client`.
 - Trong sign-in identifiers, chọn `Email`.
-![Cognito app setup basic](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%202.png)
+![Cognito app setup basic](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%202.png)
 
 - Giữ `Enable self-registration` ở trạng thái bật.
 - Đặt required attributes gồm `email`.
 - Nhập return URL: `https://myfit.click`.
 - Bấm `Create user directory`.
-![Cognito app setup and return URL](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%203.png)
+![Cognito app setup and return URL](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%203.png)
 
 ## 2. Cấu hình managed login pages
 
 - Mở user pool của bạn, sau đó mở `App clients`.
 - Chọn app client `Fitme-cognito-web-auth-service`.
 - Mở `Edit managed login pages configuration`.
-![Cognito managed login callback URLs](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%204.png)
+![Cognito managed login callback URLs](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%204.png)
 
 - Đặt `Allowed callback URLs`:
   - `http://localhost:8081/callback`
@@ -42,20 +42,20 @@ pre: " <b> 5.3.6. </b> "
   - `myfit://logout`
 - Trong identity providers, chọn `Google`.
 - Trong OAuth 2.0 grant types, chọn `Authorization code grant`.
-![Cognito managed login sign-out and OAuth flow](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%205.png)
+![Cognito managed login sign-out and OAuth flow](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%205.png)
 
 - Trong OpenID Connect scopes, chọn:
   - `email`
   - `openid`
   - `profile`
 - Bấm `Save changes`.
-![Cognito managed login OIDC scopes](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%206.png)
+![Cognito managed login OIDC scopes](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%206.png)
 
 ## 3. Cấu hình Google identity provider
 
 - Trong cùng user pool, mở `Social and external providers`.
 - Bấm `Add identity provider`.
-![Cognito social providers entry](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider1.png)
+![Cognito social providers entry](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider1.png)
 
 - Chọn provider type `Google`.
 - Nhập Google OAuth `Client ID` và `Client secret` từ Google Cloud Console.
@@ -69,14 +69,14 @@ pre: " <b> 5.3.6. </b> "
   - `name -> name`
   - `picture -> picture`
   - `username -> sub`
-![Cognito Google provider details](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider2.png)
-![Cognito Google provider mappings](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider3.png)
+![Cognito Google provider details](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider2.png)
+![Cognito Google provider mappings](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider3.png)
 
 ## 4. Verify Route 53 hosted zone và records
 
 - Mở Route 53 Console - `Hosted zones`.
 - Xác nhận hosted zone `myfit.click` tồn tại và type là `Public`.
-![Route 53 hosted zones](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%201.png)
+![Route 53 hosted zones](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%201.png)
 
 - Mở hosted zone `myfit.click` - `Records`.
 - Xác nhận các record chính:
@@ -84,7 +84,7 @@ pre: " <b> 5.3.6. </b> "
   - Alias `A` record cho `api.myfit.click` trỏ tới ALB domain.
   - ACM validation `CNAME` records cho `myfit.click` và `api.myfit.click` tồn tại.
   - `NS` và `SOA` records mặc định tồn tại.
-![Route 53 records list](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%202.png)
+![Route 53 records list](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%202.png)
 
 ## 5. Checklist hoàn tất phase
 

@@ -13,23 +13,23 @@ pre: " <b> 5.2. </b> "
 - Select service `Elastic Container Service`.
 - Select use case `Elastic Container Service Task`.
 - Click `Next`.
-![Create task execution role - trusted entity](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role1.png)
+![Create task execution role - trusted entity](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role1.png)
 
 - Search and select managed policy `AmazonECSTaskExecutionRolePolicy`.
 - Click `Next`.
-![Create task execution role - add managed policy](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role2.png)
+![Create task execution role - add managed policy](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role2.png)
 
 - Enter role name `MyfitInfraStack-TaskExecutionRole`.
 - Enter description `Allows ECS tasks to call AWS services on your behalf.`
 - Click `Create role`.
-![Create task execution role - name and create](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role3.png)
-![Create task execution role - review and create](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role4.png)
+![Create task execution role - name and create](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role3.png)
+![Create task execution role - review and create](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role4.png)
 
 ## 2. Add execution role inline policy (ECR, Logs, Secrets)
 
 - Open role `MyfitInfraStack-TaskExecutionRole`.
 - Click `Add permissions` - `Create inline policy`.
-![Task execution role - create inline policy entry](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role5.png)
+![Task execution role - create inline policy entry](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role5.png)
 
 - In `JSON` editor, add permissions equivalent to your stack policy `TaskExecutionRoleDefaultPolicy`.
 - Keep at least these actions and resources:
@@ -76,15 +76,15 @@ pre: " <b> 5.2. </b> "
 ```
 
 - Save as inline policy `TaskExecutionRoleDefaultPolicy`.
-![Task execution role - inline policy JSON](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role6.png)
-![Task execution role - create inline policy](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role7.png)
+![Task execution role - inline policy JSON](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role6.png)
+![Task execution role - create inline policy](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role7.png)
 
 ## 3. Prepare ECS task role (application data access)
 
 - Open IAM role `MyfitInfraStack-TaskRole`.
 - Edit inline policy `TaskRoleDefaultPolicy07FC53DE`.
 - Confirm S3 access policy covers bucket `crawl.fitness` and object path `crawl.fitness/*`.
-![Task role S3 policy JSON](/worklogAws/images/s/workshop/IAM/task%20role/task%20role.png)
+![Task role S3 policy JSON](/worklogAws/images/workshop/IAM/task%20role/task%20role.png)
 
 ## 4. Service-level policies required outside IAM role
 

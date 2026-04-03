@@ -646,10 +646,10 @@ Images have a similar syntax to links but include a preceding exclamation point.
 or
 
 ```markdown
-![Alt text](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg "The Stormtroopocat")
+![Alt text](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg "The Stormtroopocat")
 ```
 
-![Alt text](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg "The Stormtroopocat")
+![Alt text](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg "The Stormtroopocat")
 
 Like links, Images also have a footnote style syntax
 
@@ -694,19 +694,19 @@ Add HTTP parameters `width` and/or `height` to the link image to resize the imag
 Add a HTTP `classes` parameter to the link image to add CSS classes. `shadow`and `border` are available but you could define other ones.
 
 ```markdown
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?classes=shadow)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?classes=shadow)
 ```
 
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?width=40pc&classes=shadow)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?width=40pc&classes=shadow)
 
 ```markdown
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?classes=border)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?classes=border)
 ```
 
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?width=40pc&classes=border)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?width=40pc&classes=border)
 
 ```markdown
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?classes=border,shadow)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?classes=border,shadow)
 ```
 
-![stormtroopocat](https://octodex.github.com/worklogAws/images/stormtroopocat.jpg?width=40pc&classes=border,shadow)
+![stormtroopocat](https://octodex.github.com/worklogAws/imagestormtroopocat.jpg?width=40pc&classes=border,shadow)

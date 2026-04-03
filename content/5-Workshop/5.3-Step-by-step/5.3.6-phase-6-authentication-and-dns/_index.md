@@ -11,25 +11,25 @@ pre: " <b> 5.3.6. </b> "
 - Open Amazon Cognito Console in region `us-east-1`.
 - Open `User pools`.
 - Click `Create user pool`.
-![Cognito user pools entry](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%201.png)
+![Cognito user pools entry](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%201.png)
 
 - Select application type `Single-page application (SPA)`.
 - Enter application name: `myfit cognito app client`.
 - In sign-in identifiers, select `Email`.
-![Cognito app setup basic](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%202.png)
+![Cognito app setup basic](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%202.png)
 
 - Keep `Enable self-registration` selected.
 - Set required attributes to include `email`.
 - Enter return URL: `https://myfit.click`.
 - Click `Create user directory`.
-![Cognito app setup and return URL](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%203.png)
+![Cognito app setup and return URL](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%203.png)
 
 ## 2. Configure managed login pages
 
 - Open your user pool, then open `App clients`.
 - Select app client `Fitme-cognito-web-auth-service`.
 - Open `Edit managed login pages configuration`.
-![Cognito managed login callback URLs](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%204.png)
+![Cognito managed login callback URLs](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%204.png)
 
 - Set `Allowed callback URLs`:
   - `http://localhost:8081/callback`
@@ -42,20 +42,20 @@ pre: " <b> 5.3.6. </b> "
   - `myfit://logout`
 - In identity providers, select `Google`.
 - In OAuth 2.0 grant types, select `Authorization code grant`.
-![Cognito managed login sign-out and OAuth flow](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%205.png)
+![Cognito managed login sign-out and OAuth flow](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%205.png)
 
 - In OpenID Connect scopes, select:
   - `email`
   - `openid`
   - `profile`
 - Click `Save changes`.
-![Cognito managed login OIDC scopes](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%206.png)
+![Cognito managed login OIDC scopes](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/create%20user%20pool%206.png)
 
 ## 3. Configure Google identity provider
 
 - In the same user pool, open `Social and external providers`.
 - Click `Add identity provider`.
-![Cognito social providers entry](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider1.png)
+![Cognito social providers entry](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider1.png)
 
 - Select provider type `Google`.
 - Enter your Google OAuth `Client ID` and `Client secret` from Google Cloud Console.
@@ -69,14 +69,14 @@ pre: " <b> 5.3.6. </b> "
   - `name -> name`
   - `picture -> picture`
   - `username -> sub`
-![Cognito Google provider details](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider2.png)
-![Cognito Google provider mappings](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider3.png)
+![Cognito Google provider details](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider2.png)
+![Cognito Google provider mappings](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/cognito/google%20provider3.png)
 
 ## 4. Verify Route 53 hosted zone and records
 
 - Open Route 53 Console - `Hosted zones`.
 - Confirm hosted zone `myfit.click` exists and type is `Public`.
-![Route 53 hosted zones](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%201.png)
+![Route 53 hosted zones](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%201.png)
 
 - Open hosted zone `myfit.click` - `Records`.
 - Verify core records:
@@ -84,7 +84,7 @@ pre: " <b> 5.3.6. </b> "
   - Alias `A` record for `api.myfit.click` points to ALB domain.
   - ACM validation `CNAME` records for `myfit.click` and `api.myfit.click` exist.
   - Default `NS` and `SOA` records exist.
-![Route 53 records list](/worklogAws/images/s/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%202.png)
+![Route 53 records list](/worklogAws/images/workshop/Phase%206%20Authentication%20and%20DNS/route53%20dns/create%20hosted%20zone%202.png)
 
 ## 5. Phase completion checklist
 

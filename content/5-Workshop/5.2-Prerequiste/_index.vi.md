@@ -13,23 +13,23 @@ pre: " <b> 5.2. </b> "
 - Chọn service `Elastic Container Service`.
 - Chọn use case `Elastic Container Service Task`.
 - Bấm `Next`.
-![Create task execution role - trusted entity](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role1.png)
+![Create task execution role - trusted entity](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role1.png)
 
 - Tìm và chọn managed policy `AmazonECSTaskExecutionRolePolicy`.
 - Bấm `Next`.
-![Create task execution role - add managed policy](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role2.png)
+![Create task execution role - add managed policy](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role2.png)
 
 - Nhập role name `MyfitInfraStack-TaskExecutionRole`.
 - Nhập description `Allows ECS tasks to call AWS services on your behalf.`
 - Bấm `Create role`.
-![Create task execution role - name and create](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role3.png)
-![Create task execution role - review and create](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role4.png)
+![Create task execution role - name and create](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role3.png)
+![Create task execution role - review and create](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role4.png)
 
 ## 2. Thêm execution role inline policy (ECR, Logs, Secrets)
 
 - Mở role `MyfitInfraStack-TaskExecutionRole`.
 - Bấm `Add permissions` - `Create inline policy`.
-![Task execution role - create inline policy entry](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role5.png)
+![Task execution role - create inline policy entry](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role5.png)
 
 - Trong `JSON` editor, thêm quyền tương đương policy `TaskExecutionRoleDefaultPolicyA84DD1B0` của stack.
 - Giữ ít nhất các action và resource sau:
@@ -76,15 +76,15 @@ pre: " <b> 5.2. </b> "
 ```
 
 - Lưu với tên inline policy `TaskExecutionRoleDefaultPolicy`.
-![Task execution role - inline policy JSON](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role6.png)
-![Task execution role - create inline policy](/worklogAws/images/s/workshop/IAM/task%20execution%20role/task%20execution%20role7.png)
+![Task execution role - inline policy JSON](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role6.png)
+![Task execution role - create inline policy](/worklogAws/images/workshop/IAM/task%20execution%20role/task%20execution%20role7.png)
 
 ## 3. Chuẩn bị ECS task role (application data access)
 
 - Mở IAM role `MyfitInfraStack-TaskRole`.
 - Edit inline policy `TaskRoleDefaultPolicy`.
 - Xác nhận S3 access policy bao gồm bucket `crawl.fitness` và object path `crawl.fitness/*`.
-![Task role S3 policy JSON](/worklogAws/images/s/workshop/IAM/task%20role/task%20role.png)
+![Task role S3 policy JSON](/worklogAws/images/workshop/IAM/task%20role/task%20role.png)
 
 ## 4. Service-level policies bắt buộc ngoài IAM role
 

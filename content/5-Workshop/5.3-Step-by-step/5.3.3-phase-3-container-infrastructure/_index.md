@@ -9,13 +9,13 @@ pre: " <b> 5.3.3. </b> "
 ## 1. Create ECR repository and push backend image
 
 - Open ECR Console - `Repositories` - `Create repository`.
-![Create ECR repository screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%201.png)
+![Create ECR repository screen 1](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%201.png)
 
 - Enter Repository name: `myfit-backend`.
 - Select Image tag mutability: `MUTABLE`.
 - Select Encryption configuration: `AES256`.
 - Confirm repository URI format: `<your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend`.
-![Create ECR repository screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%202.png)
+![Create ECR repository screen 2](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%202.png)
 
 Build and push image to ECR:
 
@@ -28,27 +28,27 @@ docker push <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend:late
 ## 2. Create ECS cluster
 
 - Open ECS Console - `Clusters` - `Create cluster`.
-![Create ECS cluster screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%201.png)
+![Create ECS cluster screen 1](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%201.png)
 
 - Enter Cluster name: `<your-ecs-cluster-name>`.
 - Pick `Fargate only`.
-![Create ECS cluster screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%202.png)
+![Create ECS cluster screen 2](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%202.png)
 
 - Set Container Insights to either Disable or enable.
-![Create ECS cluster screen 3](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%203.png)
+![Create ECS cluster screen 3](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%203.png)
 
 - Click `Create`.
-![Create ECS cluster screen 4](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%204.png)
+![Create ECS cluster screen 4](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%204.png)
 
 - Confirm cluster status: `ACTIVE`.
 - Copy cluster ARN: `<your-cluster-arn>`.
-![ECS cluster result](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/cluster%20result.png)
+![ECS cluster result](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/cluster%20result.png)
 
 ## 3. Register backend task definition
 
 - Open ECS Console - `Task definitions` - `Create new task definition`.
 
-![Create task definition screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%201.png)
+![Create task definition screen 1](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%201.png)
 
 - Paste and edit this JSON base on your actual arn service ID:
 ```json
@@ -133,10 +133,10 @@ docker push <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend:late
 }
 ```
 - Click `Create`.
-![Create task definition screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%202.png)
+![Create task definition screen 2](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%202.png)
 
 - Confirm task definition status: `ACTIVE`.
-![Task definition result](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%20result.png)
+![Task definition result](/worklogAws/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%20result.png)
 
 ## 4. Phase completion checklist
 

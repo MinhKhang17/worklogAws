@@ -9,13 +9,13 @@ pre: " <b> 5.3.3. </b> "
 ## 1. Tạo ECR repository và push backend image
 
 - Mở ECR Console - `Repositories` - `Create repository`.
-![Create ECR repository screen 1](/images/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%201.png)
+![Create ECR repository screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%201.png)
 
 - Nhập Repository name: `myfit-backend`.
 - Chọn Image tag mutability: `MUTABLE`.
 - Chọn Encryption configuration: `AES256`.
 - Xác nhận repository URI format: `<your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend`.
-![Create ECR repository screen 2](/images/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%202.png)
+![Create ECR repository screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecr/create%20ecr%20repo%202.png)
 
 Build và push image lên ECR:
 
@@ -28,27 +28,27 @@ docker push <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend:late
 ## 2. Tạo ECS cluster
 
 - Mở ECS Console - `Clusters` - `Create cluster`.
-![Create ECS cluster screen 1](/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%201.png)
+![Create ECS cluster screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%201.png)
 
 - Nhập Cluster name: `<your-ecs-cluster-name>`.
 - Chọn `Fargate only`.
-![Create ECS cluster screen 2](/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%202.png)
+![Create ECS cluster screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%202.png)
 
 - Đặt Container Insights là Disable hoặc Enable.
-![Create ECS cluster screen 3](/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%203.png)
+![Create ECS cluster screen 3](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%203.png)
 
 - Bấm `Create`.
-![Create ECS cluster screen 4](/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%204.png)
+![Create ECS cluster screen 4](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/create%20cluster%204.png)
 
 - Xác nhận cluster status: `ACTIVE`.
 - Sao chép cluster ARN: `<your-cluster-arn>`.
-![ECS cluster result](/images/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/cluster%20result.png)
+![ECS cluster result](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/ecs/cluster/cluster%20result.png)
 
 ## 3. Đăng ký backend task definition
 
 - Mở ECS Console - `Task definitions` - `Create new task definition`.
 
-![Create task definition screen 1](/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%201.png)
+![Create task definition screen 1](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%201.png)
 
 - Dán và chỉnh JSON này theo ARN/ID thực tế của bạn:
 ```json
@@ -133,10 +133,10 @@ docker push <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myfit-backend:late
 }
 ```
 - Bấm `Create`.
-![Create task definition screen 2](/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%202.png)
+![Create task definition screen 2](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%202.png)
 
 - Xác nhận task definition status: `ACTIVE`.
-![Task definition result](/images/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%20result.png)
+![Task definition result](/worklogAws/images/s/workshop/Phase%203%20Container%20Infrastructure/task%20definition/create%20task%20def%20result.png)
 
 ## 4. Checklist hoàn tất phase
 

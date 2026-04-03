@@ -23,36 +23,36 @@ pre: " <b> 5.3.4. </b> "
 - Enter Interval: `30`.
 - Enter Success codes: `200-399`.
 - Click `Create target group`.
-![Create target group screen](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/target%20group/target%20group.png)
+![Create target group screen](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/target%20group/target%20group.png)
 
 ## 2. Create application load balancer
 
 - Open EC2 Console - `Load balancers` - `Create load balancer`.
 - Select `Application Load Balancer`.
-![Create ALB screen 1](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%201.png)
+![Create ALB screen 1](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%201.png)
 
 - Enter Load balancer name: `<your-alb-name>`.
 - Select Scheme: `internet-facing`.
 - Select IP address type: `ipv4`.
-![Create ALB screen 2](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%202.png)
+![Create ALB screen 2](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%202.png)
 
 - Select VPC: `vpc-0c93d1f17635865a7`.
 - Select subnet `subnet-08b30664885ff91ec` (`us-east-1a`).
 - Select subnet `subnet-06ba3f4e55b68d1f8` (`us-east-1b`).
-![Create ALB screen 3](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%203.png)
+![Create ALB screen 3](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%203.png)
 
 - Remove default security group.
 - Select security group: `sg-08002e12b1aa827d0`.
 - Enter Listener protocol/port: `HTTP:80`.
-![Create ALB screen 4](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%204.png)
+![Create ALB screen 4](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%204.png)
 
 - Select Default action: `Forward to <your-target-group-name>`.
 - Select `<your target group>`
-![Create ALB screen 6](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%206.png)
+![Create ALB screen 6](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%206.png)
 
 - Review all fields.
 - Click `Create load balancer`.
-![Create ALB screen 5](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%205.png)
+![Create ALB screen 5](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/alb/alb%205.png)
 
 - Wait for ALB status `active`.
 - Copy ALB DNS name: `<your-alb-dns-name>`.
@@ -60,16 +60,16 @@ pre: " <b> 5.3.4. </b> "
 ## 3. Create ECS service
 
 - Open ECS Console - `Clusters` - `<your-ecs-cluster-name>` - `Create service`.
-![Create ECS service screen 1](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service1.png)
+![Create ECS service screen 1](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service1.png)
 
 - Select Task definition family: `<your-task-definition-family>`.
 - Select Task definition revision: `LATEST`.
 - Enter Service name: `<your-ecs-service-name>`.
-![Create ECS service screen 2](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service2.png)
+![Create ECS service screen 2](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service2.png)
 
 - Select Service type: `REPLICA`.
 - Enter Desired tasks: `2`.
-![Create ECS service screen 3](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service3.png)
+![Create ECS service screen 3](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service3.png)
 
 
 - Select VPC: `<your-vpc-id>`.
@@ -78,7 +78,7 @@ pre: " <b> 5.3.4. </b> "
 - Remove default security group.
 - Select security group: `<backend-service-sg>`.
 - Select Public IP: `ENABLED`.
-![Create ECS service screen 4](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service4.png)
+![Create ECS service screen 4](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service4.png)
 
 - Select Load balancer type: `Application Load Balancer`.
 - Select Use existing load balancer: `Yes`.
@@ -88,24 +88,24 @@ pre: " <b> 5.3.4. </b> "
 - Enter Health check grace period: `180`.
 - Select Container name: `web`.
 - Select Container port: `8080`.
-![Create ECS service screen 5](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service5.png)
+![Create ECS service screen 5](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service5.png)
 
 - Use default listenner.
-![Create ECS service screen 6](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service6.png)
+![Create ECS service screen 6](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service6.png)
 
 ## 4. Configure ECS service auto scaling
 
 - Enable Service auto scaling.
 - Enter Minimum task count: `1`.
 - Enter Maximum task count: `4`.
-![Create ECS service screen 7](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service7.png)
+![Create ECS service screen 7](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service7.png)
 
 - Create Target tracking policy.
 - Enter Policy metric: `ECSServiceAverageCPUUtilization`.
 - Enter Target value: `70`.
 - Enter Scale-out cooldown: `300`.
 - Enter Scale-in cooldown: `300`.
-![Create ECS service screen 8](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service8.png)
+![Create ECS service screen 8](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service8.png)
 
 ## 5. Create service and verify
 
@@ -113,7 +113,7 @@ pre: " <b> 5.3.4. </b> "
 - Click `Create`.
 - Confirm ECS service status: `ACTIVE`.
 - Confirm Desired count: `2`.
-![Create ECS service screen 9](/images/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service9.png)
+![Create ECS service screen 9](/worklogAws/images/s/workshop/Phase%204%20Load%20Balancer%20and%20Service/ecs%20service/ecs%20service9.png)
 
 ## 6. Phase completion checklist
 1. Verify that the target group protocol/port is `HTTP:80` and the health check path is `/test/health`.

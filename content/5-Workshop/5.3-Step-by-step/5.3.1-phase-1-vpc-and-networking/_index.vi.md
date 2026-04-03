@@ -14,8 +14,8 @@ pre: " <b> 5.3.1. </b> "
 - Đặt IPv6 CIDR: `No IPv6 CIDR block`.
 - Đặt Tenancy: `Default`.
 
-![Create VPC step](/images/workshop/phase1%20vpc%20and%20networking/create%20vpc/1.png)
-![Create VPC step 2](/images/workshop/phase1%20vpc%20and%20networking/create%20vpc/2.png)
+![Create VPC step](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/create%20vpc/1.png)
+![Create VPC step 2](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/create%20vpc/2.png)
 - Bật DNS hostnames.
 - Bật DNS resolution.
 - Bấm `Create VPC`.
@@ -25,7 +25,7 @@ pre: " <b> 5.3.1. </b> "
 
 ## 2. Tạo 4 subnet trên 2 AZ
 
-![Create subnet step](/images/workshop/phase1%20vpc%20and%20networking/create%20subnet/1.png)
+![Create subnet step](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/create%20subnet/1.png)
 | Subnet           | Name                                    | AZ           | CIDR            |
 | ---------------- | --------------------------------------- | ------------ | --------------- |
 | Public Subnet 1  | `<your-public-subnet-1-name>`           | `us-east-1a` | `10.0.0.0/18`   |
@@ -36,7 +36,7 @@ pre: " <b> 5.3.1. </b> "
 - Bật auto-assign public IPv4 cho 2 public subnet.
 - Giữ auto-assign public IPv4 ở trạng thái tắt cho 2 isolated subnet.
 
-![Subnet result](/images/workshop/phase1%20vpc%20and%20networking/create%20subnet/subnet%20result.png)
+![Subnet result](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/create%20subnet/subnet%20result.png)
 
 ## 3. Cấu hình route tables
 
@@ -46,7 +46,7 @@ pre: " <b> 5.3.1. </b> "
 - Tạo isolated route table `<your-isolated-route-table-name>`.
 - Giữ chỉ local route `10.0.0.0/16` trong isolated route table.
 - Associate isolated route table với subnet `10.0.128.0/18` và `10.0.192.0/18`.
-![Route table result](/images/workshop/phase1%20vpc%20and%20networking/route%20table/route%20table%20result.png)
+![Route table result](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/route%20table/route%20table%20result.png)
 
 ## 4. Tạo 3 security groups và kết nối luồng truy cập
 
@@ -54,26 +54,26 @@ pre: " <b> 5.3.1. </b> "
 
 - Nhập Security group name: `<your-alb-security-group-name>`.
 - Nhập Inbound rule: `HTTP`, port `80`, source `pl-3b927c52`. `pl-3b927c52` là public endpoint từ CloudFront, nghĩa là ALB chỉ cho phép inbound traffic từ CloudFront.
-![ALB SG init](/images/workshop/phase1%20vpc%20and%20networking/security%20group/alb%20init%20with%20inbound.png)
+![ALB SG init](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/security%20group/alb%20init%20with%20inbound.png)
 
 ### B. Backend Service Security Group
 - Nhập Security group name: `<your-backend-service-security-group-name>`.
 - Nhập Inbound rule: `Custom TCP`, port `8080`, source `<your-alb-security-group-id>`.
-![ECS SG init](/images/workshop/phase1%20vpc%20and%20networking/security%20group/ecs%20init%20with%20inbound.png)
+![ECS SG init](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/security%20group/ecs%20init%20with%20inbound.png)
 
 ### C. Database Security Group
 - Nhập Security group name: `<your-database-security-group-name>`.
 - Nhập Inbound rule: `PostgreSQL`, port `5432`, source `<your-backend-service-security-group-id>`.
-![DB SG init](/images/workshop/phase1%20vpc%20and%20networking/security%20group/db%20init%20with%20inbound.png)
+![DB SG init](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/security%20group/db%20init%20with%20inbound.png)
 
 ### Chỉnh outbound rules
 
 - Chỉnh outbound rules của `<your-alb-security-group-name>`.
 - Nhập Outbound rule: `Custom TCP`, port `8080`, destination `<your-backend-service-security-group-id>`.
-![Edit outbound ALB-ECS](/images/workshop/phase1%20vpc%20and%20networking/security%20group/edit%20outbound%20from%20alb%20to%20ecs.png)
+![Edit outbound ALB-ECS](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/security%20group/edit%20outbound%20from%20alb%20to%20ecs.png)
 
 - Giữ outbound rule của backend và database security groups là `All traffic`.
-![Security group result](/images/workshop/phase1%20vpc%20and%20networking/security%20group/sg%20result.png)
+![Security group result](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/security%20group/sg%20result.png)
 
 ## 5. Checklist hoàn tất phase
 
@@ -96,5 +96,5 @@ pre: " <b> 5.3.1. </b> "
 - ALB to backend port: `8080`
 - Backend to database port: `5432`
 
-![VPC created result](/images/workshop/phase1%20vpc%20and%20networking/create%20vpc/vcp%20result.png)
+![VPC created result](/worklogAws/images/s/workshop/phase1%20vpc%20and%20networking/create%20vpc/vcp%20result.png)
 

@@ -13,24 +13,24 @@ This section captures UI results after successful deployment and configuration.
 ## Result screenshots
 
 ### 1. AI chat assistant screen
-![App result 2 - Home dashboard](/images/workshop/app%20image%20result/web%20app2.png)
+![App result 2 - Home dashboard](/worklogAws/images/s/workshop/app%20image%20result/web%20app2.png)
 
 
 ### 2. Home dashboard and nutrition summary
 
-![App result 1 - AI chat](/images/workshop/app%20image%20result/web%20app1.png)
+![App result 1 - AI chat](/worklogAws/images/s/workshop/app%20image%20result/web%20app1.png)
 
 ### 3. Workout plan and exercises
 
-![App result 3 - Workout page](/images/workshop/app%20image%20result/web%20app3.png)
+![App result 3 - Workout page](/worklogAws/images/s/workshop/app%20image%20result/web%20app3.png)
 
 ### 4. Calorie management and food selection
 
-![App result 4 - Calorie page](/images/workshop/app%20image%20result/web%20app4.png)
+![App result 4 - Calorie page](/worklogAws/images/s/workshop/app%20image%20result/web%20app4.png)
 
 ### 5. Health dashboard and macro breakdown
 
-![App result 5 - Health dashboard](/images/workshop/app%20image%20result/web%20app5.png)
+![App result 5 - Health dashboard](/worklogAws/images/s/workshop/app%20image%20result/web%20app5.png)
 
 ## Validation checklist
 

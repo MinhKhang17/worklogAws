@@ -99,7 +99,7 @@ Hệ thống được xây dựng cho nhu cầu quản lý sức khỏe cá nhâ
 
 ### 4.2. Kiến trúc hệ thống:
 
-![kiến trúc hệ thống](image11.png)
+![kiến trúc hệ thống](/worklogAws/images/2-Proposal/image11.png)
 
 ---
 
@@ -187,34 +187,34 @@ Hệ thống được xây dựng cho nhu cầu quản lý sức khỏe cá nhâ
 
 ### 5.1 Dockerfile Backend
 
-![S3 bucket properties tab](image5.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image5.png)
 
 
 ### 5.2 CDK Route API Qua CloudFront
 
 
-![S3 bucket properties tab](image4.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image4.png)
 
 
 ### 5.3 Script Deploy App
 
-![S3 bucket properties tab](image2.png)
-![S3 bucket properties tab](image10.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image2.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image10.png)
 
 
 
 ### 5.4 Khởi tạo Stack
 
 
-![S3 bucket properties tab](image6.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image6.png)
 
 
 ### 5.5 Ảnh app:
 
-![S3 bucket properties tab](image1.png)
-![S3 bucket properties tab](image8.png)
-![S3 bucket properties tab](image7.png)
-![S3 bucket properties tab](image3.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image1.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image8.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image7.png)
+![S3 bucket properties tab](/worklogAws/images/2-Proposal/image3.png)
 
 
 ---

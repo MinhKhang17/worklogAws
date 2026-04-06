@@ -1,8 +1,9 @@
 ---
 
-title: "MyFit - Fitness App System Architecture on AWS"
+title: "Proposal"
 date: 2026-04-03
 weight: 2
+slug: "myfit-aws-architecture"
 chapter: false
 pre: " <b> 2. </b> "
 --------------------
@@ -190,7 +191,7 @@ To optimize operations and reduce manual errors:
 
 ### 5.1 Dockerfile Backend
 
-![Dockerfile](/worklogAws/images/2-Proposal/image5.png)
+![Dockerfile](/worklogAws/images/2-Proposal//worklogAws/images/2-Proposal/image5.png)
 
 ---
 
@@ -248,13 +249,7 @@ To optimize operations and reduce manual errors:
 
 ---
 
-## 7. Timeline
-
-*(Add image here if needed)*
-
----
-
-## 8. Risks and Mitigation
+## 7. Risks and Mitigation
 
 | Risk                       | Impact      | Priority | Mitigation           |
 | -------------------------- | ----------- | -------- | -------------------- |

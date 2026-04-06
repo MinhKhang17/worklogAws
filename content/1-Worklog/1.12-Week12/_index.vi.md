@@ -21,7 +21,7 @@ pre: " <b> 1.12. </b> "
 | 2 | - **Thuyết trình cuối cùng** <br>&emsp; + Trình bày **myFit** trước ban lãnh đạo FCJ <br>&emsp; + Demo trực tiếp kèm phần hỏi đáp (Q&A) <br>&emsp; + Nhận được lời khen về kiến trúc Spring Boot và AWS vững chắc | 31/03/2026 | 31/03/2026 | [Presentation Recording] |
 | 3 | - **Tự đánh giá** <br>&emsp; + Hoàn thành biểu mẫu tự đánh giá <br>&emsp; + Nhìn lại hành trình 12 tuần <br>&emsp; + Xác định các điểm mạnh kỹ thuật và các lĩnh vực cần phát triển thêm | 01/04/2026 | 01/04/2026 | [Evaluation Form] |
 | 4 | - **Phản hồi về chương trình** <br>&emsp; + Viết phản hồi chi tiết cho chương trình FCJ <br>&emsp; + Nêu bật những trải nghiệm tích cực <br>&emsp; + Đề xuất cải thiện cho các thực tập sinh trong tương lai | 02/04/2026 | 02/04/2026 | [Feedback Form] |
-| 6-7 | - **Ăn mừng & tổng kết** <br>&emsp; + Tiệc ăn mừng cùng team <br>&emsp; + Chuyển giao kiến thức và bàn giao dự án <br>&emsp; + Đăng bài trên LinkedIn về trải nghiệm thực tập | 04/04/2026 | 05/04/2026 | [Photos] |
+
 
 ### Thành tựu Tuần 12
 

@@ -35,8 +35,8 @@ Main takeaways:
 
 This session helped connect conceptual Kubernetes knowledge with a realistic learning path that can be applied in both personal projects and production environments.
 
-![k8s architecture](/images/4-Event/e3k8s.png "k8s Architecture")
-![actual image](/images/4-Event/ws2k8s.jpg "actual image")
+![k8s architecture](/worklogAws/images/4-Event/e3k8s.png "k8s Architecture")
+![actual image](/worklogAws/images/4-Event/ws2k8s.jpg "actual image")
 
 ---
 
@@ -53,8 +53,8 @@ Main takeaways:
 
 This session expanded the perspective beyond common DevOps stacks and demonstrated how language/runtime choice can directly affect reliability and infrastructure cost.
 
-![benefits](/images/4-Event/e3benefit.png)
-![actual image](/images/4-Event/ws2elixir.jpg "actual image")
+![benefits](/worklogAws/images/4-Event/e3benefit.png)
+![actual image](/worklogAws/images/4-Event/ws2elixir.jpg "actual image")
 
 ---
 
@@ -71,7 +71,7 @@ Main takeaways:
 
 This session provided a clear comparison between AWS-native and multi-cloud IaC approaches, which is highly useful for selecting tools in real projects.
 
-![alt text](/images/4-Event/e3cf.png)
+![alt text](/worklogAws/images/4-Event/e3cf.png)
 
 ---
 
@@ -82,7 +82,7 @@ Through this event, I gained a broader and more connected view of modern cloud e
 * How to reason about fault tolerance and high concurrency at the application-runtime layer using Elixir/OTP.
 * How to manage infrastructure lifecycle with IaC tools across AWS and multi-cloud contexts.
 
-![actual image](/images/4-Event/ws2team.jpg "actual image")
+![actual image](/worklogAws/images/4-Event/ws2team.jpg "actual image")
 
 The event also clarified a practical roadmap: start from local Kubernetes practice, apply IaC consistently for deployments, and evaluate resilient runtime technologies such as Elixir when building highly concurrent services.
 

@@ -245,14 +245,7 @@ Hệ thống được xây dựng cho nhu cầu quản lý sức khỏe cá nhâ
 
 ---
 
-## 7. Timeline
-
-
-
-
----
-
-## 8. Rủi Ro Và Giải Pháp Giảm Thiểu
+## 7. Rủi Ro Và Giải Pháp Giảm Thiểu
 
 | Rủi ro          | Tác động  | Mức ưu tiên | Giải pháp       |
 | --------------- | --------- | ----------- | --------------- |

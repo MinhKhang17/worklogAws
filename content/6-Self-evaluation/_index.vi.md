@@ -8,13 +8,13 @@ pre: " <b> 6. </b> "
 
 
 
-Trong suốt thời gian thực tập tại **chương trình AWS First Cloud Journey** từ **05/01/2024** đến **05/04/2024**, tôi đã có cơ hội học hỏi, rèn luyện và áp dụng kiến thức đã được trang bị tại trường vào môi trường làm việc thực tế.  
+Trong suốt thời gian thực tập tại **chương trình AWS First Cloud Journey** từ **05/01/2024** đến **05/04/2024**, em đã có cơ hội học hỏi, rèn luyện và áp dụng kiến thức đã được trang bị tại trường vào môi trường làm việc thực tế.  
 
-Tôi đã tham gia **dự án MyFit của nhóm**, trong đó áp dụng các dịch vụ đã được học từ AWS để xây dựng và triển khai hệ thống. Qua quá trình này, tôi đã cải thiện các kỹ năng như **lập trình, thiết kế hệ thống, viết báo cáo, và phân tích yêu cầu**, đặc biệt là trong việc **thiết kế hệ thống quản lý rủi ro dựa trên nền tảng cloud**.  
+Em đã tham gia **dự án MyFit của nhóm**, trong đó áp dụng các dịch vụ đã được học từ AWS để xây dựng và triển khai hệ thống. Qua quá trình này, em đã cải thiện các kỹ năng như **lập trình, thiết kế hệ thống, viết báo cáo, và phân tích yêu cầu**, đặc biệt là trong việc **thiết kế hệ thống quản lý rủi ro dựa trên nền tảng cloud**.  
 
-Về tác phong, tôi luôn cố gắng hoàn thành tốt nhiệm vụ, tuân thủ nội quy, và tích cực trao đổi với đồng nghiệp để nâng cao hiệu quả công việc.
+Về tác phong, em luôn cố gắng hoàn thành tốt nhiệm vụ, tuân thủ nội quy, và tích cực trao đổi với đồng nghiệp để nâng cao hiệu quả công việc.
 
-Để phản ánh một cách khách quan quá trình thực tập, tôi xin tự đánh giá bản thân dựa trên các tiêu chí dưới đây:
+Để phản ánh một cách khách quan quá trình thực tập, em xin tự đánh giá bản thân dựa trên các tiêu chí dưới đây:
 
 | STT | Tiêu chí                            | Mô tả                                                                                            | Tốt | Khá | Trung bình |
 | --- | ----------------------------------- | ------------------------------------------------------------------------------------------------ | --- | --- | ---------- |

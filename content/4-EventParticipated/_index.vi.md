@@ -20,7 +20,7 @@ Trong quá trình thực tập, em đã tham gia các events, với mỗi event 
 
 &emsp;**Mô tả:** Sự kiện này cung cấp bản tổng kết các thông báo quan trọng từ AWS re:Invent 2025, được tổ chức dành cho cộng đồng developer và cloud tại Việt Nam ngay trước dịp Tết 2026. Các phiên chia sẻ đã giới thiệu những đổi mới nổi bật trong hệ sinh thái AWS, đặc biệt trong các lĩnh vực Generative AI, nền tảng machine learning và hạ tầng dữ liệu hiện đại. Người tham dự được làm quen với các công nghệ như Amazon Bedrock và họ mô hình Nova, cùng với Bedrock Agents cho phép hệ thống AI thực thi các workflow phức tạp thông qua cơ chế orchestration, quản lý bộ nhớ và các chính sách guardrail. Sự kiện cũng đề cập đến các cập nhật của SageMaker Unified Studio, các cải tiến trong Amazon S3 như S3 Tables và S3 Vector, cũng như những phát triển mới của OpenSearch hỗ trợ hệ thống tìm kiếm dựa trên agent. Ngoài ra, các phần thảo luận còn khám phá các kỹ thuật Retrieval-Augmented Generation (RAG) nâng cao với embedding đa phương thức, cùng các công cụ hạ tầng AI như SageMaker HyperPod và MLflow phục vụ cho các workflow machine learning quy mô lớn.  
 
-&emsp;**Kết quả / Giá trị đạt được:** Thông qua sự kiện này, tôi đã hiểu rõ hơn về các xu hướng mới nổi như Agentic AI và các hệ thống RAG đa phương thức trong hệ sinh thái AWS. Tôi cũng tìm hiểu được các phương pháp lưu trữ vector tiết kiệm chi phí hơn thông qua S3 Vector, đồng thời khám phá cách Bedrock Agents có thể được áp dụng vào các tính năng hội thoại hoặc tự động hóa trong các ứng dụng cloud. Bên cạnh đó, sự kiện còn tạo cơ hội để tôi trao đổi trực tiếp với các AWS Solution Architect và học hỏi thêm các best practices liên quan đến kiến trúc serverless và thiết kế hệ thống cloud có khả năng mở rộng.
+&emsp;**Kết quả / Giá trị đạt được:** Thông qua sự kiện này, em đã hiểu rõ hơn về các xu hướng mới nổi như Agentic AI và các hệ thống RAG đa phương thức trong hệ sinh thái AWS. Em cũng tìm hiểu được các phương pháp lưu trữ vector tiết kiệm chi phí hơn thông qua S3 Vector, đồng thời khám phá cách Bedrock Agents có thể được áp dụng vào các tính năng hội thoại hoặc tự động hóa trong các ứng dụng cloud. Bên cạnh đó, sự kiện còn tạo cơ hội để em trao đổi trực tiếp với các AWS Solution Architect và học hỏi thêm các best practices liên quan đến kiến trúc serverless và thiết kế hệ thống cloud có khả năng mở rộng.
 
 ---
 
@@ -38,3 +38,15 @@ Trong quá trình thực tập, em đã tham gia các events, với mỗi event 
 &emsp;**Kết quả và giá trị đạt được:** Thông qua sự kiện này, em hiểu rõ hơn về kiến trúc của AI Agents, cách thiết kế prompt hiệu quả cho các hệ thống AI, cũng như cách tích hợp trí tuệ nhân tạo với các thiết bị IoT trong các hệ thống thực tế. Đồng thời, em cũng có thêm góc nhìn về cách các dịch vụ AWS hỗ trợ xây dựng các hệ thống AI có khả năng mở rộng và vận hành trên nền tảng cloud.
 
 ---
+### [Event 3](4.3-Event3/)  
+&emsp;**Tên sự kiện:** Cloud Mastery 2026 #2 - Kubernetes, IaC và Elixir trong DevOps
+
+&emsp;**Thời gian:** 09:00 ngày 04/04/2026
+
+&emsp;**Địa điểm:** FPT University Ho Chi Minh City
+
+&emsp;**Vai trò:** Người tham dự
+
+&emsp;**Mô tả:** Sự kiện này tập trung vào các thực tiễn hiện đại về cloud engineering, bao gồm kiến trúc Kubernetes, Infrastructure as Code (IaC), và việc sử dụng Elixir để xây dựng các hệ thống có khả năng xử lý đồng thời cao và chịu lỗi tốt. Phiên Kubernetes giải thích các thành phần cốt lõi như Control Plane và Worker Nodes, các tài nguyên quan trọng như Pods và Deployments, và lộ trình học từ môi trường cục bộ đến các dịch vụ quản lý như Amazon EKS. Phiên Elixir giới thiệu runtime BEAM, nhấn mạnh mô hình đồng thời nhẹ, hệ thống giám sát OTP và lợi ích thực tế khi xây dựng backend bền bỉ. Phiên IaC so sánh các công cụ như CloudFormation, AWS CDK và Terraform, nhấn mạnh tự động hóa, khả năng tái tạo và chiến lược triển khai đa cloud.
+
+&emsp;**Kết quả / Giá trị đạt được:** Thông qua sự kiện này, em xây dựng được cái nhìn có hệ thống hơn về thiết kế hệ thống cloud-native, gồm điều phối container với Kubernetes và quản lý hạ tầng bằng IaC. Em cũng hiểu rõ hơn cách các lựa chọn runtime như Elixir/OTP ảnh hưởng đến khả năng mở rộng, chịu lỗi và chi phí vận hành. Ngoài ra, sự kiện giúp em kết nối các công nghệ này thành lộ trình học thực tế — từ phát triển cục bộ đến hệ thống production trên cloud — hỗ trợ mục tiêu dài hạn trở thành cloud/DevOps engineer.

@@ -79,7 +79,7 @@ Phiên này cung cấp cái nhìn rõ ràng về sự khác biệt giữa các c
 
 ## Kết quả và giá trị đạt được
 
-Thông qua sự kiện này, tôi có được cái nhìn rộng hơn và mang tính kết nối về cloud engineering hiện đại:
+Thông qua sự kiện này, em có được cái nhìn rộng hơn và mang tính kết nối về cloud engineering hiện đại:
 * Cách thiết kế và vận hành hệ thống container với Kubernetes.
 * Cách tư duy về khả năng chịu lỗi và xử lý đồng thời ở tầng runtime ứng dụng với Elixir/OTP.
 * Cách quản lý vòng đời hạ tầng bằng IaC trong môi trường AWS và đa cloud.
